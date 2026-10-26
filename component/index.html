@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nozzle Engineering System - HTML Team Edition v2</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--line:#dfe6ee;--text:#162033;--muted:#667085;--blue:#2457d6;--blue2:#eaf0ff;--green:#067647;--amber:#a15c00;--red:#b42318;--shadow:0 8px 28px rgba(16,24,40,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Malgun Gothic",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid #cdd5df;background:#fff;border-radius:8px;padding:9px 12px;font-weight:700;color:#344054}button:hover{background:#f8fafc}button.primary{background:var(--blue);border-color:var(--blue);color:#fff}button.success{background:#067647;border-color:#067647;color:#fff}button.warn{background:#fff7e6;border-color:#f2c66d;color:#7a4d00}button.danger{color:#b42318;border-color:#f1b5af}button:disabled{opacity:.45;cursor:not-allowed}
+.top{position:sticky;top:0;z-index:10;background:#101828;color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.brand{font-weight:900;font-size:18px}.sub{font-size:12px;color:#cbd5e1}.tabs{display:flex;gap:6px;flex-wrap:wrap}.tabs button{background:#1d2939;border-color:#344054;color:#e5e7eb}.tabs button.active{background:#fff;color:#101828}.tabs button.phase2{opacity:.7}
+.wrap{max-width:1460px;margin:18px auto;padding:0 16px 50px}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}.c12{grid-column:span 12}.c8{grid-column:span 8}.c6{grid-column:span 6}.c4{grid-column:span 4}.c3{grid-column:span 3}
+h2,h3{margin:0 0 12px}label{display:block;font-size:12px;font-weight:800;margin:0 0 6px;color:#344054}input,select,textarea{width:100%;border:1px solid #cfd8e3;border-radius:7px;padding:9px 10px;background:#fff;color:#101828}textarea{min-height:72px;resize:vertical}.row2,.row3,.row4{display:grid;gap:10px}.row2{grid-template-columns:repeat(2,1fr)}.row3{grid-template-columns:repeat(3,1fr)}.row4{grid-template-columns:repeat(4,1fr)}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.note{font-size:12px;color:var(--muted);line-height:1.45}.badge{display:inline-flex;align-items:center;border:1px solid #d0d5dd;border-radius:999px;padding:5px 9px;background:#fff;font-size:11px;font-weight:800}.badge.blue{background:#eef4ff;border-color:#b2c6ff;color:#1849a9}.badge.green{background:#ecfdf3;border-color:#abefc6;color:#067647}.badge.amber{background:#fff7e6;border-color:#efd18b;color:#7a4d00}
+.revbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.lock{display:none;padding:10px 12px;border-radius:8px;background:#fff1f0;border:1px solid #f7bbb5;color:#912018;font-weight:700}.lock.show{display:block}
+.project-list{width:100%;border-collapse:collapse}.project-list th,.project-list td{padding:10px;border-bottom:1px solid #eaecf0;text-align:left;font-size:13px}.project-list th{background:#f8fafc}.project-row:hover{background:#f8fbff}.empty{padding:28px;text-align:center;color:#98a2b3}
+.nozzle-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.nozzle-tab{padding:8px 12px}.nozzle-tab.active{background:#eef4ff;border-color:#9db4ff;color:#1849a9}.calc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.calc>div{border:1px solid #e4e7ec;border-radius:8px;padding:8px;background:#f8fafc}.calc b{display:block;font-size:16px;margin-top:3px}
+.spec-row{display:grid;grid-template-columns:34px 1.1fr 1.5fr .65fr 34px 34px 34px;gap:6px;align-items:center;margin-bottom:6px}.spec-row button{padding:7px 0}
+.sheet-wrap{overflow:auto;background:#d9dee7;padding:22px;border-radius:10px}.sheet{width:900px;min-height:1180px;margin:auto;background:#fff;padding:34px 44px;box-shadow:0 3px 18px rgba(0,0,0,.16);font-family:Arial,"Malgun Gothic",sans-serif;color:#000}.sheet-head{position:relative;border-bottom:1px solid #222;padding-bottom:8px;margin-bottom:20px}.sheet-title{text-align:center;font-size:22px;font-weight:800}.sheet-rev{position:absolute;right:0;top:4px;font-size:12px}.sheet-section{font-weight:800;font-size:14px;margin:18px 0 14px}.sheet-row{display:grid;grid-template-columns:34px 210px 1fr;gap:10px;min-height:29px;align-items:end}.sheet-row .no{font-weight:800}.sheet-row .lab{font-weight:800}.sheet-row .lab.sub1{padding-left:14px}.sheet-row .lab.sub2{padding-left:32px;font-weight:500}.sheet-row .val{border-bottom:1px solid #333;padding:0 2px 3px;min-height:22px;white-space:pre-wrap;word-break:break-word}.sheet-gap{height:10px}.sheet-add-head{font-weight:800;border-top:1px solid #222;padding-top:8px;margin-top:14px}.phase-card{padding:28px;text-align:center}.phase-card h2{margin-bottom:8px}.error{display:none;position:fixed;left:12px;right:12px;bottom:12px;background:#7a271a;color:#fff;padding:12px;border-radius:8px;z-index:1000;white-space:pre-wrap}.error.show{display:block}
+@media(max-width:900px){.c8,.c6,.c4,.c3{grid-column:span 12}.row2,.row3,.row4{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.sheet{width:820px}.spec-row{grid-template-columns:28px 1fr 1.2fr .55fr 32px 32px 32px}}
+
+.perf-summary{border:1px solid #e4e7ec;border-radius:10px;background:#f8fafc;padding:10px;font-size:13px;line-height:1.7}
+.perf-summary b{display:inline-block;min-width:82px;color:#344054}
+.perf-chart-shell{position:relative;margin-top:12px;border:1px solid #e4e7ec;border-radius:10px;background:#fff;padding:10px;min-height:450px}
+#perfCanvas{display:block;width:100%;height:430px}
+.perf-tooltip{display:none;position:absolute;pointer-events:none;background:#101828;color:#fff;border-radius:7px;padding:8px 10px;font-size:11px;line-height:1.45;box-shadow:0 5px 18px rgba(0,0,0,.2);white-space:nowrap}
+.perf-original{min-height:430px;margin-top:12px;border:1px dashed #cfd8e3;border-radius:10px;background:#f8fafc;padding:28px;display:flex;align-items:center;justify-content:center;text-align:center;color:#475467;line-height:1.7}
+.perf-rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.perf-rec{border:1px solid #dfe6ee;border-radius:10px;padding:12px;background:#fff}
+.perf-rec.selected{border-color:#7f9cf5;box-shadow:0 0 0 2px #eaf0ff inset}
+.perf-rec-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.perf-model{font-weight:900;font-size:15px}.perf-meta{font-size:11px;color:#667085;margin-top:3px}
+.perf-warnings{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.perf-warn{font-size:10px;font-weight:800;padding:4px 6px;border-radius:999px;background:#fff7e6;border:1px solid #efd18b;color:#7a4d00}.perf-ok{background:#ecfdf3;border-color:#abefc6;color:#067647}
+.perf-rec select{margin:6px 0}.perf-status{font-size:12px;line-height:1.55;padding:9px;border-radius:8px;background:#f8fafc;border:1px solid #e4e7ec}
+@media(max-width:1000px){.perf-rec-grid{grid-template-columns:1fr}}
+
+
+.perf-digital-wrap{margin-top:12px}
+.perf-design-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
+.perf-design-summary>div{border:1px solid #dfe6ee;border-radius:9px;padding:9px;background:#f8fafc}
+.perf-design-summary span{display:block;color:#667085;font-size:10px;font-weight:800;text-transform:uppercase;margin-bottom:4px}
+.perf-design-summary b{font-size:14px;color:#101828}
+.perf-three-charts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.perf-mini-card{position:relative;border:1px solid #e4e7ec;border-radius:10px;background:#fff;padding:9px}
+.perf-mini-title{font-size:12px;font-weight:900;color:#344054;margin:0 0 5px 3px}
+.perf-mini-card canvas{display:block;width:100%;height:260px}
+.perf-data-table-wrap{overflow:auto;margin-top:10px;border:1px solid #e4e7ec;border-radius:10px}
+.perf-data-table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+.perf-data-table th{position:sticky;top:0;background:#f8fafc;color:#344054;font-weight:900;padding:8px;border-bottom:1px solid #dfe6ee;text-align:right}
+.perf-data-table th:first-child{text-align:center}
+.perf-data-table td{padding:7px 8px;border-bottom:1px solid #f0f2f5;text-align:right}
+.perf-data-table td:first-child{text-align:center;font-weight:800}
+.perf-data-table tr.design-row{background:#fff4ed}
+.perf-data-table tr.design-row td{color:#9c2a10;font-weight:900}
+.perf-hover-box{position:absolute;display:none;pointer-events:none;z-index:5;background:#101828;color:#fff;border-radius:7px;padding:7px 9px;font-size:10px;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+@media(max-width:1100px){.perf-three-charts{grid-template-columns:1fr}.perf-design-summary{grid-template-columns:repeat(2,1fr)}}
+
+
+.perf-combined-shell{margin-top:12px}
+.perf-combined-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px}
+.perf-combined-readout{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:7px;flex:1}
+.perf-combined-readout>div{border:1px solid #dfe6ee;border-radius:9px;padding:8px 9px;background:#f8fafc;min-width:0}
+.perf-combined-readout span{display:block;font-size:9px;font-weight:900;color:#667085;margin-bottom:3px;white-space:nowrap}
+.perf-combined-readout b{display:block;font-size:13px;color:#101828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.perf-curve-help{font-size:10px;color:#667085;max-width:310px;line-height:1.45}
+.perf-combined-canvas-wrap{position:relative;border:1px solid #e4e7ec;border-radius:10px;background:#fff;padding:8px;overflow:hidden}
+#perfCombinedCanvas{display:block;width:100%;height:auto;max-height:620px;touch-action:pan-y}
+.perf-series-legend{display:flex;gap:7px 12px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:#475467}
+.perf-series-legend span{display:inline-flex;align-items:center;gap:5px}
+.perf-series-legend i{display:inline-block;width:18px;height:3px;border-radius:2px}
+@media(max-width:900px){.perf-combined-readout{grid-template-columns:repeat(2,minmax(120px,1fr))}.perf-curve-help{max-width:none}.perf-combined-canvas-wrap{overflow-x:auto}#perfCombinedCanvas{min-width:820px}}
+
+
+.perf-point-panel{margin-top:12px;border-top:1px solid #e4e7ec;padding-top:12px}
+.perf-point-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}
+.perf-point-item{display:grid;grid-template-columns:54px 1fr auto;gap:9px;align-items:center;border:1px solid #dfe6ee;border-radius:9px;padding:8px 9px;background:#fff}
+.perf-point-tag{font-size:11px;font-weight:900;text-align:center;border-radius:999px;padding:5px 7px;background:#f2f4f7;color:#344054}
+.perf-point-values{font-size:11px;line-height:1.55;color:#475467;min-width:0}
+.perf-point-values b{color:#101828}
+.perf-point-remove{padding:6px 8px!important}
+.perf-point-empty{grid-column:1/-1;padding:12px;border:1px dashed #d0d5dd;border-radius:9px;color:#667085;font-size:11px;text-align:center}
+@media(max-width:800px){.perf-point-list{grid-template-columns:1fr}}
+
+
+/* v2.8 selection feedback */
+.perf-rec{transition:border-color .18s ease,box-shadow .18s ease,transform .14s ease,background .18s ease}
+.perf-rec:hover{transform:translateY(-1px)}
+.perf-rec.selected{border-color:#2457d6!important;box-shadow:0 0 0 3px #dbe7ff inset,0 4px 14px rgba(36,87,214,.10);background:#f8fbff}
+.perf-rec.selected .perf-model{color:#1849a9}
+.perf-use{transition:transform .12s ease,background .15s ease,border-color .15s ease}
+.perf-use:active{transform:scale(.98)}
+.perf-use.is-selected{background:#067647!important;border-color:#067647!important;color:#fff!important}
+.perf-selected-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px;background:#ecfdf3;border:1px solid #abefc6;color:#067647}
+.perf-selection-flash{display:none;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border:1px solid #b2c6ff;border-radius:10px;background:#eef4ff}
+.perf-selection-flash.show{display:flex;animation:perfSelectionPulse .7s ease}
+.perf-selection-check{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#2457d6;color:#fff;font-weight:900;font-size:17px;flex:0 0 auto}
+.perf-selection-flash small{display:block;font-size:9px;font-weight:900;color:#667085;letter-spacing:.08em}
+.perf-selection-flash strong{display:inline-block;font-size:17px;color:#1849a9;margin-right:8px}
+.perf-selection-flash em{font-style:normal;font-size:11px;color:#475467}
+.perf-combined-canvas-wrap.perf-refreshing{animation:perfGraphRefresh .55s ease}
+@keyframes perfSelectionPulse{0%{transform:scale(.985);opacity:.35}55%{transform:scale(1.006);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes perfGraphRefresh{0%{box-shadow:0 0 0 0 rgba(36,87,214,.30);opacity:.55}55%{box-shadow:0 0 0 4px rgba(36,87,214,.12);opacity:1}100%{box-shadow:none;opacity:1}}
+
+
+.perf-pdf-preview-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(16,24,40,.72);padding:28px;overflow:auto}
+.perf-pdf-preview-overlay.show{display:block}
+.perf-pdf-preview-dialog{max-width:1280px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.28)}
+.perf-pdf-preview-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 18px;border-bottom:1px solid #e4e7ec;background:#fff}
+.perf-pdf-preview-body{padding:18px;background:#e9edf3;min-height:420px;text-align:center}
+.perf-pdf-preview-body canvas{display:block;width:100%;height:auto;max-width:1180px;margin:0 auto;background:#fff;box-shadow:0 4px 18px rgba(16,24,40,.18)}
+@media(max-width:760px){.perf-pdf-preview-overlay{padding:8px}.perf-pdf-preview-head{align-items:flex-start;flex-direction:column}.perf-pdf-preview-head .toolbar{width:100%}}
+
+
+.perf-pdf-options{border:1px solid #d0d5dd;border-radius:10px;padding:11px;background:#fafbfc}
+.perf-pdf-options-title{font-size:12px;font-weight:900;color:#344054;margin-bottom:9px}
+.perf-pdf-option-checks{display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:72px}
+.perf-check{display:flex!important;align-items:center;gap:8px;font-size:11px!important;font-weight:700!important;color:#344054!important;margin:0!important;cursor:pointer}
+.perf-check input{width:16px;height:16px;margin:0;accent-color:#2457d6}
+#perfPdfOptionSummary{margin-top:8px;padding-top:8px;border-top:1px dashed #d0d5dd}
+
+
+.perf-metric-desc-options{margin-top:10px;border-top:1px dashed #d0d5dd;padding-top:10px}
+.perf-metric-desc-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
+.perf-metric-desc-head b{font-size:11px;color:#344054}
+.perf-metric-desc-head span{font-size:10px;color:#667085}
+.perf-metric-desc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 10px}
+.perf-metric-desc-options.disabled{opacity:.45}
+.perf-metric-desc-options.disabled input{pointer-events:none}
+@media(max-width:760px){.perf-metric-desc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.perf-metric-desc-head{align-items:flex-start;flex-direction:column}}
+
+
+.rfq-import-card{border-color:#b8c9f8;background:linear-gradient(180deg,#fbfdff 0%,#fff 100%)}
+.rfq-import-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,.7fr);gap:14px}
+.rfq-import-drop{border:2px dashed #b8c2d4;border-radius:10px;background:#fff;transition:.15s ease;overflow:hidden}
+.rfq-import-drop.dragover{border-color:#2457d6;background:#f4f7ff;box-shadow:0 0 0 3px rgba(36,87,214,.08)}
+#rfqImportText{width:100%;min-height:190px;border:0!important;resize:vertical;border-radius:0!important;padding:12px!important;font-family:Consolas,'Courier New',monospace;font-size:12px;line-height:1.5;outline:none;box-shadow:none!important}
+.rfq-import-drop-hint{padding:8px 11px;border-top:1px solid #e4e7ec;background:#f9fafb;color:#667085;font-size:10px}
+.rfq-import-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.rfq-import-summary>div{border:1px solid #e4e7ec;border-radius:9px;padding:10px;background:#fff;text-align:center}
+.rfq-import-summary span{display:block;font-size:9px;color:#667085;font-weight:700;margin-bottom:3px}.rfq-import-summary b{font-size:22px;color:#101828}
+.rfq-import-help{margin-top:9px;padding:11px;border:1px solid #e4e7ec;border-radius:9px;background:#f9fafb;font-size:10px;line-height:1.9;color:#475467}
+.rfq-conf{display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:2px 6px;border-radius:999px;font-size:9px;font-weight:900;margin-right:4px}
+.rfq-conf.high{background:#ecfdf3;color:#067647;border:1px solid #abefc6}.rfq-conf.medium{background:#fffaeb;color:#b54708;border:1px solid #fedf89}.rfq-conf.none{background:#f2f4f7;color:#667085;border:1px solid #d0d5dd}
+.rfq-import-review-wrap{border-top:1px solid #e4e7ec;margin-top:12px;padding-top:2px}.rfq-import-table-wrap{overflow-x:auto;margin-top:8px;border:1px solid #e4e7ec;border-radius:9px}
+.rfq-import-table{width:100%;border-collapse:collapse;background:#fff;font-size:11px}.rfq-import-table th{background:#f2f4f7;color:#344054;font-size:10px;text-align:left;padding:8px;border-bottom:1px solid #d0d5dd}.rfq-import-table td{padding:8px;border-bottom:1px solid #eaecf0;vertical-align:top;color:#344054}.rfq-import-table tr:last-child td{border-bottom:0}.rfq-import-table input[type=checkbox]{width:16px;height:16px;accent-color:#2457d6}.rfq-import-source{font-size:9px;color:#667085;white-space:pre-wrap;max-width:360px}.rfq-import-value{font-weight:800;color:#101828;white-space:pre-wrap}.rfq-import-field{font-weight:700}.rfq-import-empty{padding:18px!important;text-align:center;color:#667085!important}
+@media(max-width:850px){.rfq-import-grid{grid-template-columns:1fr}.rfq-import-summary{grid-template-columns:repeat(3,1fr)}}
+
+
+.team-sync-bar{position:sticky;top:0;z-index:30;min-height:42px;background:#0b1220;color:#e5e7eb;border-bottom:1px solid #344054;padding:6px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+.team-sync-bar .team-logo{font-size:10px;font-weight:900;letter-spacing:.06em;color:#9db4ff;margin-right:2px}.team-sync-bar select{width:auto;min-width:250px;max-width:420px;padding:6px 8px;border-radius:6px;background:#fff}.team-sync-bar button{padding:6px 9px;border-radius:6px;font-size:11px}.team-sync-user{font-size:11px;font-weight:800;color:#fff}.team-sync-status{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900;background:#1d2939;border:1px solid #475467;color:#d0d5dd}.team-sync-status.ok{background:#073b2c;border-color:#12825e;color:#b7f7df}.team-sync-status.warn{background:#4b3307;border-color:#a15c00;color:#fedf89}.team-sync-status.err{background:#55160f;border-color:#b42318;color:#fecdca}.team-sync-msg{font-size:10px;color:#cbd5e1;max-width:430px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.team-sync-spacer{flex:1}.top{top:42px}
+@media(max-width:900px){.team-sync-bar{align-items:stretch}.team-sync-bar select{width:100%;max-width:none}.team-sync-spacer{display:none}.top{top:92px}.team-sync-msg{max-width:100%}}
+
+</style>
+</head>
+<body>
+
+<div id="teamSyncBar" class="team-sync-bar">
+  <span class="team-logo">TEAM SYNC</span>
+  <span id="teamSyncUser" class="team-sync-user">-</span>
+  <span id="teamSyncStatus" class="team-sync-status">Connecting</span>
+  <select id="teamProjectSelect"><option value="">— GitHub Project 선택 —</option></select>
+  <button id="teamOpenBtn">Open</button>
+  <button id="teamRefreshBtn">Refresh</button>
+  <button id="teamDeleteBtn" class="danger" style="display:none">Delete</button>
+  <span class="team-sync-spacer"></span>
+  <span id="teamSyncMsg" class="team-sync-msg"></span>
+  <button id="teamLogoutBtn">Logout</button>
+</div>
+<div class="top">
+  <div><div class="brand">Nozzle Engineering System</div><div class="sub">HTML v2.16 UI locked · GitHub Team Sync</div></div>
+  <div class="tabs">
+    <button id="tabDashboard" class="active" data-view="dashboard">Dashboard</button>
+    <button id="tabRfq" data-view="rfq">RFQ / Nozzles</button>
+    <button id="tabSheet" data-view="datasheet">Data Sheet</button>
+    <button id="tabCurve" data-view="curve">Selection / Curve</button>
+  </div>
+</div>
+<div class="wrap">
+  <section id="dashboard" class="view active">
+    <div class="grid">
+      <div class="card c12">
+        <div class="toolbar" style="justify-content:space-between">
+          <div><h2>Projects</h2><div class="note">Working Copy는 자유롭게 저장하고, Revision 저장을 눌렀을 때만 Project Revision이 생성됩니다.</div></div>
+          <button class="primary" id="newProjectBtn">+ New Project</button>
+        </div>
+      </div>
+      <div class="card c12"><table class="project-list"><thead><tr><th>Project No.</th><th>Project</th><th>Customer</th><th>Owner</th><th>Status</th><th>Nozzles</th><th>Revision</th><th>Updated</th><th></th></tr></thead><tbody id="projectRows"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="rfq" class="view">
+    <div class="grid">
+      <div class="card c12">
+        <div class="toolbar" style="justify-content:space-between">
+          <div><h2>Project / RFQ</h2><div class="note">프로젝트 입력값과 노즐별 Data Sheet 입력값을 한 곳에서 관리합니다.</div></div>
+          <div class="toolbar"><button id="saveWorkBtn">Working Copy 저장</button><button class="primary" id="saveRevisionBtn">Revision 저장</button><button class="success" id="completeBtn">프로젝트 완료/잠금</button><button class="warn" id="newWorkingRevBtn" style="display:none">새 Revision 작업 시작</button></div>
+        </div>
+        <div class="revbar"><span class="badge" id="lastSavedBadge">LAST SAVED -</span><span class="badge amber" id="workingBadge">CURRENT WORKING -</span><span class="badge blue" id="docRevBadge">DATA SHEET Rev.A</span></div>
+        <div class="lock" id="lockBanner">완료된 프로젝트입니다. 수정하려면 “새 Revision 작업 시작”을 눌러주세요.</div>
+        <div class="row3">
+          <div><label>Project No.</label><input id="projectNo"></div><div><label>Project Name</label><input id="projectName"></div><div><label>Customer</label><input id="customer"></div>
+          <div><label>Owner</label><input id="owner"></div><div><label>Status</label><select id="status"><option>Draft</option><option>RFQ Received</option><option>Technical Review</option><option>Proposal Submitted</option><option>Customer Revision</option><option>Approved</option><option>Order Received</option><option>Completed</option><option>Hold</option><option>Lost</option></select></div><div><label>Participants</label><input id="participants"></div>
+        </div>
+      </div>
+
+      <div class="card c12 rfq-import-card">
+        <div class="toolbar" style="justify-content:space-between;align-items:flex-start">
+          <div>
+            <h3>RFQ Quick Import</h3>
+            <div class="note">고객 RFQ 메일/문서의 텍스트를 붙여넣거나 선택한 텍스트를 드래그하면 주요 사양을 1차 추출합니다. 실제 RFQ에는 검토 후 선택한 항목만 적용됩니다.</div>
+          </div>
+          <span class="badge blue">STEP 1 · LOCAL TEXT PARSER</span>
+        </div>
+        <div class="rfq-import-grid" style="margin-top:10px">
+          <div>
+            <label>RFQ Source Text</label>
+            <div id="rfqImportDrop" class="rfq-import-drop">
+              <textarea id="rfqImportText" placeholder="예)\nCustomer: ABC Energy\nFluid: Urea Solution 40%\nNozzle Qty: 6\nNormal Flow: 1.5 L/min/nozzle\nAtomizing Air Pressure: 4 barg\nMaterial: SS316L"></textarea>
+              <div class="rfq-import-drop-hint">여기에 텍스트를 드래그하거나 붙여넣으세요 · TXT / CSV / EML / HTML 파일도 가능</div>
+            </div>
+            <input id="rfqImportFile" type="file" accept=".txt,.csv,.eml,.html,.htm,.md,text/plain,text/csv,message/rfc822,text/html" style="display:none">
+            <div class="toolbar" style="margin-top:8px">
+              <button id="rfqImportFileBtn">텍스트 파일 열기</button>
+              <button class="primary" id="rfqImportAnalyzeBtn">RFQ 분석</button>
+              <button id="rfqImportClearBtn">초기화</button>
+            </div>
+            <div id="rfqImportNotice" class="note" style="margin-top:7px">현재 Quick Import는 RFQ 텍스트 붙여넣기와 텍스트 기반 파일 분석만 사용합니다.</div>
+          </div>
+          <div>
+            <div class="rfq-import-summary">
+              <div><span>인식 항목</span><b id="rfqImportFound">0</b></div>
+              <div><span>자동 적용 권장</span><b id="rfqImportHigh">0</b></div>
+              <div><span>확인 필요</span><b id="rfqImportReview">0</b></div>
+            </div>
+            <div class="rfq-import-help">
+              <b>Confidence</b><br>
+              <span class="rfq-conf high">확실</span> 명확한 라벨·단위로 인식<br>
+              <span class="rfq-conf medium">확인 필요</span> 문맥 추정 또는 계산값<br>
+              <span class="rfq-conf none">미인식</span> 값이 없어 기존 입력 유지
+            </div>
+          </div>
+        </div>
+        <div id="rfqImportReviewWrap" class="rfq-import-review-wrap" style="display:none">
+          <div class="toolbar" style="justify-content:space-between;margin-top:12px">
+            <div><b>자동 인식 결과</b><div class="note">체크된 항목만 RFQ 입력란에 반영됩니다. 확인 필요 항목은 기본적으로 체크하지 않습니다.</div></div>
+            <button class="success" id="rfqImportApplyBtn">선택 항목 RFQ에 적용</button>
+          </div>
+          <div class="rfq-import-table-wrap">
+            <table class="rfq-import-table">
+              <thead><tr><th style="width:58px">적용</th><th style="width:180px">RFQ Field</th><th>인식 값</th><th style="width:110px">Confidence</th><th>근거</th></tr></thead>
+              <tbody id="rfqImportReviewRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card c12">
+        <div class="toolbar" style="justify-content:space-between"><div><h3>Project Nozzles</h3><div class="note">한 프로젝트에 최대 5개 노즐을 각각 저장합니다.</div></div><div class="toolbar"><span class="badge" id="nozzleCountBadge">1 / 5</span><button id="addNozzleBtn">+ Add Nozzle</button><button class="danger" id="deleteNozzleBtn">Delete Nozzle</button></div></div>
+        <div class="nozzle-tabs" id="nozzleTabs"></div>
+      </div>
+
+      <div class="card c12">
+        <h3>Basic Nozzle / RFQ Input</h3>
+        <div class="row4">
+          <div><label>Type Tag</label><input id="typeTag" placeholder="Type-1"></div>
+          <div><label>Injection Type</label><select id="injectionType"><option value="RA">RA</option><option value="DI">DI</option><option value="AMMONIA">AMMONIA</option></select></div>
+          <div><label>Selected Model</label><input id="selectedModel" placeholder="예: FM5 / KAFMX015-20"></div>
+          <div><label>Data Sheet Revision</label><input id="dataSheetRevision" value="A" placeholder="A / B / C"></div>
+        </div>
+        <div class="row4" style="margin-top:10px">
+          <div><label>Fluid</label><select id="fluid"><option>Urea Solution</option><option>Ammonia Solution</option><option>Hydrated Lime</option><option>Water</option></select></div>
+          <div><label>Concentration (%)</label><input id="concentration" type="number" step="0.1"></div>
+          <div><label>Nozzle Qty</label><input id="qty" type="number" min="1" value="1"></div>
+          <div><label>Spray Angle (°)</label><input id="sprayAngle" type="number" step="1"></div>
+        </div>
+        <div class="row3" style="margin-top:10px">
+          <div><label>Min Flow / Nozzle (L/min)</label><input id="minFlow" type="number" step="0.1"></div>
+          <div><label>Normal Flow / Nozzle (L/min)</label><input id="normalFlow" type="number" step="0.1"></div>
+          <div><label>Max Flow / Nozzle (L/min)</label><input id="maxFlow" type="number" step="0.1"></div>
+        </div>
+        <div class="calc"><div>Min Total<b id="minTotal">0 L/min</b></div><div>Normal Total<b id="normalTotal">0 L/min</b></div><div>Max Total<b id="maxTotal">0 L/min</b></div></div>
+      </div>
+
+      <div class="card c12">
+        <h3>Performance Values for Data Sheet</h3>
+        <div class="note" style="margin-bottom:10px">Performance Curve는 Phase 2에서 별도로 처리합니다. 지금은 고객 제출용 Excel에 들어갈 값을 직접 입력할 수 있게 했습니다.</div>
+        <div class="row4">
+          <div><label>Atomizing Air Pressure</label><input id="airPressure" placeholder="예: 4.14 barg"></div>
+          <div><label>Atomizing Air Flow</label><input id="airFlow" placeholder="예: 65 Nm³/hr"></div>
+          <div><label>Droplet Size</label><input id="dropletSize" placeholder="예: SMD 80 μm"></div>
+          <div><label>Liquid Pressure</label><input id="liquidPressure" placeholder="예: 2.5 ~ 4.5 barg"></div>
+        </div>
+      </div>
+
+      <div class="card c12">
+        <h3>Data Sheet Manual Specifications</h3>
+        <div class="row3">
+          <div><label>Nozzle Type</label><input id="manualNozzleType" value="Internal-mix, Air Atomizing"></div>
+          <div><label>Run Type</label><input id="manualRunType" value="Flow control"></div>
+          <div><label>Spraying Type</label><input id="manualSprayingType" value="Round"></div>
+        </div>
+        <div class="row3" style="margin-top:10px"><div><label>Dimension / DWG</label><input id="manualDimension"></div><div><label>Nozzle Tip Material</label><input id="manualTipMaterial"></div><div><label>Nozzle Pipe Material</label><input id="manualPipeMaterial" value="316LSS"></div></div>
+        <div class="row3" style="margin-top:10px"><div><label>Empty Weight</label><input id="manualEmptyWeight"></div><div><label>Operating Weight</label><input id="manualOperatingWeight"></div><div><label>Unit Number</label><textarea id="manualUnitNumber"></textarea></div></div>
+        <div class="row3" style="margin-top:10px"><div><label>Atomizing Air Connection</label><input id="manualAirConnection"></div><div><label>Liquid Connection</label><input id="manualLiquidConnection"></div><div><label>Temperatures</label><div class="row2"><input id="manualDesignTemp" placeholder="HRSG Design"><input id="manualOperatingTemp" placeholder="HRSG Operation"></div></div></div>
+        <div style="margin-top:10px"><label>Remark / Note</label><textarea id="manualRemark"></textarea></div>
+        <div style="margin-top:16px;border-top:1px solid #eaecf0;padding-top:14px"><div class="toolbar" style="justify-content:space-between"><div><b>Additional Specifications</b><div class="note">고객 요청 항목을 자유롭게 추가하고 순서를 바꿀 수 있습니다.</div></div><button id="addSpecBtn">+ 추가 항목</button></div><div id="additionalSpecs" style="margin-top:10px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="datasheet" class="view">
+    <div class="grid"><div class="card c12"><div class="toolbar" style="justify-content:space-between"><div><h2>Data Sheet Preview</h2><div class="note">이 미리보기와 같은 구조로 실제 .xlsx 파일을 생성합니다.</div></div><div class="toolbar"><select id="sheetNozzleSelect" style="min-width:160px"></select><button class="primary" id="excelBtn">Excel Data Sheet (.xlsx)</button></div></div></div><div class="card c12"><div class="sheet-wrap"><div class="sheet" id="sheetPreview"></div></div></div></div>
+  </section>
+
+  
+  <section id="curve" class="view">
+    <div class="grid">
+      <div class="card c12">
+        <div class="toolbar" style="justify-content:space-between">
+          <div>
+            <h2>Nozzle Selection / Performance Curve</h2>
+            <div class="note">지원 모델의 Digital Curve 데이터를 모두 연결했습니다. 단일 통합 그래프 1개로 표시됩니다. 그래프 위에서 마우스를 좌우로 이동하면 해당 유량의 Liquid Pressure / Air Flow / Particle Data가 실시간으로 함께 표시됩니다.</div>
+          </div>
+          <div class="toolbar">
+            <select id="perfNozzleSelect" style="min-width:160px"></select>
+            <span class="badge blue" id="perfSelectedBadge">Selected -</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card c4">
+        <h3>Selection Basis</h3>
+        <div class="perf-summary" id="perfBasis"></div>
+        
+        <div class="row3" style="margin-top:10px">
+          <div><label>Air Pressure</label><select id="perfAirSelect"></select></div>
+          <div><label>Graph Flow Unit</label><select id="perfFlowUnit"><option value="Lmin">L/min</option><option value="Lhr">L/hr</option></select></div>
+          <div><label>Performance Curve Rev.</label><input id="perfRevision" value="A" maxlength="8" placeholder="A"></div>
+        </div>
+
+        <div class="perf-pdf-options" style="margin-top:12px">
+          <div class="perf-pdf-options-title">PDF Output Options</div>
+          <div class="row2">
+            <div>
+              <label>Page Orientation</label>
+              <select id="perfPdfOrientation">
+                <option value="landscape">Landscape / 가로</option>
+                <option value="portrait">Portrait / 세로</option>
+              </select>
+            </div>
+            <div class="perf-pdf-option-checks">
+              <label class="perf-check"><input id="perfPdfProjectInfo" type="checkbox" checked> Project / Customer 정보 포함</label>
+              <label class="perf-check"><input id="perfPdfDesignPoints" type="checkbox" checked> 그래프 Design Point (P1~Pn) 포함</label>
+              <label class="perf-check"><input id="perfPdfPointTable" type="checkbox" checked> Design Point 성능표 포함</label>
+              <label class="perf-check"><input id="perfPdfMetricDescriptions" type="checkbox" checked> Graph Metric 설명 포함</label>
+            </div>
+          </div>
+
+          <div id="perfMetricDescOptions" class="perf-metric-desc-options">
+            <div class="perf-metric-desc-head">
+              <b>Graph Metric Descriptions</b>
+              <span>선택한 모델에 존재하는 항목만 PDF에 표시됩니다.</span>
+            </div>
+            <div class="perf-metric-desc-grid">
+              <label class="perf-check"><input id="perfDescFlow" type="checkbox" checked> Flow Rate</label>
+              <label class="perf-check"><input id="perfDescLiquidPressure" type="checkbox" checked> Liquid Pressure</label>
+              <label class="perf-check"><input id="perfDescAirFlow" type="checkbox" checked> Air Capacity / Air Flow</label>
+              <label class="perf-check"><input id="perfDescD32" type="checkbox" checked> D32 / SMD</label>
+              <label class="perf-check"><input id="perfDescDv05" type="checkbox" checked> Dv0.5</label>
+              <label class="perf-check"><input id="perfDescDv09" type="checkbox" checked> Dv0.9</label>
+              <label class="perf-check"><input id="perfDescDmax" type="checkbox" checked> Dmax</label>
+              <label class="perf-check"><input id="perfDescX90" type="checkbox" checked> X90</label>
+              <label class="perf-check"><input id="perfDescX99" type="checkbox" checked> X99</label>
+            </div>
+          </div>
+
+          <div class="note" id="perfPdfOptionSummary">A4 Landscape · Project Info 포함 · Design Points 포함 · Point Table 포함 · Metric 설명 포함</div>
+        </div>
+
+        <button class="primary" id="perfApplyBtn" style="width:100%;margin-top:12px">선택값 RFQ / Data Sheet에 적용</button>
+        <div class="row2" style="margin-top:8px">
+          <button id="perfPdfPreviewBtn" style="width:100%">PDF 미리보기</button>
+          <button class="success" id="perfPdfBtn" style="width:100%">Performance Curve PDF 저장</button>
+        </div>
+        <div class="note" style="margin-top:6px;text-align:center">선택한 PDF Output Options와 Graph Flow Unit이 미리보기 / 최종 PDF에 동일하게 반영됩니다.</div>
+        <div class="perf-status" id="perfStatus" style="margin-top:10px"></div>
+      </div>
+
+      <div class="card c8">
+        <div class="toolbar" style="justify-content:space-between">
+          <div><h3 style="margin-bottom:3px">Performance Curve</h3><div class="note" id="perfCurveTitle">모델을 선택하세요.</div></div>
+          <span class="badge" id="perfDataBadge">Data -</span>
+        </div>
+        <div id="perfDigitalPanel" class="perf-combined-shell">
+          <div id="perfSelectionFlash" class="perf-selection-flash" aria-live="polite">
+            <span class="perf-selection-check">✓</span>
+            <div>
+              <small>SELECTED MODEL</small>
+              <strong id="perfSelectionFlashModel">-</strong>
+              <em id="perfSelectionFlashAir">-</em>
+            </div>
+          </div>
+          <div class="perf-combined-top">
+            <div class="perf-combined-readout" id="perfLiveReadout">
+              <div><span>FLOW</span><b id="perfLiveFlow">-</b></div>
+              <div><span>LIQUID P.</span><b id="perfLiveLP">-</b></div>
+              <div><span>AIR FLOW</span><b id="perfLiveAir">-</b></div>
+              <div><span id="perfLiveDropLabel">DROPLET</span><b id="perfLiveDrop">-</b></div>
+              <div><span>OTHER PARTICLE</span><b id="perfLiveOther">-</b></div>
+            </div>
+            <div class="perf-curve-help">단일 통합 Digital Curve입니다. 마우스를 좌우로 이동하면 해당 유량의 모든 값이 실시간 보간되며, 클릭할 때마다 Design Point가 추가됩니다.</div>
+          </div>
+          <div class="perf-combined-canvas-wrap">
+            <canvas id="perfCombinedCanvas" width="1240" height="620"></canvas>
+            <div id="perfCombinedTooltip" class="perf-tooltip"></div>
+          </div>
+          <div class="perf-series-legend" id="perfCombinedLegend"></div>
+          <div class="perf-point-panel">
+            <div class="toolbar" style="justify-content:space-between">
+              <div>
+                <b>Selected Design Points</b>
+                <div class="note">그래프를 클릭할 때마다 Point 1, Point 2…로 추가됩니다. 이 포인트들은 현재 Nozzle에 저장되어 추후 PDF 출력에 사용할 수 있습니다.</div>
+              </div>
+              <button id="perfClearPointsBtn" class="danger">Clear Points</button>
+            </div>
+            <div id="perfPointList" class="perf-point-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card c12">
+        <div class="toolbar" style="justify-content:space-between">
+          <div><h3>Recommended Nozzles</h3><div class="note">Normal Flow가 범위 안이면 우선 표시합니다. Min/Max가 벗어나도 후보에서 제외하지 않습니다.</div></div>
+          <button id="perfRefreshBtn">추천 새로고침</button>
+        </div>
+        <div id="perfRecommendations" class="perf-rec-grid"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="perfPdfPreviewOverlay" class="perf-pdf-preview-overlay" aria-hidden="true">
+  <div class="perf-pdf-preview-dialog">
+    <div class="perf-pdf-preview-head">
+      <div>
+        <h3 style="margin:0">Performance Curve PDF Preview</h3>
+        <div class="note" id="perfPdfPreviewNote">실제 PDF 저장에 사용되는 동일한 A4 페이지입니다.</div>
+      </div>
+      <div class="toolbar">
+        <button id="perfPdfPreviewSaveBtn" class="success">PDF 저장</button>
+        <button id="perfPdfPreviewCloseBtn">닫기</button>
+      </div>
+    </div>
+    <div id="perfPdfPreviewBody" class="perf-pdf-preview-body"></div>
+  </div>
+</div>
+
+<div class="error" id="errorBox"></div>
+<script>
+(function(){
+'use strict';
+var STORAGE_KEY='NozzleEngineeringStableV1';
+var state={projects:[],currentId:null,activeNozzle:0};
+
+var TEAM_MODE=true,teamArgs={},teamDomReady=false,teamPendingArgs=null,teamLastLoadToken=null,teamEventSeq=0;
+function teamPost(type,payload){try{window.parent.postMessage(Object.assign({isStreamlitMessage:true,type:type},payload||{}),'*')}catch(e){}}
+function teamSetHeight(){var h=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,760);teamPost('streamlit:setFrameHeight',{height:h})}
+function teamEmit(action,payload){
+  var value=Object.assign({action:action,event_id:Date.now()+'_'+(++teamEventSeq)},payload||{});
+  teamPost('streamlit:setComponentValue',{value:value,dataType:'json'});
+  teamSetSync('warn','Saving');
+}
+function teamSetSync(kind,text,msg){
+  var e=$('teamSyncStatus');if(e){e.className='team-sync-status '+(kind||'');e.textContent=text||'-'}
+  if($('teamSyncMsg'))$('teamSyncMsg').textContent=msg||'';
+}
+function teamNormalizeProject(p){
+  if(!p)return null;
+  if(p.projectNo!==undefined)return clone(p);
+  // Compatibility with the first Streamlit Team Edition JSON schema.
+  var q=defaultProject();
+  q.id=p.id||uid();q.projectNo=p.project_no||'';q.projectName=p.project_name||'';q.customer=p.customer||'';q.owner=p.owner||'';q.participants=p.participants||'';
+  q.status=p.status==='Completed'?'Completed':p.status==='On Hold'?'Hold':(p.status&&p.status!=='Working'?p.status:'Draft');
+  q.createdAt=p.created_at||now();q.updatedAt=p.updated_at||now();q.locked=q.status==='Completed';
+  var last=p.last_saved_revision;q.revisionCount=(last===null||last===undefined)?0:Math.max(0,Number(last)||0);
+  q.revisions=Array.isArray(p.revision_history)?clone(p.revision_history):[];
+  q.nozzles=(Array.isArray(p.nozzles)&&p.nozzles.length?p.nozzles:[{}]).slice(0,5).map(function(x,i){
+    var n=defaultNozzle(i),m=x.manual||{},po=x.pdf_options||{},mets=po.metrics||{};
+    n.name=x.name||('Type-'+(i+1));n.typeTag=n.name;n.injectionType=x.injection_type||'RA';n.selectedModel=x.selected_model||'';n.dataSheetRevision=x.data_sheet_revision||'A';
+    n.fluid=x.fluid||'Urea Solution';n.concentration=x.concentration||'';n.qty=Math.max(1,num(x.qty)||1);n.sprayAngle=x.spray_angle_deg==null?'':String(x.spray_angle_deg);
+    n.minFlow=x.min_flow_lmin==null?'':num(x.min_flow_lmin)*60;n.normalFlow=x.normal_flow_lmin==null?'':num(x.normal_flow_lmin)*60;n.maxFlow=x.max_flow_lmin==null?'':num(x.max_flow_lmin)*60;
+    n.airPressure=x.air_pressure_barg==null?'':String(x.air_pressure_barg);n.airFlow=x.air_flow_nm3h==null?'':String(x.air_flow_nm3h);n.liquidPressure=x.liquid_pressure_barg==null?'':String(x.liquid_pressure_barg);n.dropletSize=x.droplet_size||'';
+    n.selectedAir=x.selected_air_barg==null?'':String(x.selected_air_barg);n.designPoints=Array.isArray(x.design_points)?clone(x.design_points):[];n.performanceRevision=x.performance_curve_revision||'A';
+    n.manualNozzleType=m.nozzle_type||n.manualNozzleType;n.manualRunType=m.run_type||n.manualRunType;n.manualSprayingType=m.spraying_type||n.manualSprayingType;n.manualDimension=m.dimension||'';n.manualTipMaterial=m.tip_material||'';n.manualPipeMaterial=m.pipe_material||n.manualPipeMaterial;n.manualEmptyWeight=m.empty_weight||'';n.manualOperatingWeight=m.operating_weight||'';n.manualAirConnection=m.air_connection||'';n.manualLiquidConnection=m.liquid_connection||'';n.manualUnitNumber=m.unit_number||'';n.manualDesignTemp=m.design_temperature||'';n.manualOperatingTemp=m.operating_temperature||'';n.manualRemark=m.remark||'';n.additionalSpecs=Array.isArray(x.additional_specs)?clone(x.additional_specs):[];
+    n.pdfOrientation=po.orientation||'landscape';n.pdfProjectInfo=po.project_info!==false;n.pdfDesignPoints=po.graph_design_points!==false;n.pdfPointTable=po.point_table!==false;n.pdfMetricDescriptions=po.metric_descriptions!==false;n.pdfMetricDescSelection={flow:mets.flow!==false,liquidPressure:mets.liquidPressure!==false,airRate:mets.airRate!==false,d32:mets.d32!==false,dv05:mets.dv05!==false,dv09:mets.dv09!==false,dmax:mets.dmax!==false,x90:mets.x90!==false,x99:mets.x99!==false};
+    return n;
+  });
+  return q;
+}
+function teamPopulateRefs(refs,currentFilename){
+  var sel=$('teamProjectSelect');if(!sel)return;var before=sel.value;sel.innerHTML='<option value="">— GitHub Project 선택 —</option>';
+  (refs||[]).forEach(function(r){var o=document.createElement('option');o.value=r.name||r;o.textContent=r.label||r.name||r;sel.appendChild(o)});
+  if(currentFilename&&[].slice.call(sel.options).some(function(o){return o.value===currentFilename}))sel.value=currentFilename;else if(before&&[].slice.call(sel.options).some(function(o){return o.value===before}))sel.value=before;
+}
+function teamApplyArgs(args){
+  teamArgs=args||{};
+  var u=teamArgs.user||{};if($('teamSyncUser'))$('teamSyncUser').textContent=(u.name||'Team User')+' · '+(u.role||'Member');
+  teamPopulateRefs(teamArgs.project_refs||[],teamArgs.current_filename||'');
+  if($('teamDeleteBtn'))$('teamDeleteBtn').style.display=(String(u.role||'').toLowerCase()==='admin'&&teamArgs.current_filename)?'inline-block':'none';
+  var st=String(teamArgs.sync_status||'Ready'),kind=/error|conflict/i.test(st)?'err':/new|saving|unsaved/i.test(st)?'warn':'ok';teamSetSync(kind,st,teamArgs.flash||'');
+  var token=teamArgs.load_token;
+  if(token!==undefined&&token!==teamLastLoadToken){
+    teamLastLoadToken=token;
+    var p=teamNormalizeProject(teamArgs.project||null);
+    if(p){state.projects=[p];state.currentId=p.id;state.activeNozzle=0;saveStore();switchView(teamArgs.open_view||'rfq')}
+    else {state.projects=[];state.currentId=null;state.activeNozzle=0;renderDashboard()}
+  }
+  setTimeout(teamSetHeight,40);
+}
+function teamTryApplyPending(){if(teamDomReady&&teamPendingArgs){var a=teamPendingArgs;teamPendingArgs=null;teamApplyArgs(a)}}
+function teamBridgeInit(){
+  window.addEventListener('message',function(ev){var d=ev.data||{};if(d.type==='streamlit:render'){var a=d.args||{};if(teamDomReady)teamApplyArgs(a);else teamPendingArgs=a}});
+  teamPost('streamlit:componentReady',{apiVersion:1});
+  if(window.ResizeObserver){new ResizeObserver(function(){teamSetHeight()}).observe(document.body)}else setInterval(teamSetHeight,1000);
+}
+teamBridgeInit();
+
+function $(id){return document.getElementById(id)}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function uid(){return 'p_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)}
+function now(){return new Date().toISOString()}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function num(v){var n=parseFloat(v);return isFinite(n)?n:0}
+function fmtNum(v){var n=num(v);return (Math.round(n*100)/100).toLocaleString('en-US',{maximumFractionDigits:2})}
+function flowToLmin(v){if(v===''||v==null)return '';return num(v)/60}
+function flowFromLmin(v){if(v===''||v==null)return '';return num(v)*60}
+function fmtFlowLmin(v){return fmtNum(flowToLmin(v))}
+function perfGraphUnit(){
+  var el=$('perfFlowUnit');
+  return el&&el.value==='Lhr'?'Lhr':'Lmin';
+}
+function perfGraphFlowLabel(){return perfGraphUnit()==='Lhr'?'L/hr':'L/min'}
+function perfGraphFlowValue(v){return perfGraphUnit()==='Lhr'?num(v):flowToLmin(v)}
+function fmtPerfGraphFlow(v){return fmtNum(perfGraphFlowValue(v))}
+
+
+
+var rfqImportState={text:'',items:[]};
+var RFQ_IMPORT_LABELS={
+  projectNo:'Project No.',projectName:'Project Name',customer:'Customer',typeTag:'Type Tag',injectionType:'Injection Type',selectedModel:'Selected Model',
+  fluid:'Fluid',concentration:'Concentration (%)',qty:'Nozzle Qty',sprayAngle:'Spray Angle (°)',minFlow:'Min Flow / Nozzle (L/min)',normalFlow:'Normal Flow / Nozzle (L/min)',maxFlow:'Max Flow / Nozzle (L/min)',
+  airPressure:'Atomizing Air Pressure',airFlow:'Atomizing Air Flow',dropletSize:'Droplet Size',liquidPressure:'Liquid Pressure',manualTipMaterial:'Nozzle Tip Material',manualPipeMaterial:'Nozzle Pipe Material',
+  manualDesignTemp:'Design Temperature',manualOperatingTemp:'Operating Temperature',manualAirConnection:'Atomizing Air Connection',manualLiquidConnection:'Liquid Connection',manualRemark:'Remark / Note'
+};
+function rfqImportCleanText(text){return String(text||'').replace(/\r/g,'\n').replace(/\u00a0/g,' ').replace(/[\t ]+/g,' ').replace(/\n{3,}/g,'\n\n').trim()}
+function rfqImportLines(text){return rfqImportCleanText(text).split(/\n+/).map(function(x){return x.trim()}).filter(Boolean)}
+function rfqImportSourceShort(v){v=String(v||'').trim();return v.length>120?v.slice(0,117)+'...':v}
+function rfqImportAdd(items,key,value,confidence,source,note){
+  if(value===undefined||value===null||String(value).trim()==='')return;
+  if(items.some(function(x){return x.key===key}))return;
+  items.push({key:key,label:RFQ_IMPORT_LABELS[key]||key,value:String(value).trim(),confidence:confidence||'high',source:rfqImportSourceShort(source||''),note:note||'',checked:(confidence||'high')==='high'});
+}
+function rfqImportFindLine(lines,patterns){
+  for(var i=0;i<lines.length;i++){
+    for(var j=0;j<patterns.length;j++){
+      var re=new RegExp('^\\s*(?:'+patterns[j]+')\\s*(?:[:=\\-–—]|\\bis\\b)?\\s*(.+)$','i'),m=lines[i].match(re);
+      if(m&&m[1]&&m[1].trim())return {value:m[1].trim(),line:lines[i]};
+    }
+  }
+  return null;
+}
+function rfqImportFirstNumber(v){var m=String(v||'').replace(/,/g,'').match(/[-+]?\d+(?:\.\d+)?/);return m?parseFloat(m[0]):NaN}
+function rfqImportFlowToLmin(raw){
+  var t=String(raw||'').toLowerCase().replace(/,/g,''),n=rfqImportFirstNumber(t);if(!isFinite(n))return null;
+  if(/(?:l\s*\/\s*h|lph|liter[s]?\s*\/\s*h)/i.test(t))return {value:n/60,unit:'L/hr'};
+  if(/(?:gpm|gal(?:lon)?s?\s*\/\s*min)/i.test(t))return {value:n*3.785411784,unit:'gpm'};
+  if(/(?:l\s*\/\s*min|lpm|liter[s]?\s*\/\s*min)/i.test(t))return {value:n,unit:'L/min'};
+  return {value:n,unit:''};
+}
+function rfqImportPressureToBarg(raw){
+  var t=String(raw||'').toLowerCase().replace(/,/g,''),n=rfqImportFirstNumber(t);if(!isFinite(n))return null;
+  if(/psi/.test(t))return {value:n/14.5037738,unit:'psi'};
+  if(/mpa/.test(t))return {value:n*10,unit:'MPa'};
+  if(/kpa/.test(t))return {value:n/100,unit:'kPa'};
+  return {value:n,unit:/bara/.test(t)?'bara':(/bar/.test(t)?'bar':'')};
+}
+function rfqImportFormat(n,dec){if(!isFinite(n))return '';var p=Math.pow(10,dec==null?3:dec);return String(Math.round(n*p)/p)}
+function rfqImportExtractFlow(lines,kind){
+  var pats=kind==='min'?['min(?:imum)?\\s*(?:liquid\\s*)?flow(?:\\s*\/\\s*nozzle)?','minimum\\s*capacity']:
+    kind==='max'?['max(?:imum)?\\s*(?:liquid\\s*)?flow(?:\\s*\/\\s*nozzle)?','maximum\\s*capacity']:
+    ['normal\\s*(?:liquid\\s*)?flow(?:\\s*\/\\s*nozzle)?','design\\s*(?:liquid\\s*)?flow(?:\\s*\/\\s*nozzle)?','rated\\s*(?:liquid\\s*)?flow(?:\\s*\/\\s*nozzle)?','flow\\s*(?:rate)?\\s*(?:\/|per)\\s*nozzle'];
+  var hit=rfqImportFindLine(lines,pats);if(!hit)return null;
+  var cv=rfqImportFlowToLmin(hit.value);if(!cv)return null;
+  return {value:rfqImportFormat(cv.value,3),line:hit.line,confidence:cv.unit?'high':'medium',note:cv.unit&&cv.unit!=='L/min'?'Converted from '+cv.unit+' to L/min':(!cv.unit?'Unit not explicit':'')};
+}
+function rfqImportExtract(text){
+  var clean=rfqImportCleanText(text),lines=rfqImportLines(clean),items=[];
+  if(!clean)return items;
+  var hit,n,cv;
+
+  hit=rfqImportFindLine(lines,['project\\s*(?:no\\.?|number|#)','job\\s*(?:no\\.?|number|#)','rfq\\s*(?:no\\.?|number|#)']);if(hit)rfqImportAdd(items,'projectNo',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['project\\s*name','project\\s*title','job\\s*name']);if(hit)rfqImportAdd(items,'projectName',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['customer','client','end\\s*user']);if(hit)rfqImportAdd(items,'customer',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['type\\s*tag','nozzle\\s*type\\s*tag']);if(hit)rfqImportAdd(items,'typeTag',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['(?:selected\\s*)?(?:nozzle\\s*)?model','model\\s*(?:no\\.?|number)?']);if(hit)rfqImportAdd(items,'selectedModel',hit.value,'high',hit.line);
+
+  var low=clean.toLowerCase();
+  var fluid='';
+  if(/urea\s*(?:solution|water)?|요소수|요소\s*용액/.test(low))fluid='Urea Solution';
+  else if(/ammonia\s*(?:solution|water)|ammonium\s*hydroxide|암모니아수|암모니아\s*용액/.test(low))fluid='Ammonia Solution';
+  else if(/hydrated\s*lime|slaked\s*lime|소석회/.test(low))fluid='Hydrated Lime';
+  else if(/\bwater\b|공업용수|용수/.test(low))fluid='Water';
+  hit=rfqImportFindLine(lines,['fluid','liquid','medium','solution']);
+  if(hit){var hv=hit.value.toLowerCase();if(/urea|요소/.test(hv))fluid='Urea Solution';else if(/ammonia|암모니아/.test(hv))fluid='Ammonia Solution';else if(/hydrated\s*lime|slaked\s*lime|소석회/.test(hv))fluid='Hydrated Lime';else if(/water|용수/.test(hv))fluid='Water'}
+  if(fluid)rfqImportAdd(items,'fluid',fluid,'high',hit?hit.line:fluid);
+
+  hit=rfqImportFindLine(lines,['concentration','conc\\.?','농도']);
+  if(hit){n=rfqImportFirstNumber(hit.value);if(isFinite(n))rfqImportAdd(items,'concentration',rfqImportFormat(n,2),'high',hit.line)}
+  else if(fluid!=='Water'){
+    var cm=clean.match(/(?:urea|ammonia|요소수|암모니아)[^\n%]{0,35}?(\d+(?:\.\d+)?)\s*%/i)||clean.match(/(\d+(?:\.\d+)?)\s*%[^\n]{0,35}?(?:urea|ammonia|요소수|암모니아)/i);
+    if(cm)rfqImportAdd(items,'concentration',cm[1],'high',cm[0]);
+  }
+
+  hit=rfqImportFindLine(lines,['nozzle\\s*(?:qty|quantity|count)','quantity\\s*(?:of\\s*)?nozzles?','qty\\s*(?:of\\s*)?nozzles?','no\\.?\\s*of\\s*nozzles?']);
+  if(hit){n=rfqImportFirstNumber(hit.value);if(isFinite(n)&&n>0)rfqImportAdd(items,'qty',String(Math.round(n)),'high',hit.line)}
+  var qtyItem=items.find(function(x){return x.key==='qty'}),qty=qtyItem?parseFloat(qtyItem.value):NaN;
+
+  hit=rfqImportFindLine(lines,['spray\\s*angle','spraying\\s*(?:degree|angle)','분사각']);
+  if(hit){n=rfqImportFirstNumber(hit.value);if(isFinite(n))rfqImportAdd(items,'sprayAngle',rfqImportFormat(n,1),'high',hit.line)}
+
+  ['min','normal','max'].forEach(function(k){var r=rfqImportExtractFlow(lines,k);if(r)rfqImportAdd(items,k+'Flow',r.value,r.confidence,r.line,r.note)});
+  if(!items.some(function(x){return x.key==='normalFlow'})&&isFinite(qty)&&qty>0){
+    hit=rfqImportFindLine(lines,['total\\s*(?:liquid\\s*)?flow','total\\s*capacity']);
+    if(hit){cv=rfqImportFlowToLmin(hit.value);if(cv){rfqImportAdd(items,'normalFlow',rfqImportFormat(cv.value/qty,3),'medium',hit.line,'Calculated as total flow ÷ nozzle qty ('+qty+')')}}
+  }
+
+  hit=rfqImportFindLine(lines,['atomizing\\s*air\\s*pressure','air\\s*pressure','plant\\s*air\\s*pressure']);
+  if(hit){cv=rfqImportPressureToBarg(hit.value);if(cv)rfqImportAdd(items,'airPressure',rfqImportFormat(cv.value,3)+' barg',cv.unit?'high':'medium',hit.line,cv.unit&&cv.unit!=='bar'&&cv.unit!=='barg'?'Converted from '+cv.unit+' to barg':(!cv.unit?'Unit not explicit':'') )}
+  hit=rfqImportFindLine(lines,['atomizing\\s*air\\s*(?:flow|capacity|consumption)','air\\s*(?:flow|capacity|consumption)']);
+  if(hit){n=rfqImportFirstNumber(hit.value);if(isFinite(n))rfqImportAdd(items,'airFlow',rfqImportFormat(n,3)+( /nm(?:3|³)\s*\/\s*h|nm3\s*\/\s*hr/i.test(hit.value)?' Nm³/hr':''),/nm(?:3|³)|scfm/i.test(hit.value)?'high':'medium',hit.line,/scfm/i.test(hit.value)?'SCFM detected - verify conversion before use':(!/nm(?:3|³)/i.test(hit.value)?'Unit not explicit':'') )}
+
+  hit=rfqImportFindLine(lines,['liquid\\s*pressure','fluid\\s*pressure']);if(hit)rfqImportAdd(items,'liquidPressure',hit.value,/bar|psi|mpa|kpa/i.test(hit.value)?'high':'medium',hit.line);
+  hit=rfqImportFindLine(lines,['droplet\\s*size','smd','d32']);if(hit)rfqImportAdd(items,'dropletSize',hit.value,/µm|μm|um|micron/i.test(hit.value)?'high':'medium',hit.line);
+
+  var injection='';
+  if(/direct\s*injection|\bdi\s*injection\b/i.test(clean))injection='DI';
+  else if(/ammonia\s*injection/i.test(clean))injection='AMMONIA';
+  else if(/reducing\s*agent|\bra\s*injection\b/i.test(clean))injection='RA';
+  hit=rfqImportFindLine(lines,['injection\\s*type','injection']);
+  if(hit){var iv=hit.value.toLowerCase();if(/direct|\bdi\b/.test(iv))injection='DI';else if(/ammonia/.test(iv))injection='AMMONIA';else if(/reducing|\bra\b/.test(iv))injection='RA'}
+  if(injection)rfqImportAdd(items,'injectionType',injection,'high',hit?hit.line:injection);
+
+  hit=rfqImportFindLine(lines,['nozzle\\s*tip\\s*material','tip\\s*material']);if(hit)rfqImportAdd(items,'manualTipMaterial',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['nozzle\\s*pipe\\s*material','pipe\\s*material','lance\\s*material']);if(hit)rfqImportAdd(items,'manualPipeMaterial',hit.value,'high',hit.line);
+  if(!items.some(function(x){return x.key==='manualTipMaterial'})&&!items.some(function(x){return x.key==='manualPipeMaterial'})){
+    hit=rfqImportFindLine(lines,['material','moc','material\\s*of\\s*construction']);
+    if(hit){rfqImportAdd(items,'manualTipMaterial',hit.value,'medium',hit.line,'Generic material - verify tip material');rfqImportAdd(items,'manualPipeMaterial',hit.value,'medium',hit.line,'Generic material - verify pipe material')}
+    else {var mm=clean.match(/\b(?:SS\s*)?316L(?:SS)?\b|\bSUS\s*316L\b|\bSS\s*304L?\b|\bHastelloy\s*[A-Z0-9-]+\b/i);if(mm){rfqImportAdd(items,'manualTipMaterial',mm[0],'medium',mm[0],'Material mention found without field label');rfqImportAdd(items,'manualPipeMaterial',mm[0],'medium',mm[0],'Material mention found without field label')}}
+  }
+
+  hit=rfqImportFindLine(lines,['design\\s*temperature','design\\s*temp\\.?','설계\\s*온도']);if(hit)rfqImportAdd(items,'manualDesignTemp',hit.value,/°|c|f/i.test(hit.value)?'high':'medium',hit.line);
+  hit=rfqImportFindLine(lines,['operating\\s*temperature','operation\\s*temperature','operating\\s*temp\\.?','운전\\s*온도']);if(hit)rfqImportAdd(items,'manualOperatingTemp',hit.value,/°|c|f/i.test(hit.value)?'high':'medium',hit.line);
+  hit=rfqImportFindLine(lines,['atomizing\\s*air\\s*connection','air\\s*connection']);if(hit)rfqImportAdd(items,'manualAirConnection',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['liquid\\s*connection','fluid\\s*connection']);if(hit)rfqImportAdd(items,'manualLiquidConnection',hit.value,'high',hit.line);
+  hit=rfqImportFindLine(lines,['remark(?:s)?','note(?:s)?','special\\s*requirement(?:s)?']);if(hit)rfqImportAdd(items,'manualRemark',hit.value,'high',hit.line);
+
+  return items;
+}
+function rfqImportConfidenceLabel(c){return c==='high'?'확실':c==='medium'?'확인 필요':'미인식'}
+function rfqImportRender(){
+  var body=$('rfqImportReviewRows'),wrap=$('rfqImportReviewWrap'),items=rfqImportState.items||[];if(!body||!wrap)return;
+  $('rfqImportFound').textContent=items.length;
+  $('rfqImportHigh').textContent=items.filter(function(x){return x.confidence==='high'}).length;
+  $('rfqImportReview').textContent=items.filter(function(x){return x.confidence!=='high'}).length;
+  if(!items.length){wrap.style.display='block';body.innerHTML='<tr><td colspan="5" class="rfq-import-empty">인식된 RFQ 항목이 없습니다. 라벨과 단위가 포함된 원문을 확인해주세요.</td></tr>';return}
+  wrap.style.display='block';
+  body.innerHTML=items.map(function(it,i){
+    var src=it.source+(it.note?' · '+it.note:'');
+    return '<tr><td><input class="rfq-import-use" type="checkbox" data-i="'+i+'" '+(it.checked?'checked':'')+'></td>'+
+      '<td class="rfq-import-field">'+esc(it.label)+'</td><td class="rfq-import-value">'+esc(it.value)+'</td>'+
+      '<td><span class="rfq-conf '+(it.confidence==='high'?'high':'medium')+'">'+rfqImportConfidenceLabel(it.confidence)+'</span></td>'+
+      '<td class="rfq-import-source">'+esc(src||'-')+'</td></tr>';
+  }).join('');
+  body.querySelectorAll('.rfq-import-use').forEach(function(cb){cb.onchange=function(){var i=parseInt(cb.getAttribute('data-i'),10);if(items[i])items[i].checked=cb.checked}});
+}
+function rfqImportAnalyze(){
+  var text=rfqImportCleanText($('rfqImportText').value);rfqImportState.text=text;rfqImportState.items=rfqImportExtract(text);rfqImportRender();
+  $('rfqImportNotice').textContent=rfqImportState.items.length?'분석 완료: 확실한 항목은 기본 체크, 문맥 추정값은 “확인 필요”로 표시했습니다.':'인식 결과가 없습니다. 원문의 라벨/단위를 확인해주세요.';
+}
+function rfqImportClear(){
+  rfqImportState={text:'',items:[]};$('rfqImportText').value='';$('rfqImportReviewRows').innerHTML='';$('rfqImportReviewWrap').style.display='none';$('rfqImportFound').textContent='0';$('rfqImportHigh').textContent='0';$('rfqImportReview').textContent='0';$('rfqImportNotice').textContent='현재 Quick Import는 RFQ 텍스트 붙여넣기와 텍스트 기반 파일 분석만 사용합니다.';
+}
+function rfqImportApply(){
+  var p=current();if(!p){alert('프로젝트를 먼저 생성해주세요.');return}
+  var items=(rfqImportState.items||[]).filter(function(x){return x.checked});if(!items.length){alert('적용할 항목을 선택해주세요.');return}
+  var applied=0;
+  items.forEach(function(it){var el=$(it.key);if(!el)return;el.value=it.value;applied++});
+  updateFluid();updateTotals();captureProject();saveStore();renderNozzleTabs();renderRevision();
+  $('rfqImportNotice').textContent=applied+'개 항목을 현재 Project / Nozzle RFQ에 적용했습니다. 적용값을 확인한 후 Working Copy를 저장해주세요.';
+  alert(applied+'개 RFQ 항목을 적용했습니다. 입력값을 한 번 확인해주세요.');
+}
+function rfqImportReadFile(file){
+  if(!file)return;
+  var name=(file.name||'').toLowerCase(),ok=/\.(txt|csv|eml|html?|md)$/.test(name)||/^text\//.test(file.type||'')||file.type==='message/rfc822';
+  if(!ok){$('rfqImportNotice').textContent='현재 로컬 Quick Import는 텍스트 파일만 읽습니다. 이미지/PDF는 AI Vision/OCR 연결 단계에서 처리합니다.';return}
+  var reader=new FileReader();reader.onload=function(){var t=rfqImportCleanText(reader.result||'');$('rfqImportText').value=t;rfqImportAnalyze()};reader.onerror=function(){$('rfqImportNotice').textContent='파일을 읽지 못했습니다.'};reader.readAsText(file);
+}
+function rfqImportBind(){
+  var drop=$('rfqImportDrop'),ta=$('rfqImportText');if(!drop||!ta)return;
+  $('rfqImportAnalyzeBtn').onclick=rfqImportAnalyze;$('rfqImportClearBtn').onclick=rfqImportClear;$('rfqImportApplyBtn').onclick=rfqImportApply;
+  $('rfqImportFileBtn').onclick=function(){$('rfqImportFile').click()};$('rfqImportFile').onchange=function(){if(this.files&&this.files[0])rfqImportReadFile(this.files[0]);this.value=''};
+  ['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();drop.classList.add('dragover')})});
+  ['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();drop.classList.remove('dragover')})});
+  drop.addEventListener('drop',function(e){var dt=e.dataTransfer;if(!dt)return;if(dt.files&&dt.files.length){rfqImportReadFile(dt.files[0]);return}var text=dt.getData('text/plain')||dt.getData('text');if(text){ta.value=rfqImportCleanText(text);rfqImportAnalyze()}});
+  ta.addEventListener('paste',function(){setTimeout(function(){if(ta.value.trim())rfqImportAnalyze()},0)});
+}
+
+function showError(e){var b=$('errorBox');b.textContent='오류: '+(e&&e.message?e.message:e);b.classList.add('show');console.error(e)}
+window.onerror=function(msg,src,line,col,err){showError(err||msg)};
+function defaultNozzle(i){return {name:'Type-'+(i+1),typeTag:'Type-'+(i+1),injectionType:'RA',selectedModel:'',dataSheetRevision:'A',fluid:'Urea Solution',concentration:'',qty:1,sprayAngle:'',minFlow:'',normalFlow:'',maxFlow:'',airPressure:'',airFlow:'',dropletSize:'',liquidPressure:'',manualNozzleType:'Internal-mix, Air Atomizing',manualRunType:'Flow control',manualSprayingType:'Round',manualDimension:'',manualTipMaterial:'',manualPipeMaterial:'316LSS',manualEmptyWeight:'',manualOperatingWeight:'',manualAirConnection:'',manualLiquidConnection:'',manualUnitNumber:'',manualDesignTemp:'',manualOperatingTemp:'',manualRemark:'',additionalSpecs:[],designPoints:[],performanceRevision:'A'}}
+function defaultProject(){return {id:uid(),projectNo:'',projectName:'',customer:'',owner:'',participants:'',status:'Draft',revisionCount:0,revisions:[],locked:false,createdAt:now(),updatedAt:now(),nozzles:[defaultNozzle(0)]}}
+function load(){teamDomReady=true;if(TEAM_MODE){renderDashboard();teamTryApplyPending();teamSetHeight();return}try{var raw=localStorage.getItem(STORAGE_KEY);if(raw){var x=JSON.parse(raw);if(x&&Array.isArray(x.projects))state=x}}catch(e){showError(e)};renderDashboard()}
+function saveStore(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){if(!TEAM_MODE)showError(e)}}
+function current(){return state.projects.find(function(p){return p.id===state.currentId})||null}
+function activeNozzle(){var p=current();return p&&p.nozzles[state.activeNozzle]?p.nozzles[state.activeNozzle]:null}
+function switchView(id){document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v.id===id)});document.querySelectorAll('.tabs button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-view')===id)});if(id==='dashboard')renderDashboard();if(id==='rfq')renderProject();if(id==='datasheet')renderDataSheet();if(id==='curve')renderPerformance()}
+function revisionLabels(){var p=current();if(!p)return {last:'-',working:'-',doc:'Rev.A'};var n=p.revisionCount||0;var last=n?'R'+String(n).padStart(2,'0'):'No Saved Revision';var working=p.locked?(n?'R'+String(n).padStart(2,'0')+' LOCKED':'Initial LOCKED'):(n?'R'+String(n+1).padStart(2,'0')+' WORKING':'R00 WORKING');var nz=activeNozzle();return {last:last,working:working,doc:'Rev.'+normalizeDocRev(nz?nz.dataSheetRevision:'A')}}
+function normalizeDocRev(v){var x=String(v||'A').trim().replace(/^rev[.\s-]*/i,'');return x||'A'}
+function renderRevision(){var r=revisionLabels();$('lastSavedBadge').textContent='LAST SAVED '+r.last;$('workingBadge').textContent='CURRENT WORKING '+r.working;$('docRevBadge').textContent='DATA SHEET '+r.doc}
+function renderDashboard(){var body=$('projectRows');var list=state.projects.slice().sort(function(a,b){return String(b.updatedAt).localeCompare(String(a.updatedAt))});if(!list.length){body.innerHTML='<tr><td colspan="9" class="empty">아직 프로젝트가 없습니다.</td></tr>';return}body.innerHTML=list.map(function(p){var rev=p.revisionCount?'R'+String(p.revisionCount).padStart(2,'0'):'-';return '<tr class="project-row" data-id="'+esc(p.id)+'"><td><b>'+esc(p.projectNo||'-')+'</b></td><td>'+esc(p.projectName||'-')+'</td><td>'+esc(p.customer||'-')+'</td><td>'+esc(p.owner||'-')+'</td><td>'+esc(p.status||'-')+'</td><td>'+p.nozzles.length+'</td><td>'+rev+'</td><td>'+new Date(p.updatedAt).toLocaleString()+'</td><td><button class="danger dash-del" data-id="'+esc(p.id)+'">Delete</button></td></tr>'}).join('');body.querySelectorAll('.project-row').forEach(function(row){row.addEventListener('click',function(e){if(e.target.classList.contains('dash-del'))return;state.currentId=row.getAttribute('data-id');state.activeNozzle=0;saveStore();switchView('rfq')})});body.querySelectorAll('.dash-del').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-id');var p=state.projects.find(function(x){return x.id===id});if(confirm('프로젝트 '+(p&&p.projectNo?p.projectNo:'')+' 를 삭제할까요?')){state.projects=state.projects.filter(function(x){return x.id!==id});if(state.currentId===id)state.currentId=null;saveStore();renderDashboard()}})})}
+function fill(id,v){$(id).value=v==null?'':v}
+function captureProject(){var p=current();if(!p||p.locked)return;p.projectNo=$('projectNo').value;p.projectName=$('projectName').value;p.customer=$('customer').value;p.owner=$('owner').value;p.status=$('status').value;p.participants=$('participants').value;captureNozzle();p.updatedAt=now()}
+function captureNozzle(){var n=activeNozzle();if(!n)return;n.typeTag=$('typeTag').value||('Type-'+(state.activeNozzle+1));n.name=n.typeTag;n.injectionType=$('injectionType').value;n.selectedModel=$('selectedModel').value;n.dataSheetRevision=normalizeDocRev($('dataSheetRevision').value);n.fluid=$('fluid').value;n.concentration=$('fluid').value==='Water'?'':$('concentration').value;n.qty=Math.max(1,num($('qty').value)||1);n.sprayAngle=$('sprayAngle').value;n.minFlow=flowFromLmin($('minFlow').value);n.normalFlow=flowFromLmin($('normalFlow').value);n.maxFlow=flowFromLmin($('maxFlow').value);n.airPressure=$('airPressure').value;n.airFlow=$('airFlow').value;n.dropletSize=$('dropletSize').value;n.liquidPressure=$('liquidPressure').value;n.manualNozzleType=$('manualNozzleType').value;n.manualRunType=$('manualRunType').value;n.manualSprayingType=$('manualSprayingType').value;n.manualDimension=$('manualDimension').value;n.manualTipMaterial=$('manualTipMaterial').value;n.manualPipeMaterial=$('manualPipeMaterial').value;n.manualEmptyWeight=$('manualEmptyWeight').value;n.manualOperatingWeight=$('manualOperatingWeight').value;n.manualAirConnection=$('manualAirConnection').value;n.manualLiquidConnection=$('manualLiquidConnection').value;n.manualUnitNumber=$('manualUnitNumber').value;n.manualDesignTemp=$('manualDesignTemp').value;n.manualOperatingTemp=$('manualOperatingTemp').value;n.manualRemark=$('manualRemark').value;n.additionalSpecs=readSpecs()}
+function loadNozzleFields(){var n=activeNozzle();if(!n)return;fill('typeTag',n.typeTag);fill('injectionType',n.injectionType);fill('selectedModel',n.selectedModel);fill('dataSheetRevision',normalizeDocRev(n.dataSheetRevision));fill('fluid',n.fluid);fill('concentration',n.concentration);fill('qty',n.qty);fill('sprayAngle',n.sprayAngle);fill('minFlow',flowToLmin(n.minFlow));fill('normalFlow',flowToLmin(n.normalFlow));fill('maxFlow',flowToLmin(n.maxFlow));fill('airPressure',n.airPressure);fill('airFlow',n.airFlow);fill('dropletSize',n.dropletSize);fill('liquidPressure',n.liquidPressure);fill('manualNozzleType',n.manualNozzleType);fill('manualRunType',n.manualRunType);fill('manualSprayingType',n.manualSprayingType);fill('manualDimension',n.manualDimension);fill('manualTipMaterial',n.manualTipMaterial);fill('manualPipeMaterial',n.manualPipeMaterial);fill('manualEmptyWeight',n.manualEmptyWeight);fill('manualOperatingWeight',n.manualOperatingWeight);fill('manualAirConnection',n.manualAirConnection);fill('manualLiquidConnection',n.manualLiquidConnection);fill('manualUnitNumber',n.manualUnitNumber);fill('manualDesignTemp',n.manualDesignTemp);fill('manualOperatingTemp',n.manualOperatingTemp);fill('manualRemark',n.manualRemark);renderSpecs(n.additionalSpecs||[]);updateTotals();updateFluid();renderRevision()}
+function renderProject(){var p=current();if(!p){switchView('dashboard');return}fill('projectNo',p.projectNo);fill('projectName',p.projectName);fill('customer',p.customer);fill('owner',p.owner);fill('status',p.status);fill('participants',p.participants);$('lockBanner').classList.toggle('show',!!p.locked);$('saveWorkBtn').disabled=!!p.locked;$('saveRevisionBtn').disabled=!!p.locked;$('completeBtn').disabled=!!p.locked;$('newWorkingRevBtn').style.display=p.locked?'inline-block':'none';document.querySelectorAll('#rfq input,#rfq select,#rfq textarea,#rfq button').forEach(function(el){if(['newWorkingRevBtn'].indexOf(el.id)>=0)return;if(el.closest('.top'))return;if(p.locked&&['saveWorkBtn','saveRevisionBtn','completeBtn'].indexOf(el.id)<0)el.disabled=true;else if(!p.locked)el.disabled=false});renderNozzleTabs();loadNozzleFields()}
+function renderNozzleTabs(){var p=current();var box=$('nozzleTabs');if(!p)return;box.innerHTML=p.nozzles.map(function(n,i){return '<button class="nozzle-tab '+(i===state.activeNozzle?'active':'')+'" data-i="'+i+'">'+esc(n.typeTag||('Type-'+(i+1)))+'</button>'}).join('');box.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){if(!current().locked)captureProject();state.activeNozzle=parseInt(b.getAttribute('data-i'),10);renderNozzleTabs();loadNozzleFields()})});$('nozzleCountBadge').textContent=p.nozzles.length+' / 5';$('addNozzleBtn').disabled=p.locked||p.nozzles.length>=5;$('deleteNozzleBtn').disabled=p.locked||p.nozzles.length<=1}
+function updateTotals(){var q=Math.max(1,num($('qty').value)||1);$('minTotal').textContent=fmtNum(num($('minFlow').value)*q)+' L/min';$('normalTotal').textContent=fmtNum(num($('normalFlow').value)*q)+' L/min';$('maxTotal').textContent=fmtNum(num($('maxFlow').value)*q)+' L/min'}
+function updateFluid(){$('concentration').disabled=$('fluid').value==='Water';if($('fluid').value==='Water')$('concentration').value=''}
+function renderSpecs(arr){var box=$('additionalSpecs');if(!arr.length){box.innerHTML='<div class="note">추가 항목 없음</div>';return}box.innerHTML=arr.map(function(a,i){return '<div class="spec-row" data-i="'+i+'"><span>'+(i+1)+'</span><input class="sp-label" placeholder="항목명" value="'+esc(a.label||'')+'"><input class="sp-value" placeholder="값" value="'+esc(a.value||'')+'"><input class="sp-unit" placeholder="Unit" value="'+esc(a.unit||'')+'"><button class="sp-up">↑</button><button class="sp-down">↓</button><button class="danger sp-del">×</button></div>'}).join('');box.querySelectorAll('.sp-up').forEach(function(b){b.onclick=function(){var a=readSpecs(),i=+b.parentNode.getAttribute('data-i');if(i>0){var t=a[i-1];a[i-1]=a[i];a[i]=t;renderSpecs(a)}}});box.querySelectorAll('.sp-down').forEach(function(b){b.onclick=function(){var a=readSpecs(),i=+b.parentNode.getAttribute('data-i');if(i<a.length-1){var t=a[i+1];a[i+1]=a[i];a[i]=t;renderSpecs(a)}}});box.querySelectorAll('.sp-del').forEach(function(b){b.onclick=function(){var a=readSpecs(),i=+b.parentNode.getAttribute('data-i');a.splice(i,1);renderSpecs(a)}});}
+function readSpecs(){var rows=[].slice.call(document.querySelectorAll('#additionalSpecs .spec-row'));return rows.map(function(r){return {label:r.querySelector('.sp-label').value,value:r.querySelector('.sp-value').value,unit:r.querySelector('.sp-unit').value}})}
+function fluidText(n){if(n.fluid==='Water')return 'Water';var name=n.fluid==='Urea Solution'?'Reducing Agent':n.fluid==='Ammonia Solution'?'Ammonia Water':n.fluid;return name+(n.concentration?(' '+n.concentration+'%'):'')}
+function injectionTitle(n){return n.injectionType==='DI'?'Direct Injection Nozzle':n.injectionType==='AMMONIA'?'Ammonia Injection Nozzle':'R.A Injection Nozzle'}
+function capacityText(n){var a=n.minFlow!==''?fmtFlowLmin(n.minFlow):'';var b=n.maxFlow!==''?fmtFlowLmin(n.maxFlow):'';var normal=n.normalFlow!==''?fmtFlowLmin(n.normalFlow):'';var range=a&&b?a+' ~ '+b+' L/min (per Nozzle)':normal?normal+' L/min (per Nozzle)':'';return range+(normal?' / Normal '+normal+' L/min':'')}
+function sheetRows(n){return [
+['1)','Quantity','Total ('+Math.max(1,num(n.qty)||1)+' sets/Unit)',''],
+['2)','Model/Spraying Type',(n.selectedModel||'')+(n.manualNozzleType?' / '+n.manualNozzleType:'')+(n.manualRunType?' / '+n.manualRunType:''),''],
+['3)','Capacity',capacityText(n),''],
+['4)','Liquid','','gap'],
+['','a. Liquid',fluidText(n),'sub1'],['','- Droplet Size',n.dropletSize||'','sub2'],['','- Spraying Degree',n.sprayAngle?String(n.sprayAngle)+'°':'','sub2'],['','- Spraying Type',n.manualSprayingType||'','sub2'],
+['','b. Atomizing Air','Plant Air','sub1'],['','- Pressure',n.airPressure||'','sub2'],['','- Flow rate',n.airFlow||'','sub2'],
+['5)','Liquid Pressure',n.liquidPressure||'',''],['6)','Dimension',n.manualDimension||'',''],['7)','Material','','gap'],['','- Nozzle Tip',n.manualTipMaterial||'','sub2'],['','- Nozzle Pipe',n.manualPipeMaterial||'','sub2'],['8)','Weight','','gap'],['','- Empty',n.manualEmptyWeight||'','sub2'],['','- Operating',n.manualOperatingWeight||'','sub2'],['9)','Connection','','gap'],['','- Atomizing air',n.manualAirConnection||'','sub2'],['','- Liquid',n.manualLiquidConnection||'','sub2'],['10)','Unit Number',n.manualUnitNumber||'',''],['11)','Operation Temperature','','gap'],['','- HRSG Design',n.manualDesignTemp||'','sub2'],['','- HRSG Operation',n.manualOperatingTemp||'','sub2']
+]}
+function previewHtml(n){var rows=sheetRows(n).map(function(r){return '<div class="sheet-row"><div class="no">'+esc(r[0])+'</div><div class="lab '+esc(r[3]||'')+'">'+esc(r[1])+'</div><div class="val">'+esc(r[2])+'</div></div>'+(r[3]==='gap'?'<div class="sheet-gap"></div>':'')}).join('');var adds=(n.additionalSpecs||[]).map(function(a){return '<div class="sheet-row"><div></div><div class="lab">'+esc(a.label||'')+'</div><div class="val">'+esc((a.value||'')+(a.unit?' '+a.unit:''))+'</div></div>'}).join('');var remark=n.manualRemark?'<div class="sheet-row" style="margin-top:10px"><div></div><div class="lab">Remark / Note</div><div class="val">'+esc(n.manualRemark)+'</div></div>':'';return '<div class="sheet-head"><div class="sheet-title">ATOMIZING NOZZLE DESIGN DATA SHEET</div><div class="sheet-rev">Rev.'+esc(normalizeDocRev(n.dataSheetRevision))+'</div></div><div class="sheet-section">1. '+esc(injectionTitle(n))+' / '+esc(n.selectedModel||'')+'</div>'+rows+((n.additionalSpecs||[]).length?'<div class="sheet-add-head">Additional Specification</div>'+adds:'')+remark}
+function renderDataSheet(){var p=current();if(!p){$('sheetPreview').innerHTML='<div class="empty">프로젝트를 먼저 선택하세요.</div>';return}captureProject();var sel=$('sheetNozzleSelect');sel.innerHTML=p.nozzles.map(function(n,i){return '<option value="'+i+'">Nozzle '+(i+1)+' · '+esc(n.typeTag||'')+'</option>'}).join('');sel.value=String(state.activeNozzle);var n=p.nozzles[state.activeNozzle];$('sheetPreview').innerHTML=previewHtml(n);saveStore()}
+function xmlEsc(v){return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;')}
+function colName(n){var s='';while(n){n--;s=String.fromCharCode(65+n%26)+s;n=Math.floor(n/26)}return s}
+var crcTable=null;function crc32(bytes){if(!crcTable){crcTable=new Uint32Array(256);for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?0xEDB88320^(c>>>1):c>>>1;crcTable[n]=c>>>0}}var c=0xFFFFFFFF;for(var i=0;i<bytes.length;i++)c=crcTable[(c^bytes[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+function zipBlob(entries){var enc=new TextEncoder(),locals=[],centrals=[],offset=0;entries.forEach(function(e){var name=enc.encode(e.name),data=typeof e.data==='string'?enc.encode(e.data):e.data,crc=crc32(data),lh=new Uint8Array(30+name.length),lv=new DataView(lh.buffer);lv.setUint32(0,0x04034b50,true);lv.setUint16(4,20,true);lv.setUint16(6,0x0800,true);lv.setUint16(8,0,true);lv.setUint16(10,0,true);lv.setUint16(12,0,true);lv.setUint32(14,crc,true);lv.setUint32(18,data.length,true);lv.setUint32(22,data.length,true);lv.setUint16(26,name.length,true);lv.setUint16(28,0,true);lh.set(name,30);locals.push(lh,data);var ch=new Uint8Array(46+name.length),cv=new DataView(ch.buffer);cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,0,true);cv.setUint16(14,0,true);cv.setUint32(16,crc,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);cv.setUint16(28,name.length,true);cv.setUint16(30,0,true);cv.setUint16(32,0,true);cv.setUint16(34,0,true);cv.setUint16(36,0,true);cv.setUint32(38,0,true);cv.setUint32(42,offset,true);ch.set(name,46);centrals.push(ch);offset+=lh.length+data.length});var centralSize=centrals.reduce(function(a,x){return a+x.length},0),end=new Uint8Array(22),ev=new DataView(end.buffer);ev.setUint32(0,0x06054b50,true);ev.setUint16(8,entries.length,true);ev.setUint16(10,entries.length,true);ev.setUint32(12,centralSize,true);ev.setUint32(16,offset,true);return new Blob(locals.concat(centrals,[end]),{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+function cell(ref,val,style){return '<c r="'+ref+'" s="'+(style||0)+'" t="inlineStr"><is><t xml:space="preserve">'+xmlEsc(val)+'</t></is></c>'}
+function blank(ref,style){return '<c r="'+ref+'" s="'+(style||0)+'"/>'}
+function buildXlsx(n){var rows=[],merges=['B1:M1','B3:N3'];function row(r,cells,h){rows.push('<row r="'+r+'" ht="'+(h||22)+'" customHeight="1">'+cells.join('')+'</row>')}function line(r,no,label,value,labelStyle,valueStyle,h){var vs=valueStyle||8;row(r,[no?cell('B'+r,no,4):blank('B'+r,0),cell('D'+r,label,labelStyle||5),cell('I'+r,value,vs),blank('J'+r,vs),blank('K'+r,vs),blank('L'+r,vs),blank('M'+r,vs)],h||22);merges.push('D'+r+':F'+r,'I'+r+':M'+r)}row(1,[cell('B1','ATOMIZING NOZZLE DESIGN DATA SHEET',1),cell('N1','Rev.'+normalizeDocRev(n.dataSheetRevision),2)],25);row(3,[cell('B3','1. '+injectionTitle(n)+' / '+(n.selectedModel||''),3)],22);line(5,'1)','Quantity','Total ('+Math.max(1,num(n.qty)||1)+' sets/Unit)');line(6,'2)','Model/Spraying Type',(n.selectedModel||'')+(n.manualNozzleType?' / '+n.manualNozzleType:'')+(n.manualRunType?' / '+n.manualRunType:''),5,8,28);line(7,'3)','Capacity',capacityText(n),5,8,28);line(9,'4)','Liquid','');line(10,'','a. Liquid',fluidText(n),6);line(11,'','- Droplet Size',n.dropletSize||'',7);line(12,'','- Spraying Degree',n.sprayAngle?String(n.sprayAngle)+'°':'',7);line(13,'','- Spraying Type',n.manualSprayingType||'',7);line(15,'','b. Atomizing Air','Plant Air',6);line(16,'','- Pressure',n.airPressure||'',7);line(17,'','- Flow rate',n.airFlow||'',7);line(19,'5)','Liquid Pressure',n.liquidPressure||'');line(20,'6)','Dimension',n.manualDimension||'');line(22,'7)','Material','');line(23,'','- Nozzle Tip',n.manualTipMaterial||'',7);line(24,'','- Nozzle Pipe',n.manualPipeMaterial||'',7);line(26,'8)','Weight','');line(27,'','- Empty',n.manualEmptyWeight||'',7);line(28,'','- Operating',n.manualOperatingWeight||'',7);line(30,'9)','Connection','');line(31,'','- Atomizing air',n.manualAirConnection||'',7);line(32,'','- Liquid',n.manualLiquidConnection||'',7);line(34,'10)','Unit Number',n.manualUnitNumber||'',5,8,Math.max(22,String(n.manualUnitNumber||'').split(/\n/).length*15));line(36,'11)','Operation Temperature','');line(37,'','- HRSG Design',n.manualDesignTemp||'',7,9);line(38,'','- HRSG Operation',n.manualOperatingTemp||'',7);var r=40;if((n.additionalSpecs||[]).length){row(r,[cell('B'+r,'Additional Specification',10)],22);merges.push('B'+r+':N'+r);r++;n.additionalSpecs.forEach(function(a){line(r,'',a.label||'',String(a.value||'')+(a.unit?' '+a.unit:''));r++})}if(n.manualRemark){line(r,'','Remark / Note',n.manualRemark,5,8,Math.max(22,String(n.manualRemark).length>70?36:22));r++}var last=Math.max(38,r-1),mergeXml=merges.map(function(m){return '<mergeCell ref="'+m+'"/>'}).join('');var sheet='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><dimension ref="A1:N'+last+'"/><sheetViews><sheetView showGridLines="0" workbookViewId="0"/></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols><col min="1" max="1" width="2.8" customWidth="1"/><col min="2" max="2" width="5.2" customWidth="1"/><col min="3" max="3" width="3.7" customWidth="1"/><col min="4" max="4" width="22.7" customWidth="1"/><col min="5" max="5" width="3.2" customWidth="1"/><col min="6" max="6" width="4.7" customWidth="1"/><col min="7" max="7" width="3.0" customWidth="1"/><col min="8" max="8" width="3.0" customWidth="1"/><col min="9" max="13" width="8.6" customWidth="1"/><col min="14" max="14" width="3.0" customWidth="1"/></cols><sheetData>'+rows.join('')+'</sheetData><mergeCells count="'+merges.length+'">'+mergeXml+'</mergeCells><printOptions horizontalCentered="1"/><pageMargins left="0.28" right="0.28" top="0.32" bottom="0.32" header="0" footer="0"/><pageSetup paperSize="9" orientation="portrait" fitToWidth="1" fitToHeight="1"/></worksheet>';var contentTypes='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>';var rootRels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';var workbook='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><bookViews><workbookView/></bookViews><sheets><sheet name="DESIGN DATA SHEET" sheetId="1" r:id="rId1"/></sheets><definedNames><definedName name="_xlnm.Print_Area" localSheetId="0">\'DESIGN DATA SHEET\'!$A$1:$N$'+last+'</definedName></definedNames></workbook>';var wbRels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>';var styles='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="4"><font><sz val="10"/><name val="Malgun Gothic"/></font><font><b/><sz val="10"/><name val="Malgun Gothic"/></font><font><b/><sz val="16"/><name val="Malgun Gothic"/></font><font><color rgb="FFD92D20"/><sz val="10"/><name val="Malgun Gothic"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left/><right/><top/><bottom style="thin"><color rgb="FF000000"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="11"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="2" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment horizontal="right" vertical="center"/></xf><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment horizontal="center" vertical="bottom"/></xf><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment horizontal="left" vertical="bottom"/></xf><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1" applyAlignment="1"><alignment horizontal="left" vertical="bottom" indent="1"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment horizontal="left" vertical="bottom" indent="2"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment horizontal="right" vertical="bottom" wrapText="1"/></xf><xf numFmtId="0" fontId="3" fillId="0" borderId="1" xfId="0" applyFont="1" applyBorder="1" applyAlignment="1"><alignment horizontal="right" vertical="bottom" wrapText="1"/></xf><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';return zipBlob([{name:'[Content_Types].xml',data:contentTypes},{name:'_rels/.rels',data:rootRels},{name:'xl/workbook.xml',data:workbook},{name:'xl/_rels/workbook.xml.rels',data:wbRels},{name:'xl/styles.xml',data:styles},{name:'xl/worksheets/sheet1.xml',data:sheet}])}
+function downloadXlsx(){captureProject();saveStore();var n=activeNozzle();if(!n)return;var blob=buildXlsx(n),a=document.createElement('a'),p=current();var safe=function(x){return String(x||'').replace(/[\\/:*?"<>|]/g,'_')};a.href=URL.createObjectURL(blob);a.download='DESIGN_DATA_SHEET_'+safe(n.injectionType)+'_'+safe(p.projectNo||'Project')+'_Nozzle-'+(state.activeNozzle+1)+'_'+safe(n.selectedModel||'Nozzle')+'_Rev-'+safe(normalizeDocRev(n.dataSheetRevision))+'.xlsx';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},1200)}
+var PERF_NUMERIC_DB = [
+  {
+    model:"KAFMX015-20", family:"FloMax", angle:20, source:"Measured table values", material:"SS316L",
+    curves:[{
+      air:4.14, status:"source-data", flowUnit:"L/hr-internal",
+      data:[
+        {flow:5,smd:41.19,airRate:12.9,x90:70.59,x99:112.49,liquidPressure:2.04},
+        {flow:7,smd:42.02,airRate:12.7,x90:78.10,x99:122.80,liquidPressure:2.07},
+        {flow:13,smd:43.53,airRate:12.3,x90:90.37,x99:143.00,liquidPressure:2.20},
+        {flow:19,smd:46.71,airRate:11.7,x90:100.88,x99:158.44,liquidPressure:2.36},
+        {flow:25,smd:49.21,airRate:11.2,x90:106.40,x99:162.26,liquidPressure:2.49},
+        {flow:31,smd:51.47,airRate:10.8,x90:105.98,x99:162.02,liquidPressure:2.60},
+        {flow:37,smd:54.67,airRate:10.2,x90:113.05,x99:172.58,liquidPressure:2.73},
+        {flow:43,smd:58.19,airRate:9.8,x90:116.41,x99:174.08,liquidPressure:2.85},
+        {flow:49,smd:59.19,airRate:9.4,x90:115.02,x99:172.31,liquidPressure:2.92},
+        {flow:55,smd:61.24,airRate:8.8,x90:111.70,x99:165.34,liquidPressure:3.06},
+        {flow:60,smd:63.95,airRate:8.4,x90:115.06,x99:166.46,liquidPressure:3.15}
+      ]
+    }]
+  },
+  {
+    model:"KAFMX015-55", family:"FloMax", angle:55, source:"Measured table values", material:"SS316L",
+    curves:[{
+      air:4.14, status:"source-data", flowUnit:"L/hr-internal",
+      data:[
+        {flow:5,smd:37.96,airRate:12.30,x90:59.26,x99:86.13,liquidPressure:2.21},
+        {flow:7,smd:38.30,airRate:12.00,x90:61.01,x99:89.27,liquidPressure:2.24},
+        {flow:13,smd:35.60,airRate:11.50,x90:58.11,x99:90.17,liquidPressure:2.37},
+        {flow:19,smd:36.11,airRate:11.00,x90:57.94,x99:90.10,liquidPressure:2.48},
+        {flow:25,smd:37.57,airRate:10.60,x90:59.74,x99:90.41,liquidPressure:2.60},
+        {flow:31,smd:38.51,airRate:10.20,x90:65.04,x99:101.73,liquidPressure:2.68},
+        {flow:37,smd:39.58,airRate:9.70,x90:71.21,x99:113.96,liquidPressure:2.80},
+        {flow:43,smd:41.81,airRate:9.30,x90:72.74,x99:115.87,liquidPressure:2.90},
+        {flow:49,smd:43.78,airRate:8.90,x90:76.04,x99:117.96,liquidPressure:2.99},
+        {flow:55,smd:44.21,airRate:8.70,x90:78.62,x99:121.03,liquidPressure:3.07},
+        {flow:60,smd:46.16,airRate:8.40,x90:80.13,x99:120.47,liquidPressure:3.15}
+      ]
+    }]
+  },
+  {
+    model:"FMX015-20", family:"FloMax", angle:20, source:"Reference curve / digitized", material:"SS316L",
+    curves:[
+      {air:1.38,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+        {flow:6,liquidPressure:.68,airRate:7.3,d32:39,dv05:40,dmax:108},
+        {flow:18,liquidPressure:.86,airRate:7.0,d32:41,dv05:42,dmax:114},
+        {flow:30,liquidPressure:1.05,airRate:6.6,d32:44,dv05:46,dmax:123},
+        {flow:42,liquidPressure:1.22,airRate:6.1,d32:49,dv05:52,dmax:135},
+        {flow:54,liquidPressure:1.40,airRate:5.6,d32:58,dv05:64,dmax:160}
+      ]},
+      {air:2.00,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+        {flow:6,liquidPressure:1.18,airRate:9.4,d32:36,dv05:37,dmax:95},
+        {flow:18,liquidPressure:1.38,airRate:8.8,d32:39,dv05:41,dmax:103},
+        {flow:30,liquidPressure:1.57,airRate:8.0,d32:43,dv05:46,dmax:112},
+        {flow:42,liquidPressure:1.78,airRate:7.1,d32:49,dv05:52,dmax:123},
+        {flow:54,liquidPressure:1.98,airRate:5.5,d32:56,dv05:60,dmax:136}
+      ]},
+      {air:2.76,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+        {flow:6,liquidPressure:1.65,airRate:11.5,d32:33,dv05:35,dmax:84},
+        {flow:18,liquidPressure:1.88,airRate:10.7,d32:35,dv05:37,dmax:91},
+        {flow:30,liquidPressure:2.08,airRate:9.7,d32:38,dv05:40,dmax:98},
+        {flow:42,liquidPressure:2.30,airRate:8.6,d32:41,dv05:44,dmax:105},
+        {flow:54,liquidPressure:2.58,airRate:7.2,d32:45,dv05:49,dmax:114}
+      ]}
+    ]
+  },
+  {
+    model:"FMX090-55", family:"FloMax", angle:55, source:"Reference curve / digitized", material:"SS316L",
+    curves:[
+      {air:2.76,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+        {flow:120,liquidPressure:1.90,airRate:45,d32:58,dv05:61,dmax:112},
+        {flow:180,liquidPressure:2.25,airRate:43,d32:61,dv05:64,dmax:119},
+        {flow:240,liquidPressure:2.65,airRate:40,d32:66,dv05:69,dmax:129},
+        {flow:300,liquidPressure:3.05,airRate:38,d32:72,dv05:75,dmax:143},
+        {flow:342,liquidPressure:3.35,airRate:36,d32:78,dv05:81,dmax:163}
+      ]},
+      {air:3.45,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+        {flow:120,liquidPressure:2.35,airRate:61,d32:50,dv05:52,dmax:94},
+        {flow:180,liquidPressure:2.78,airRate:59,d32:57,dv05:59,dmax:103},
+        {flow:240,liquidPressure:3.18,airRate:56,d32:64,dv05:66,dmax:113},
+        {flow:300,liquidPressure:3.60,airRate:53,d32:72,dv05:74,dmax:128},
+        {flow:342,liquidPressure:3.95,airRate:50,d32:78,dv05:80,dmax:140}
+      ]}
+    ]
+  },
+  {
+    model:"FMX015SB-40", family:"FloMax", angle:40, source:"Reference curve / digitized", material:"SS316L",
+    curves:[{air:3.45,status:"digitized-reference",flowUnit:"L/hr-internal",data:[
+      {flow:1,liquidPressure:2.55,airRate:13.5,d32:42,dv09:62,dmax:82},
+      {flow:10,liquidPressure:2.65,airRate:12.8,d32:32,dv09:50,dmax:59},
+      {flow:20,liquidPressure:2.80,airRate:11.8,d32:33,dv09:49,dmax:58},
+      {flow:40,liquidPressure:3.15,airRate:9.5,d32:36,dv09:57,dmax:79},
+      {flow:60,liquidPressure:3.45,airRate:7.5,d32:40,dv09:77,dmax:127},
+      {flow:100,liquidPressure:4.10,airRate:5.5,d32:48,dv09:108,dmax:175},
+      {flow:140,liquidPressure:4.65,airRate:4.3,d32:51,dv09:120,dmax:198}
+    ]}]
+  },
+{"model":"FM1","family":"FloMax","angle":55,"source":"Original performance curve / digitized reference","material":"316SS","curves":[{"air":1.38,"data":[{"flow":120.0,"liquidPressure":0.97,"airRate":30.3,"dmax":147.0,"d32":31.96},{"flow":176.2,"liquidPressure":1.07,"airRate":27.9,"dmax":147.5,"d32":33.9},{"flow":232.5,"liquidPressure":1.17,"airRate":25.5,"dmax":148.0,"d32":35.7},{"flow":288.8,"liquidPressure":1.28,"airRate":23.1,"dmax":148.6,"d32":37.5},{"flow":345.0,"liquidPressure":1.39,"airRate":20.9,"dmax":149.1,"d32":39.2},{"flow":401.2,"liquidPressure":1.49,"airRate":18.9,"dmax":149.6,"d32":40.9},{"flow":457.5,"liquidPressure":1.6,"airRate":17.0,"dmax":150.1,"d32":42.4},{"flow":513.8,"liquidPressure":1.7,"airRate":15.4,"dmax":150.5,"d32":43.9},{"flow":570.0,"liquidPressure":1.79,"airRate":13.86,"dmax":151.0,"d32":45.27}]},{"air":2.0,"data":[{"flow":120.0,"liquidPressure":1.49,"airRate":33.63,"dmax":133.58,"d32":26.79},{"flow":176.2,"liquidPressure":1.6,"airRate":31.0,"dmax":135.0,"d32":28.2},{"flow":232.5,"liquidPressure":1.72,"airRate":28.6,"dmax":136.3,"d32":29.6},{"flow":288.8,"liquidPressure":1.83,"airRate":26.3,"dmax":137.5,"d32":31.0},{"flow":345.0,"liquidPressure":1.95,"airRate":24.1,"dmax":138.6,"d32":32.4},{"flow":401.2,"liquidPressure":2.06,"airRate":21.9,"dmax":139.7,"d32":33.8},{"flow":457.5,"liquidPressure":2.16,"airRate":19.8,"dmax":140.8,"d32":35.2},{"flow":513.8,"liquidPressure":2.24,"airRate":17.7,"dmax":141.8,"d32":36.6},{"flow":570.0,"liquidPressure":2.31,"airRate":15.7,"dmax":142.82,"d32":37.88}]},{"air":2.76,"data":[{"flow":120.0,"liquidPressure":1.99,"airRate":43.79,"dmax":117.32,"d32":20.88},{"flow":176.2,"liquidPressure":2.13,"airRate":41.3,"dmax":120.3,"d32":22.7},{"flow":232.5,"liquidPressure":2.27,"airRate":38.9,"dmax":123.2,"d32":24.5},{"flow":288.8,"liquidPressure":2.41,"airRate":36.5,"dmax":126.0,"d32":26.3},{"flow":345.0,"liquidPressure":2.55,"airRate":34.1,"dmax":128.8,"d32":28.0},{"flow":401.2,"liquidPressure":2.69,"airRate":31.8,"dmax":131.6,"d32":29.7},{"flow":457.5,"liquidPressure":2.83,"airRate":29.4,"dmax":134.6,"d32":31.4},{"flow":513.8,"liquidPressure":2.96,"airRate":27.0,"dmax":137.7,"d32":33.0},{"flow":570.0,"liquidPressure":3.08,"airRate":24.57,"dmax":140.97,"d32":34.55}]},{"air":3.45,"data":[{"flow":120.0,"liquidPressure":2.52,"airRate":63.19,"dmax":115.84,"d32":23.65},{"flow":176.2,"liquidPressure":2.67,"airRate":59.8,"dmax":118.1,"d32":25.3},{"flow":232.5,"liquidPressure":2.82,"airRate":56.5,"dmax":120.4,"d32":27.0},{"flow":288.8,"liquidPressure":2.97,"airRate":53.2,"dmax":122.6,"d32":28.6},{"flow":345.0,"liquidPressure":3.12,"airRate":50.0,"dmax":124.7,"d32":30.2},{"flow":401.2,"liquidPressure":3.27,"airRate":46.8,"dmax":126.8,"d32":31.8},{"flow":457.5,"liquidPressure":3.42,"airRate":43.5,"dmax":128.9,"d32":33.4},{"flow":513.8,"liquidPressure":3.56,"airRate":40.1,"dmax":131.0,"d32":35.0},{"flow":570.0,"liquidPressure":3.69,"airRate":36.58,"dmax":133.21,"d32":36.58}]},{"air":4.14,"data":[{"flow":120.0,"liquidPressure":3.07,"airRate":75.98,"dmax":110.58,"d32":21.99},{"flow":176.2,"liquidPressure":3.22,"airRate":72.4,"dmax":113.0,"d32":24.0},{"flow":232.5,"liquidPressure":3.38,"airRate":68.9,"dmax":115.4,"d32":26.0},{"flow":288.8,"liquidPressure":3.53,"airRate":65.4,"dmax":117.7,"d32":28.0},{"flow":345.0,"liquidPressure":3.69,"airRate":62.0,"dmax":120.0,"d32":30.0},{"flow":401.2,"liquidPressure":3.84,"airRate":58.6,"dmax":122.3,"d32":31.9},{"flow":457.5,"liquidPressure":4.0,"airRate":55.2,"dmax":124.6,"d32":33.8},{"flow":513.8,"liquidPressure":4.15,"airRate":51.8,"dmax":127.0,"d32":35.6},{"flow":570.0,"liquidPressure":4.29,"airRate":48.34,"dmax":129.49,"d32":37.34}]},{"air":4.83,"data":[{"flow":120.0,"liquidPressure":3.63,"airRate":87.94,"dmax":103.3,"d32":22.63},{"flow":176.2,"liquidPressure":3.8,"airRate":84.1,"dmax":104.7,"d32":24.3},{"flow":232.5,"liquidPressure":3.98,"airRate":80.3,"dmax":106.1,"d32":26.0},{"flow":288.8,"liquidPressure":4.15,"airRate":76.5,"dmax":107.4,"d32":27.7},{"flow":345.0,"liquidPressure":4.33,"airRate":72.7,"dmax":108.8,"d32":29.4},{"flow":401.2,"liquidPressure":4.5,"airRate":68.9,"dmax":110.1,"d32":31.0},{"flow":457.5,"liquidPressure":4.67,"airRate":65.0,"dmax":111.4,"d32":32.7},{"flow":513.8,"liquidPressure":4.84,"airRate":61.1,"dmax":112.7,"d32":34.4},{"flow":570.0,"liquidPressure":5.0,"airRate":57.07,"dmax":113.97,"d32":36.05}]},{"air":5.5,"data":[{"flow":120.0,"liquidPressure":3.97,"airRate":99.21,"dmax":85.22,"d32":17.46},{"flow":176.2,"liquidPressure":4.15,"airRate":95.0,"dmax":88.0,"d32":19.3},{"flow":232.5,"liquidPressure":4.34,"airRate":90.8,"dmax":90.8,"d32":21.1},{"flow":288.8,"liquidPressure":4.52,"airRate":86.6,"dmax":93.6,"d32":22.9},{"flow":345.0,"liquidPressure":4.71,"airRate":82.4,"dmax":96.4,"d32":24.7},{"flow":401.2,"liquidPressure":4.89,"airRate":78.2,"dmax":99.2,"d32":26.5},{"flow":457.5,"liquidPressure":5.08,"airRate":74.0,"dmax":102.0,"d32":28.3},{"flow":513.8,"liquidPressure":5.26,"airRate":69.9,"dmax":104.7,"d32":30.2},{"flow":570.0,"liquidPressure":5.44,"airRate":65.96,"dmax":107.39,"d32":32.01}]},{"air":6.2,"data":[{"flow":120.0,"liquidPressure":4.58,"airRate":113.49,"dmax":91.66,"d32":19.08},{"flow":176.2,"liquidPressure":4.77,"airRate":109.2,"dmax":95.4,"d32":20.6},{"flow":232.5,"liquidPressure":4.96,"airRate":104.8,"dmax":99.1,"d32":22.1},{"flow":288.8,"liquidPressure":5.15,"airRate":100.5,"dmax":102.9,"d32":23.6},{"flow":345.0,"liquidPressure":5.34,"airRate":96.1,"dmax":106.7,"d32":25.1},{"flow":401.2,"liquidPressure":5.53,"airRate":91.8,"dmax":110.5,"d32":26.5},{"flow":457.5,"liquidPressure":5.72,"airRate":87.4,"dmax":114.3,"d32":28.0},{"flow":513.8,"liquidPressure":5.91,"airRate":83.0,"dmax":118.1,"d32":29.4},{"flow":570.0,"liquidPressure":6.09,"airRate":78.73,"dmax":121.89,"d32":30.88}]},{"air":6.9,"data":[{"flow":120.0,"liquidPressure":5.25,"airRate":130.62,"dmax":104.94,"d32":17.92},{"flow":176.2,"liquidPressure":5.46,"airRate":126.0,"dmax":109.0,"d32":19.3},{"flow":232.5,"liquidPressure":5.67,"airRate":121.5,"dmax":113.1,"d32":20.7},{"flow":288.8,"liquidPressure":5.88,"airRate":116.9,"dmax":117.2,"d32":22.0},{"flow":345.0,"liquidPressure":6.08,"airRate":112.3,"dmax":121.3,"d32":23.4},{"flow":401.2,"liquidPressure":6.29,"airRate":107.7,"dmax":125.4,"d32":24.7},{"flow":457.5,"liquidPressure":6.49,"airRate":103.1,"dmax":129.5,"d32":26.0},{"flow":513.8,"liquidPressure":6.69,"airRate":98.5,"dmax":133.7,"d32":27.3},{"flow":570.0,"liquidPressure":6.89,"airRate":93.86,"dmax":137.83,"d32":28.64}]}]},{"model":"FM5","family":"FloMax","angle":55,"source":"Original performance curve / digitized reference","material":"316SS","curves":[{"air":2.76,"data":[{"flow":480.0,"liquidPressure":2.4,"airRate":132.09,"dmax":94.7,"d32":25.12},{"flow":615.0,"liquidPressure":2.66,"airRate":126.9,"dmax":97.0,"d32":27.6},{"flow":750.0,"liquidPressure":2.92,"airRate":121.7,"dmax":99.3,"d32":30.1},{"flow":885.0,"liquidPressure":3.18,"airRate":116.5,"dmax":101.5,"d32":32.7},{"flow":1020.0,"liquidPressure":3.44,"airRate":111.3,"dmax":103.8,"d32":35.2},{"flow":1155.0,"liquidPressure":3.7,"airRate":106.1,"dmax":106.0,"d32":37.7},{"flow":1290.0,"liquidPressure":3.96,"airRate":100.9,"dmax":108.2,"d32":40.2},{"flow":1425.0,"liquidPressure":4.21,"airRate":95.7,"dmax":110.4,"d32":42.7},{"flow":1560.0,"liquidPressure":4.44,"airRate":90.6,"dmax":112.56,"d32":45.21}]},{"air":3.45,"data":[{"flow":480.0,"liquidPressure":2.78,"airRate":162.84,"dmax":88.74,"d32":24.49},{"flow":615.0,"liquidPressure":3.06,"airRate":156.8,"dmax":92.0,"d32":27.0},{"flow":750.0,"liquidPressure":3.35,"airRate":150.7,"dmax":95.2,"d32":29.5},{"flow":885.0,"liquidPressure":3.64,"airRate":144.6,"dmax":98.4,"d32":32.0},{"flow":1020.0,"liquidPressure":3.93,"airRate":138.6,"dmax":101.6,"d32":34.5},{"flow":1155.0,"liquidPressure":4.22,"airRate":132.5,"dmax":104.8,"d32":36.9},{"flow":1290.0,"liquidPressure":4.5,"airRate":126.4,"dmax":108.0,"d32":39.3},{"flow":1425.0,"liquidPressure":4.78,"airRate":120.3,"dmax":111.2,"d32":41.8},{"flow":1560.0,"liquidPressure":5.04,"airRate":114.28,"dmax":114.28,"d32":44.16}]},{"air":4.14,"data":[{"flow":480.0,"liquidPressure":3.44,"airRate":192.44,"dmax":79.07,"d32":22.97},{"flow":615.0,"liquidPressure":3.7,"airRate":186.2,"dmax":82.6,"d32":25.3},{"flow":750.0,"liquidPressure":3.96,"airRate":180.0,"dmax":86.1,"d32":27.6},{"flow":885.0,"liquidPressure":4.22,"airRate":173.7,"dmax":89.6,"d32":29.9},{"flow":1020.0,"liquidPressure":4.48,"airRate":167.4,"dmax":93.1,"d32":32.2},{"flow":1155.0,"liquidPressure":4.74,"airRate":161.1,"dmax":96.6,"d32":34.5},{"flow":1290.0,"liquidPressure":5.0,"airRate":154.8,"dmax":100.1,"d32":36.7},{"flow":1425.0,"liquidPressure":5.27,"airRate":148.6,"dmax":103.7,"d32":38.9},{"flow":1560.0,"liquidPressure":5.55,"airRate":142.44,"dmax":107.27,"d32":40.99}]},{"air":4.83,"data":[{"flow":480.0,"liquidPressure":4.0,"airRate":225.58,"dmax":80.23,"d32":24.13},{"flow":615.0,"liquidPressure":4.26,"airRate":218.9,"dmax":83.8,"d32":26.5},{"flow":750.0,"liquidPressure":4.52,"airRate":212.2,"dmax":87.3,"d32":28.9},{"flow":885.0,"liquidPressure":4.78,"airRate":205.5,"dmax":90.8,"d32":31.2},{"flow":1020.0,"liquidPressure":5.04,"airRate":198.8,"dmax":94.3,"d32":33.5},{"flow":1155.0,"liquidPressure":5.3,"airRate":192.1,"dmax":97.8,"d32":35.8},{"flow":1290.0,"liquidPressure":5.56,"airRate":185.4,"dmax":101.4,"d32":38.1},{"flow":1425.0,"liquidPressure":5.82,"airRate":179.0,"dmax":104.9,"d32":40.4},{"flow":1560.0,"liquidPressure":6.08,"airRate":172.97,"dmax":108.43,"d32":42.73}]},{"air":5.5,"data":[{"flow":480.0,"liquidPressure":4.69,"airRate":265.81,"dmax":83.72,"d32":28.6},{"flow":615.0,"liquidPressure":4.94,"airRate":258.1,"dmax":87.2,"d32":30.9},{"flow":750.0,"liquidPressure":5.19,"airRate":250.4,"dmax":90.8,"d32":33.2},{"flow":885.0,"liquidPressure":5.44,"airRate":242.7,"dmax":94.3,"d32":35.5},{"flow":1020.0,"liquidPressure":5.69,"airRate":235.0,"dmax":97.8,"d32":37.8},{"flow":1155.0,"liquidPressure":5.94,"airRate":227.3,"dmax":101.3,"d32":40.1},{"flow":1290.0,"liquidPressure":6.19,"airRate":219.6,"dmax":104.9,"d32":42.4},{"flow":1425.0,"liquidPressure":6.45,"airRate":212.0,"dmax":108.4,"d32":44.7},{"flow":1560.0,"liquidPressure":6.71,"airRate":204.42,"dmax":111.98,"d32":47.09}]},{"air":6.2,"data":[{"flow":480.0,"liquidPressure":5.34,"airRate":307.67,"dmax":72.03,"d32":20.35},{"flow":615.0,"liquidPressure":5.57,"airRate":298.8,"dmax":75.3,"d32":22.7},{"flow":750.0,"liquidPressure":5.81,"airRate":289.9,"dmax":78.5,"d32":25.0},{"flow":885.0,"liquidPressure":6.04,"airRate":281.0,"dmax":81.8,"d32":27.4},{"flow":1020.0,"liquidPressure":6.27,"airRate":272.1,"dmax":85.1,"d32":29.7},{"flow":1155.0,"liquidPressure":6.51,"airRate":263.2,"dmax":88.3,"d32":32.0},{"flow":1290.0,"liquidPressure":6.74,"airRate":254.3,"dmax":91.6,"d32":34.3},{"flow":1425.0,"liquidPressure":6.97,"airRate":245.4,"dmax":94.8,"d32":36.5},{"flow":1560.0,"liquidPressure":7.2,"airRate":236.45,"dmax":98.08,"d32":38.66}]},{"air":6.9,"data":[{"flow":480.0,"liquidPressure":6.22,"airRate":363.72,"dmax":62.33,"d32":19.07},{"flow":615.0,"liquidPressure":6.43,"airRate":353.1,"dmax":65.1,"d32":21.2},{"flow":750.0,"liquidPressure":6.64,"airRate":342.5,"dmax":67.8,"d32":23.3},{"flow":885.0,"liquidPressure":6.85,"airRate":331.9,"dmax":70.6,"d32":25.4},{"flow":1020.0,"liquidPressure":7.06,"airRate":321.3,"dmax":73.3,"d32":27.5},{"flow":1155.0,"liquidPressure":7.27,"airRate":310.7,"dmax":76.0,"d32":29.6},{"flow":1290.0,"liquidPressure":7.48,"airRate":300.1,"dmax":78.8,"d32":31.7},{"flow":1425.0,"liquidPressure":7.7,"airRate":289.6,"dmax":81.5,"d32":33.8},{"flow":1560.0,"liquidPressure":7.91,"airRate":279.07,"dmax":84.19,"d32":35.81}]},{"air":8.2,"data":[{"flow":480.0,"liquidPressure":7.16,"airRate":429.07,"dmax":55.23,"d32":16.86},{"flow":615.0,"liquidPressure":7.34,"airRate":416.3,"dmax":57.7,"d32":18.8},{"flow":750.0,"liquidPressure":7.52,"airRate":403.6,"dmax":60.2,"d32":20.7},{"flow":885.0,"liquidPressure":7.7,"airRate":390.9,"dmax":62.6,"d32":22.6},{"flow":1020.0,"liquidPressure":7.88,"airRate":378.2,"dmax":65.1,"d32":24.5},{"flow":1155.0,"liquidPressure":8.06,"airRate":365.5,"dmax":67.6,"d32":26.4},{"flow":1290.0,"liquidPressure":8.25,"airRate":352.8,"dmax":70.0,"d32":28.3},{"flow":1425.0,"liquidPressure":8.44,"airRate":340.1,"dmax":72.5,"d32":30.2},{"flow":1560.0,"liquidPressure":8.62,"airRate":327.33,"dmax":75.0,"d32":31.98}]}]},{"model":"FM10","family":"FloMax","angle":55,"source":"Original performance curve / digitized reference","material":"316SS","curves":[{"air":1.38,"data":[{"flow":900.0,"liquidPressure":1.28,"airRate":68.9,"dmax":179.36,"d32":45.64},{"flow":1155.0,"liquidPressure":1.43,"airRate":63.5,"dmax":182.8,"d32":48.6},{"flow":1410.0,"liquidPressure":1.58,"airRate":58.1,"dmax":186.2,"d32":51.5},{"flow":1665.0,"liquidPressure":1.73,"airRate":52.7,"dmax":189.6,"d32":54.4},{"flow":1920.0,"liquidPressure":1.88,"airRate":47.3,"dmax":193.0,"d32":57.3},{"flow":2175.0,"liquidPressure":2.03,"airRate":41.9,"dmax":196.4,"d32":60.2},{"flow":2430.0,"liquidPressure":2.18,"airRate":36.5,"dmax":199.8,"d32":63.1},{"flow":2685.0,"liquidPressure":2.33,"airRate":31.1,"dmax":203.2,"d32":66.0},{"flow":2940.0,"liquidPressure":2.48,"airRate":25.87,"dmax":206.69,"d32":68.9}]},{"air":2.0,"data":[{"flow":900.0,"liquidPressure":1.86,"airRate":99.42,"dmax":116.28,"d32":47.38},{"flow":1155.0,"liquidPressure":2.03,"airRate":92.6,"dmax":126.7,"d32":50.2},{"flow":1410.0,"liquidPressure":2.2,"airRate":85.8,"dmax":137.2,"d32":53.0},{"flow":1665.0,"liquidPressure":2.37,"airRate":79.0,"dmax":147.7,"d32":55.8},{"flow":1920.0,"liquidPressure":2.54,"airRate":72.2,"dmax":158.1,"d32":58.7},{"flow":2175.0,"liquidPressure":2.71,"airRate":65.4,"dmax":168.6,"d32":61.5},{"flow":2430.0,"liquidPressure":2.88,"airRate":58.6,"dmax":179.0,"d32":64.4},{"flow":2685.0,"liquidPressure":3.04,"airRate":51.7,"dmax":189.5,"d32":67.2},{"flow":2940.0,"liquidPressure":3.2,"airRate":44.77,"dmax":200.0,"d32":70.06}]},{"air":2.76,"data":[{"flow":900.0,"liquidPressure":2.39,"airRate":129.07,"dmax":143.6,"d32":45.64},{"flow":1155.0,"liquidPressure":2.59,"airRate":120.7,"dmax":150.1,"d32":47.7},{"flow":1410.0,"liquidPressure":2.79,"airRate":112.3,"dmax":156.6,"d32":49.8},{"flow":1665.0,"liquidPressure":2.99,"airRate":103.9,"dmax":163.1,"d32":51.9},{"flow":1920.0,"liquidPressure":3.19,"airRate":95.5,"dmax":169.6,"d32":54.0},{"flow":2175.0,"liquidPressure":3.39,"airRate":87.1,"dmax":176.1,"d32":56.1},{"flow":2430.0,"liquidPressure":3.59,"airRate":78.7,"dmax":182.6,"d32":58.1},{"flow":2685.0,"liquidPressure":3.79,"airRate":70.4,"dmax":189.1,"d32":60.2},{"flow":2940.0,"liquidPressure":3.98,"airRate":62.21,"dmax":195.64,"d32":62.21}]},{"air":3.45,"data":[{"flow":900.0,"liquidPressure":3.17,"airRate":169.3,"dmax":126.98,"d32":44.65},{"flow":1155.0,"liquidPressure":3.36,"airRate":158.7,"dmax":134.5,"d32":46.5},{"flow":1410.0,"liquidPressure":3.55,"airRate":148.1,"dmax":142.1,"d32":48.4},{"flow":1665.0,"liquidPressure":3.74,"airRate":137.4,"dmax":149.7,"d32":50.3},{"flow":1920.0,"liquidPressure":3.93,"airRate":126.7,"dmax":157.2,"d32":52.2},{"flow":2175.0,"liquidPressure":4.12,"airRate":116.1,"dmax":164.8,"d32":54.1},{"flow":2430.0,"liquidPressure":4.31,"airRate":105.5,"dmax":172.4,"d32":56.0},{"flow":2685.0,"liquidPressure":4.5,"airRate":94.8,"dmax":179.9,"d32":57.9},{"flow":2940.0,"liquidPressure":4.69,"airRate":84.19,"dmax":187.44,"d32":59.77}]},{"air":4.14,"data":[{"flow":900.0,"liquidPressure":3.43,"airRate":196.51,"dmax":114.24,"d32":42.15},{"flow":1155.0,"liquidPressure":3.65,"airRate":185.5,"dmax":121.0,"d32":43.9},{"flow":1410.0,"liquidPressure":3.87,"airRate":174.4,"dmax":127.8,"d32":45.7},{"flow":1665.0,"liquidPressure":4.1,"airRate":163.4,"dmax":134.6,"d32":47.5},{"flow":1920.0,"liquidPressure":4.32,"airRate":152.3,"dmax":141.4,"d32":49.3},{"flow":2175.0,"liquidPressure":4.55,"airRate":141.3,"dmax":148.2,"d32":51.1},{"flow":2430.0,"liquidPressure":4.77,"airRate":130.2,"dmax":155.0,"d32":52.9},{"flow":2685.0,"liquidPressure":5.0,"airRate":119.1,"dmax":161.8,"d32":54.7},{"flow":2940.0,"liquidPressure":5.22,"airRate":108.14,"dmax":168.6,"d32":56.4}]},{"air":4.83,"data":[{"flow":900.0,"liquidPressure":3.9,"airRate":227.03,"dmax":100.87,"d32":40.0},{"flow":1155.0,"liquidPressure":4.15,"airRate":215.2,"dmax":107.0,"d32":41.3},{"flow":1410.0,"liquidPressure":4.39,"airRate":203.4,"dmax":113.1,"d32":42.6},{"flow":1665.0,"liquidPressure":4.64,"airRate":191.6,"dmax":119.2,"d32":43.9},{"flow":1920.0,"liquidPressure":4.89,"airRate":179.8,"dmax":125.3,"d32":45.2},{"flow":2175.0,"liquidPressure":5.14,"airRate":168.0,"dmax":131.4,"d32":46.5},{"flow":2430.0,"liquidPressure":5.38,"airRate":156.2,"dmax":137.5,"d32":47.8},{"flow":2685.0,"liquidPressure":5.63,"airRate":144.3,"dmax":143.6,"d32":49.1},{"flow":2940.0,"liquidPressure":5.87,"airRate":132.56,"dmax":149.71,"d32":50.4}]},{"air":5.5,"data":[{"flow":900.0,"liquidPressure":4.53,"airRate":237.56,"dmax":91.05,"d32":35.93},{"flow":1155.0,"liquidPressure":4.75,"airRate":224.2,"dmax":96.8,"d32":37.5},{"flow":1410.0,"liquidPressure":4.97,"airRate":210.8,"dmax":102.5,"d32":39.1},{"flow":1665.0,"liquidPressure":5.19,"airRate":197.4,"dmax":108.2,"d32":40.7},{"flow":1920.0,"liquidPressure":5.41,"airRate":184.0,"dmax":113.9,"d32":42.3},{"flow":2175.0,"liquidPressure":5.63,"airRate":170.6,"dmax":119.6,"d32":43.9},{"flow":2430.0,"liquidPressure":5.85,"airRate":157.2,"dmax":125.3,"d32":45.5},{"flow":2685.0,"liquidPressure":6.07,"airRate":143.8,"dmax":131.0,"d32":47.0},{"flow":2940.0,"liquidPressure":6.28,"airRate":130.81,"dmax":136.74,"d32":48.49}]}]},{"model":"FM25","family":"FloMax","angle":55,"source":"Original performance curve / digitized reference","material":"316SS","curves":[{"air":2.0,"data":[{"flow":3420.0,"liquidPressure":2.62,"airRate":50.0,"dmax":199.0,"d32":66.0},{"flow":3592.5,"liquidPressure":2.7,"airRate":48.5,"dmax":199.4,"d32":66.5},{"flow":3765.0,"liquidPressure":2.78,"airRate":47.0,"dmax":199.8,"d32":67.0},{"flow":3937.5,"liquidPressure":2.86,"airRate":45.5,"dmax":200.2,"d32":67.5},{"flow":4110.0,"liquidPressure":2.94,"airRate":44.0,"dmax":200.6,"d32":68.0},{"flow":4282.5,"liquidPressure":3.02,"airRate":42.5,"dmax":201.0,"d32":68.5},{"flow":4455.0,"liquidPressure":3.1,"airRate":41.0,"dmax":201.4,"d32":69.0},{"flow":4627.5,"liquidPressure":3.19,"airRate":39.5,"dmax":201.8,"d32":69.5},{"flow":4800.0,"liquidPressure":3.28,"airRate":38.0,"dmax":202.2,"d32":70.0}]},{"air":2.76,"data":[{"flow":3420.0,"liquidPressure":3.25,"airRate":59.74,"dmax":189.39,"d32":69.9},{"flow":3690.0,"liquidPressure":3.39,"airRate":55.6,"dmax":190.2,"d32":70.6},{"flow":3960.0,"liquidPressure":3.53,"airRate":51.5,"dmax":191.0,"d32":71.3},{"flow":4230.0,"liquidPressure":3.67,"airRate":47.3,"dmax":191.8,"d32":72.0},{"flow":4500.0,"liquidPressure":3.81,"airRate":43.1,"dmax":192.6,"d32":72.7},{"flow":4770.0,"liquidPressure":3.95,"airRate":38.9,"dmax":193.4,"d32":73.4},{"flow":5040.0,"liquidPressure":4.09,"airRate":34.7,"dmax":194.2,"d32":74.1},{"flow":5310.0,"liquidPressure":4.22,"airRate":30.5,"dmax":195.0,"d32":74.9},{"flow":5580.0,"liquidPressure":4.35,"airRate":26.39,"dmax":195.77,"d32":75.7}]},{"air":3.45,"data":[{"flow":3420.0,"liquidPressure":3.85,"airRate":83.99,"dmax":175.64,"d32":67.05},{"flow":3690.0,"liquidPressure":4.0,"airRate":78.8,"dmax":176.4,"d32":67.7},{"flow":3960.0,"liquidPressure":4.15,"airRate":73.6,"dmax":177.2,"d32":68.4},{"flow":4230.0,"liquidPressure":4.3,"airRate":68.5,"dmax":177.9,"d32":69.1},{"flow":4500.0,"liquidPressure":4.45,"airRate":63.3,"dmax":178.7,"d32":69.8},{"flow":4770.0,"liquidPressure":4.6,"airRate":58.2,"dmax":179.5,"d32":70.5},{"flow":5040.0,"liquidPressure":4.74,"airRate":53.1,"dmax":180.2,"d32":71.2},{"flow":5310.0,"liquidPressure":4.87,"airRate":48.0,"dmax":181.0,"d32":71.9},{"flow":5580.0,"liquidPressure":5.0,"airRate":42.92,"dmax":181.67,"d32":72.62}]},{"air":4.14,"data":[{"flow":3420.0,"liquidPressure":4.45,"airRate":106.29,"dmax":155.57,"d32":62.02},{"flow":3690.0,"liquidPressure":4.61,"airRate":100.1,"dmax":156.3,"d32":62.7},{"flow":3960.0,"liquidPressure":4.77,"airRate":93.9,"dmax":157.0,"d32":63.3},{"flow":4230.0,"liquidPressure":4.93,"airRate":87.8,"dmax":157.7,"d32":64.0},{"flow":4500.0,"liquidPressure":5.09,"airRate":81.6,"dmax":158.4,"d32":64.6},{"flow":4770.0,"liquidPressure":5.25,"airRate":75.5,"dmax":159.1,"d32":65.3},{"flow":5040.0,"liquidPressure":5.41,"airRate":69.3,"dmax":159.8,"d32":66.0},{"flow":5310.0,"liquidPressure":5.56,"airRate":63.2,"dmax":160.4,"d32":66.6},{"flow":5580.0,"liquidPressure":5.7,"airRate":57.01,"dmax":161.0,"d32":67.24}]},{"air":4.83,"data":[{"flow":3420.0,"liquidPressure":5.15,"airRate":131.79,"dmax":142.37,"d32":61.62},{"flow":3690.0,"liquidPressure":5.3,"airRate":124.7,"dmax":143.0,"d32":62.2},{"flow":3960.0,"liquidPressure":5.45,"airRate":117.6,"dmax":143.6,"d32":62.8},{"flow":4230.0,"liquidPressure":5.6,"airRate":110.5,"dmax":144.2,"d32":63.4},{"flow":4500.0,"liquidPressure":5.75,"airRate":103.4,"dmax":144.8,"d32":64.0},{"flow":4770.0,"liquidPressure":5.9,"airRate":96.3,"dmax":145.4,"d32":64.6},{"flow":5040.0,"liquidPressure":6.05,"airRate":89.2,"dmax":146.0,"d32":65.2},{"flow":5310.0,"liquidPressure":6.19,"airRate":82.1,"dmax":146.5,"d32":65.9},{"flow":5580.0,"liquidPressure":6.32,"airRate":75.36,"dmax":147.01,"d32":66.64}]}]},{"model":"FM40","family":"FloMax","angle":55,"source":"Original performance curve / digitized reference","material":"316SS","curves":[{"air":4.83,"data":[{"flow":3300.0,"liquidPressure":3.75,"airRate":553.12,"dmax":376.56,"d32":141.41},{"flow":4275.0,"liquidPressure":4.45,"airRate":534.4,"dmax":386.3,"d32":147.8},{"flow":5250.0,"liquidPressure":5.16,"airRate":515.6,"dmax":396.1,"d32":154.2},{"flow":6225.0,"liquidPressure":5.87,"airRate":496.9,"dmax":405.9,"d32":160.6},{"flow":7200.0,"liquidPressure":6.58,"airRate":478.1,"dmax":415.7,"d32":167.0},{"flow":8175.0,"liquidPressure":7.28,"airRate":459.4,"dmax":425.4,"d32":173.4},{"flow":9150.0,"liquidPressure":7.98,"airRate":440.6,"dmax":435.2,"d32":179.8},{"flow":10125.0,"liquidPressure":8.68,"airRate":421.9,"dmax":444.9,"d32":186.0},{"flow":11100.0,"liquidPressure":9.38,"airRate":403.12,"dmax":454.69,"d32":192.19}]},{"air":5.5,"data":[{"flow":3300.0,"liquidPressure":3.5,"airRate":610.94,"dmax":203.91,"d32":71.09},{"flow":4275.0,"liquidPressure":4.34,"airRate":591.0,"dmax":224.4,"d32":78.3},{"flow":5250.0,"liquidPressure":5.18,"airRate":571.0,"dmax":244.9,"d32":85.5},{"flow":6225.0,"liquidPressure":6.02,"airRate":551.0,"dmax":265.4,"d32":92.7},{"flow":7200.0,"liquidPressure":6.86,"airRate":531.0,"dmax":285.9,"d32":99.9},{"flow":8175.0,"liquidPressure":7.7,"airRate":511.0,"dmax":306.4,"d32":107.1},{"flow":9150.0,"liquidPressure":8.54,"airRate":491.0,"dmax":326.9,"d32":114.3},{"flow":10125.0,"liquidPressure":9.39,"airRate":471.0,"dmax":347.4,"d32":121.6},{"flow":11100.0,"liquidPressure":10.23,"airRate":451.56,"dmax":367.97,"d32":128.91}]}]},{"model":"FM5A","family":"FloMax A Series","angle":55,"source":"A-Series original performance curve / digitized reference","material":"316SS","curves":[{"air":2.0,"data":[{"flow":452.3,"liquidPressure":1.14,"airRate":94.75,"dmax":135.21,"d32":74.31,"dv09":101.49},{"flow":593.2,"liquidPressure":1.5,"airRate":91.8,"dmax":146.48,"d32":79.64,"dv09":111.68},{"flow":734.2,"liquidPressure":1.86,"airRate":88.85,"dmax":157.75,"d32":84.97,"dv09":121.87},{"flow":875.1,"liquidPressure":2.23,"airRate":85.89,"dmax":169.01,"d32":90.3,"dv09":132.06},{"flow":1016.0,"liquidPressure":2.59,"airRate":82.94,"dmax":180.28,"d32":95.64,"dv09":142.26},{"flow":1156.9,"liquidPressure":2.95,"airRate":79.99,"dmax":191.55,"d32":100.97,"dv09":152.45},{"flow":1297.8,"liquidPressure":3.32,"airRate":77.04,"dmax":202.82,"d32":106.3,"dv09":162.64},{"flow":1438.8,"liquidPressure":3.68,"airRate":74.09,"dmax":214.08,"d32":111.64,"dv09":172.83},{"flow":1579.7,"liquidPressure":4.05,"airRate":71.14,"dmax":225.34,"d32":116.97,"dv09":183.03}]},{"air":2.76,"data":[{"flow":474.9,"liquidPressure":1.62,"airRate":122.96,"dmax":119.04,"d32":76.38,"dv09":95.64},{"flow":614.6,"liquidPressure":1.99,"airRate":119.37,"dmax":128.07,"d32":81.2,"dv09":103.42},{"flow":754.4,"liquidPressure":2.37,"airRate":115.79,"dmax":137.1,"d32":86.01,"dv09":111.21},{"flow":894.1,"liquidPressure":2.75,"airRate":112.2,"dmax":146.13,"d32":90.83,"dv09":119.0},{"flow":1033.8,"liquidPressure":3.14,"airRate":108.61,"dmax":155.16,"d32":95.64,"dv09":126.78},{"flow":1173.5,"liquidPressure":3.54,"airRate":105.03,"dmax":164.19,"d32":100.46,"dv09":134.57},{"flow":1313.3,"liquidPressure":3.94,"airRate":101.44,"dmax":173.22,"d32":105.28,"dv09":142.35},{"flow":1453.0,"liquidPressure":4.35,"airRate":97.85,"dmax":182.25,"d32":110.09,"dv09":150.13},{"flow":1592.7,"liquidPressure":4.77,"airRate":94.27,"dmax":191.28,"d32":114.91,"dv09":157.91}]},{"air":3.45,"data":[{"flow":474.9,"liquidPressure":1.94,"airRate":146.9,"dmax":101.15,"d32":75.0,"dv09":82.91},{"flow":611.4,"liquidPressure":2.35,"airRate":143.92,"dmax":109.02,"d32":80.16,"dv09":90.35},{"flow":747.9,"liquidPressure":2.76,"airRate":140.94,"dmax":116.89,"d32":85.32,"dv09":97.79},{"flow":884.4,"liquidPressure":3.17,"airRate":137.96,"dmax":124.76,"d32":90.48,"dv09":105.23},{"flow":1020.8,"liquidPressure":3.58,"airRate":134.99,"dmax":132.63,"d32":95.64,"dv09":112.67},{"flow":1157.3,"liquidPressure":3.98,"airRate":132.01,"dmax":140.5,"d32":100.8,"dv09":120.11},{"flow":1293.8,"liquidPressure":4.39,"airRate":129.03,"dmax":148.37,"d32":105.96,"dv09":127.55},{"flow":1430.2,"liquidPressure":4.79,"airRate":126.05,"dmax":156.24,"d32":111.12,"dv09":134.99},{"flow":1566.7,"liquidPressure":5.19,"airRate":123.07,"dmax":164.11,"d32":116.28,"dv09":142.43}]}]},{"model":"FM10A","family":"FloMax A Series","angle":55,"source":"A-Series original performance curve / digitized reference","material":"316SS","curves":[{"air":2.76,"data":[{"flow":316.7,"liquidPressure":1.29,"airRate":83.56,"dmax":143.06,"d32":51.7,"dv09":108.5},{"flow":646.9,"liquidPressure":1.61,"airRate":74.86,"dmax":162.08,"d32":61.92,"dv09":123.54},{"flow":977.1,"liquidPressure":1.93,"airRate":66.17,"dmax":181.09,"d32":72.14,"dv09":138.58},{"flow":1307.3,"liquidPressure":2.26,"airRate":57.47,"dmax":200.11,"d32":82.35,"dv09":153.62},{"flow":1637.5,"liquidPressure":2.58,"airRate":48.78,"dmax":219.13,"d32":92.57,"dv09":168.65},{"flow":1967.7,"liquidPressure":2.9,"airRate":40.08,"dmax":238.14,"d32":102.79,"dv09":183.69},{"flow":2297.9,"liquidPressure":3.22,"airRate":31.39,"dmax":257.16,"d32":113.0,"dv09":198.73},{"flow":2628.1,"liquidPressure":3.55,"airRate":22.69,"dmax":276.18,"d32":123.22,"dv09":213.77},{"flow":2958.3,"liquidPressure":3.87,"airRate":14.0,"dmax":302.75,"d32":133.44,"dv09":228.81}]},{"air":3.45,"data":[{"flow":258.3,"liquidPressure":1.02,"airRate":98.62,"dmax":125.25,"d32":33.75,"dv09":89.25},{"flow":610.4,"liquidPressure":1.42,"airRate":88.0,"dmax":138.98,"d32":38.67,"dv09":98.95},{"flow":962.5,"liquidPressure":1.83,"airRate":77.36,"dmax":152.72,"d32":43.59,"dv09":108.66},{"flow":1314.6,"liquidPressure":2.23,"airRate":66.74,"dmax":166.45,"d32":48.52,"dv09":118.36},{"flow":1666.7,"liquidPressure":2.64,"airRate":56.12,"dmax":180.19,"d32":53.44,"dv09":128.06},{"flow":2018.8,"liquidPressure":3.04,"airRate":45.49,"dmax":193.92,"d32":58.36,"dv09":137.77},{"flow":2370.8,"liquidPressure":3.44,"airRate":34.87,"dmax":207.66,"d32":63.28,"dv09":147.47},{"flow":2722.9,"liquidPressure":3.85,"airRate":24.23,"dmax":221.39,"d32":68.2,"dv09":157.17},{"flow":3075.0,"liquidPressure":4.25,"airRate":13.59,"dmax":235.12,"d32":73.12,"dv09":166.88}]},{"air":4.14,"data":[{"flow":250.0,"liquidPressure":1.38,"airRate":160.12,"dmax":148.88,"d32":79.52,"dv09":121.13},{"flow":605.2,"liquidPressure":1.82,"airRate":150.1,"dmax":156.71,"d32":81.06,"dv09":126.42},{"flow":960.4,"liquidPressure":2.25,"airRate":140.08,"dmax":164.53,"d32":82.61,"dv09":131.72},{"flow":1315.6,"liquidPressure":2.69,"airRate":130.06,"dmax":172.36,"d32":84.15,"dv09":137.01},{"flow":1670.8,"liquidPressure":3.12,"airRate":120.04,"dmax":180.19,"d32":85.7,"dv09":142.31},{"flow":2026.0,"liquidPressure":3.56,"airRate":110.02,"dmax":188.02,"d32":87.24,"dv09":147.61},{"flow":2381.2,"liquidPressure":4.0,"airRate":100.0,"dmax":195.85,"d32":88.79,"dv09":152.9},{"flow":2736.5,"liquidPressure":4.43,"airRate":89.98,"dmax":203.67,"d32":90.33,"dv09":158.2},{"flow":3091.7,"liquidPressure":4.87,"airRate":79.95,"dmax":211.5,"d32":91.88,"dv09":163.5}]}]},{"model":"FM25A","family":"FloMax A Series","angle":55,"source":"A-Series original performance curve / digitized reference","material":"316SS","curves":[{"air":3.45,"data":[{"flow":2310.6,"liquidPressure":1.74,"airRate":97.66,"dmax":180.95,"d32":52.98,"dv09":123.21},{"flow":2942.5,"liquidPressure":2.14,"airRate":91.4,"dmax":213.17,"d32":65.92,"dv09":148.21},{"flow":3574.5,"liquidPressure":2.54,"airRate":85.15,"dmax":245.27,"d32":78.87,"dv09":173.21},{"flow":4206.4,"liquidPressure":2.94,"airRate":78.89,"dmax":277.48,"d32":91.81,"dv09":198.21},{"flow":4838.3,"liquidPressure":3.35,"airRate":72.64,"dmax":309.69,"d32":104.76,"dv09":223.21},{"flow":5470.2,"liquidPressure":3.75,"airRate":66.38,"dmax":341.91,"d32":117.7,"dv09":248.21},{"flow":6102.1,"liquidPressure":4.15,"airRate":60.13,"dmax":374.12,"d32":130.65,"dv09":273.21},{"flow":6734.0,"liquidPressure":4.55,"airRate":53.87,"dmax":406.34,"d32":143.6,"dv09":298.21},{"flow":7366.0,"liquidPressure":4.95,"airRate":47.62,"dmax":438.69,"d32":156.55,"dv09":323.21}]},{"air":4.14,"data":[{"flow":1851.1,"liquidPressure":1.9,"airRate":168.1,"dmax":180.95,"d32":87.26,"dv09":134.29},{"flow":2462.3,"liquidPressure":2.35,"airRate":162.06,"dmax":198.75,"d32":97.72,"dv09":150.3},{"flow":3073.4,"liquidPressure":2.8,"airRate":156.02,"dmax":216.55,"d32":108.18,"dv09":166.3},{"flow":3684.6,"liquidPressure":3.24,"airRate":149.98,"dmax":234.35,"d32":118.64,"dv09":182.31},{"flow":4295.7,"liquidPressure":3.69,"airRate":143.94,"dmax":252.14,"d32":129.1,"dv09":198.31},{"flow":4906.9,"liquidPressure":4.14,"airRate":137.9,"dmax":269.94,"d32":139.56,"dv09":214.32},{"flow":5518.1,"liquidPressure":4.59,"airRate":131.86,"dmax":287.74,"d32":150.02,"dv09":230.32},{"flow":6129.2,"liquidPressure":5.03,"airRate":125.81,"dmax":305.53,"d32":160.48,"dv09":246.33},{"flow":6740.4,"liquidPressure":5.48,"airRate":119.76,"dmax":323.33,"d32":170.95,"dv09":262.38}]},{"air":4.83,"data":[{"flow":1991.5,"liquidPressure":1.79,"airRate":184.64,"dmax":172.14,"d32":77.5,"dv09":127.91},{"flow":2596.3,"liquidPressure":2.31,"airRate":178.67,"dmax":183.75,"d32":86.16,"dv09":139.11},{"flow":3201.1,"liquidPressure":2.83,"airRate":172.7,"dmax":195.36,"d32":94.82,"dv09":150.31},{"flow":3805.9,"liquidPressure":3.35,"airRate":166.73,"dmax":206.96,"d32":103.48,"dv09":161.51},{"flow":4410.6,"liquidPressure":3.87,"airRate":160.76,"dmax":218.57,"d32":112.14,"dv09":172.71},{"flow":5015.4,"liquidPressure":4.39,"airRate":154.79,"dmax":230.18,"d32":120.8,"dv09":183.91},{"flow":5620.2,"liquidPressure":4.91,"airRate":148.82,"dmax":241.79,"d32":129.46,"dv09":195.11},{"flow":6225.0,"liquidPressure":5.43,"airRate":142.85,"dmax":253.39,"d32":138.12,"dv09":206.31},{"flow":6829.8,"liquidPressure":5.94,"airRate":136.88,"dmax":265.0,"d32":146.79,"dv09":217.5}]},{"air":5.5,"data":[{"flow":1914.9,"liquidPressure":1.41,"airRate":189.32,"dmax":162.0,"d32":66.86,"dv09":116.36},{"flow":2524.5,"liquidPressure":2.0,"airRate":184.01,"dmax":172.45,"d32":74.74,"dv09":126.24},{"flow":3134.0,"liquidPressure":2.59,"airRate":178.7,"dmax":182.89,"d32":82.61,"dv09":136.13},{"flow":3743.6,"liquidPressure":3.18,"airRate":173.39,"dmax":193.34,"d32":90.49,"dv09":146.01},{"flow":4353.2,"liquidPressure":3.77,"airRate":168.08,"dmax":203.79,"d32":98.36,"dv09":155.9},{"flow":4962.8,"liquidPressure":4.36,"airRate":162.77,"dmax":214.23,"d32":106.24,"dv09":165.78},{"flow":5572.3,"liquidPressure":4.95,"airRate":157.46,"dmax":224.68,"d32":114.11,"dv09":175.67},{"flow":6181.9,"liquidPressure":5.54,"airRate":152.15,"dmax":235.12,"d32":121.99,"dv09":185.55},{"flow":6791.5,"liquidPressure":6.13,"airRate":146.89,"dmax":245.57,"d32":129.86,"dv09":195.43}]}]}
+];
+
+var PERF_REFERENCE_DB = []
+
+function perfAllModels(){
+  var digital=PERF_NUMERIC_DB.map(function(m){
+    var all=[];
+    (m.curves||[]).forEach(function(c){(c.data||[]).forEach(function(p){all.push(num(p.flow))})});
+    return {model:m.model,family:m.family,angle:m.angle,range:[Math.min.apply(null,all),Math.max.apply(null,all)],air:m.curves.map(function(c){return c.air}),source:m.source,digital:true,raw:m};
+  });
+  return digital.concat(PERF_REFERENCE_DB.map(function(m){var x=clone(m);x.digital=false;x.raw=null;return x}));
+}
+function perfFindModel(name){return perfAllModels().find(function(m){return m.model===name})||null}
+function perfFindNumeric(name){return PERF_NUMERIC_DB.find(function(m){return m.model===name})||null}
+function perfSelectedAir(n,m){
+  var raw=String((n&&n.selectedAir)||'').trim(),v=parseFloat(raw);
+  var arr=(m&&m.air)||[];
+  if(isFinite(v)&&arr.length)return arr.reduce(function(best,x){return Math.abs(x-v)<Math.abs(best-v)?x:best},arr[0]);
+  var entered=parseFloat(String((n&&n.airPressure)||'').replace(',','.'));
+  if(isFinite(entered)&&arr.length)return arr.reduce(function(best,x){return Math.abs(x-entered)<Math.abs(best-entered)?x:best},arr[0]);
+  return arr.length?arr[0]:'';
+}
+function perfCurveFor(model,air){
+  var m=perfFindNumeric(model);if(!m)return null;
+  return (m.curves||[]).find(function(c){return Math.abs(num(c.air)-num(air))<0.001})||m.curves[0]||null;
+}
+function perfInterp(curve,flow){
+  if(!curve||!curve.data||!curve.data.length)return null;
+  var a=curve.data.slice().sort(function(x,y){return x.flow-y.flow}),f=num(flow);
+  if(f<=a[0].flow)return clone(a[0]);
+  if(f>=a[a.length-1].flow)return clone(a[a.length-1]);
+  for(var i=0;i<a.length-1;i++){
+    var p=a[i],q=a[i+1];
+    if(f>=p.flow&&f<=q.flow){
+      var t=(f-p.flow)/(q.flow-p.flow),o={flow:f};
+      Object.keys(p).forEach(function(k){
+        if(k==='flow')return;
+        if(typeof p[k]==='number'&&typeof q[k]==='number')o[k]=p[k]+(q[k]-p[k])*t;
+      });
+      return o;
+    }
+  }
+  return clone(a[0]);
+}
+function perfDroplet(p){
+  if(!p)return {label:"",value:null};
+  if(isFinite(p.smd))return {label:"SMD",value:p.smd};
+  if(isFinite(p.d32))return {label:"D32",value:p.d32};
+  return {label:"",value:null};
+}
+function perfRangeWarnings(m,n){
+  var out=[],mn=num(n.minFlow),mx=num(n.maxFlow),normal=num(n.normalFlow);
+  if(mn&&mn<m.range[0])out.push("MIN 범위밖");
+  if(mn&&mn>m.range[1])out.push("MIN 범위밖");
+  if(mx&&mx>m.range[1])out.push("MAX 범위밖");
+  if(mx&&mx<m.range[0])out.push("MAX 범위밖");
+  if(normal>=m.range[0]&&normal<=m.range[1])out.push("NORMAL 범위내");
+  else out.push("NORMAL 범위밖");
+  return out;
+}
+function perfScore(m,n){
+  var f=num(n.normalFlow),score=0;
+  if(f<m.range[0])score+=(m.range[0]-f)*10;
+  else if(f>m.range[1])score+=(f-m.range[1])*10;
+  var mid=(m.range[0]+m.range[1])/2;
+  score+=Math.abs(f-mid)/(Math.max(1,m.range[1]-m.range[0]));
+  var ang=num(n.sprayAngle);
+  if(ang&&m.angle!=null)score+=Math.abs(ang-m.angle)*2;
+  if(m.digital)score-=0.05;
+  return score;
+}
+function perfPopulateNozzles(){
+  var p=current(),sel=$('perfNozzleSelect');if(!sel)return;
+  if(!p){sel.innerHTML='';return}
+  sel.innerHTML=p.nozzles.map(function(n,i){return '<option value="'+i+'">Nozzle '+(i+1)+' · '+esc(n.typeTag||('Type-'+(i+1)))+'</option>'}).join('');
+  sel.value=String(state.activeNozzle);
+}
+function perfRenderBasis(){
+  var n=activeNozzle(),box=$('perfBasis');if(!box)return;
+  if(!n){box.innerHTML='프로젝트를 먼저 생성하세요.';return}
+  box.innerHTML='<div><b>Min / Nozzle</b>'+esc(fmtFlowLmin(n.minFlow||0))+' L/min</div>'+
+    '<div><b>Normal / Nozzle</b>'+esc(fmtFlowLmin(n.normalFlow||0))+' L/min</div>'+
+    '<div><b>Max / Nozzle</b>'+esc(fmtFlowLmin(n.maxFlow||0))+' L/min</div>'+
+    '<div><b>Spray Angle</b>'+(n.sprayAngle?esc(n.sprayAngle)+'°':'-')+'</div>'+
+    '<div><b>Selected</b>'+esc(n.selectedModel||'-')+'</div>';
+}
+function perfRenderRecommendations(){
+  var n=activeNozzle(),box=$('perfRecommendations');if(!box)return;
+  if(!n){box.innerHTML='<div class="empty">프로젝트를 먼저 생성하세요.</div>';return}
+  var models=perfAllModels().slice().sort(function(a,b){return perfScore(a,n)-perfScore(b,n)});
+  box.innerHTML=models.map(function(m,idx){
+    var warnings=perfRangeWarnings(m,n),sel=n.selectedModel===m.model;
+    var warnHtml=warnings.map(function(w){return '<span class="perf-warn '+(w==='NORMAL 범위내'?'perf-ok':'')+'">'+w+'</span>'}).join('');
+    var airOpts=m.air.map(function(a){return '<option value="'+a+'">'+Number(a).toFixed(2)+' barg</option>'}).join('');
+    return '<div class="perf-rec '+(sel?'selected':'')+'" data-model="'+esc(m.model)+'">'+
+      '<div class="perf-rec-head"><div><div class="perf-model">'+esc(m.model)+'</div><div class="perf-meta">'+esc(m.family||'')+(m.angle!=null?' · '+m.angle+'°':'')+'</div></div>'+
+      (sel?'<span class="perf-selected-chip">✓ SELECTED</span>':'<span class="badge '+(m.digital?'green':'amber')+'">'+(m.digital?'DIGITAL':'DATA 준비중')+'</span>')+'</div>'+
+      '<div class="perf-meta" style="margin-top:8px">Flow range: '+fmtFlowLmin(m.range[0])+' ~ '+fmtFlowLmin(m.range[1])+' L/min</div>'+
+      '<div class="perf-warnings">'+warnHtml+'</div>'+
+      '<label>Air Pressure</label><select class="perf-card-air" '+(m.digital?'':'disabled')+'>'+airOpts+'</select>'+
+      '<button class="perf-use '+(sel?'is-selected':(idx===0&&m.digital?'primary':''))+'" style="width:100%" data-model="'+esc(m.model)+'" '+(m.digital?'':'disabled')+'>'+(m.digital?(sel?'✓ 선택됨':'이 모델 선택'):'Digital Data 준비중')+'</button>'+
+      '</div>';
+  }).join('');
+  box.querySelectorAll('.perf-rec').forEach(function(card){
+    var m=perfFindModel(card.getAttribute('data-model')),sel=card.querySelector('.perf-card-air');
+    if(m&&sel)sel.value=String(perfSelectedAir(n,m));
+  });
+  box.querySelectorAll('.perf-use:not([disabled])').forEach(function(btn){
+    btn.onclick=function(){
+      var model=btn.getAttribute('data-model'),card=btn.closest('.perf-rec'),air=card.querySelector('.perf-card-air').value;
+      perfChooseModel(model,air,false);
+    };
+  });
+}
+
+function perfSelectionFeedback(model,air){
+  var flash=$('perfSelectionFlash');
+  if($('perfSelectionFlashModel'))$('perfSelectionFlashModel').textContent=model||'-';
+  if($('perfSelectionFlashAir'))$('perfSelectionFlashAir').textContent=air?Number(air).toFixed(2)+' barg':'';
+  if(flash){
+    flash.classList.remove('show');
+    void flash.offsetWidth;
+    flash.classList.add('show');
+  }
+  var wrap=document.querySelector('.perf-combined-canvas-wrap');
+  if(wrap){
+    wrap.classList.remove('perf-refreshing');
+    void wrap.offsetWidth;
+    wrap.classList.add('perf-refreshing');
+    setTimeout(function(){wrap.classList.remove('perf-refreshing')},650);
+  }
+}
+
+function perfChooseModel(model,air,applyValues){
+  var n=activeNozzle(),m=perfFindModel(model);if(!n||!m||!m.digital)return;
+  n.selectedModel=model;
+  n.selectedAir=String(air||perfSelectedAir(n,m));
+  if(!Array.isArray(n.designPoints))n.designPoints=[];
+  if(!n.sprayAngle&&m.angle!=null)n.sprayAngle=m.angle;
+  saveStore();
+
+  fill('selectedModel',n.selectedModel);
+  if(m.angle!=null&&!$('sprayAngle').value)fill('sprayAngle',m.angle);
+
+  perfPopulateAir();
+  $('perfAirSelect').value=String(n.selectedAir);
+  perfRenderBasis();
+  perfRenderRecommendations();
+  perfUpdateStatus();
+  perfCombinedState.hoverFlow=null;
+  $('perfDigitalPanel').style.display='block';
+  perfDrawCombined();
+  perfUpdateMetricDescAvailability();
+  perfSelectionFeedback(model,n.selectedAir);
+
+  if(applyValues)perfApplyToNozzle();
+
+  var graph=document.querySelector('.perf-combined-canvas-wrap');
+  if(graph&&graph.scrollIntoView){
+    setTimeout(function(){graph.scrollIntoView({behavior:'smooth',block:'nearest'});},80);
+  }
+}
+function perfPopulateAir(){
+  var n=activeNozzle(),m=n?perfFindModel(n.selectedModel):null,sel=$('perfAirSelect');
+  if(!sel)return;
+  if(!m){sel.innerHTML='<option value="">-</option>';return}
+  sel.innerHTML=m.air.map(function(a){return '<option value="'+a+'">'+Number(a).toFixed(2)+' barg</option>'}).join('');
+  var a=perfSelectedAir(n,m);sel.value=String(a);n.selectedAir=a;
+}
+function perfMetricValue(p,metric){
+  if(!p)return null;
+  if(metric==='liquidPressure')return p.liquidPressure;
+  if(metric==='airRate')return p.airRate;
+  var d=perfDroplet(p);return d.value;
+}
+function perfMetricLabel(metric,curve){
+  if(metric==='liquidPressure')return 'Liquid Pressure (barg)';
+  if(metric==='airRate')return 'Air Flow (Nm³/hr)';
+  var p=curve&&curve.data&&curve.data[0],d=perfDroplet(p);return (d.label||'Droplet')+' (μm)';
+}
+var perfHoverPoints=[];
+
+function perfOtherParticleText(p){
+  if(!p)return '';
+  var out=[];
+  if(isFinite(p.x90))out.push('X90 '+fmtNum(p.x90));
+  if(isFinite(p.x99))out.push('X99 '+fmtNum(p.x99));
+  if(isFinite(p.dv05))out.push('Dv0.5 '+fmtNum(p.dv05));
+  if(isFinite(p.dv09))out.push('Dv0.9 '+fmtNum(p.dv09));
+  if(isFinite(p.dmax))out.push('Dmax '+fmtNum(p.dmax));
+  return out.join(' / ');
+}
+function perfCurrentCurve(){
+  var n=activeNozzle();if(!n)return null;
+  var m=perfFindNumeric(n.selectedModel);if(!m)return null;
+  var a=$('perfAirSelect').value||perfSelectedAir(n,perfFindModel(n.selectedModel));
+  return perfCurveFor(n.selectedModel,a);
+}
+function perfRenderDesignSummary(){
+  var box=$('perfDesignSummary'),n=activeNozzle(),curve=perfCurrentCurve();
+  if(!box)return;
+  if(!n||!curve){box.innerHTML='';return}
+  var p=perfInterp(curve,num(n.normalFlow)),d=perfDroplet(p);
+  var vals=[
+    ['Design Flow',fmtFlowLmin(n.normalFlow||0)+' L/min'],
+    ['Liquid Pressure',p&&isFinite(p.liquidPressure)?fmtNum(p.liquidPressure)+' barg':'-'],
+    ['Air Flow',p&&isFinite(p.airRate)?fmtNum(p.airRate)+' Nm³/hr':'-'],
+    ['Droplet',p&&isFinite(d.value)?d.label+' '+fmtNum(d.value)+' μm':'-'],
+    ['Air Pressure',Number(curve.air).toFixed(2)+' barg']
+  ];
+  box.innerHTML=vals.map(function(x){return '<div><span>'+x[0]+'</span><b>'+esc(x[1])+'</b></div>'}).join('');
+}
+function perfRenderDataTable(){
+  var body=$('perfDataRows'),head=$('perfDropletHead'),curve=perfCurrentCurve(),n=activeNozzle();
+  if(!body)return;
+  if(!curve){body.innerHTML='<tr><td colspan="5" style="text-align:center;color:#667085;padding:20px">Digital numeric data is not available for this model.</td></tr>';return}
+  var first=curve.data&&curve.data[0],d0=perfDroplet(first);
+  if(head)head.innerHTML=(d0.label||'Droplet')+'<br>(μm)';
+  var normal=num(n&&n.normalFlow);
+  body.innerHTML=(curve.data||[]).map(function(p){
+    var d=perfDroplet(p),isDesign=Math.abs(num(p.flow)-normal)<0.0001;
+    return '<tr class="'+(isDesign?'design-row':'')+'"><td>'+fmtPerfGraphFlow(p.flow)+'</td><td>'+
+      (isFinite(p.liquidPressure)?fmtNum(p.liquidPressure):'-')+'</td><td>'+
+      (isFinite(p.airRate)?fmtNum(p.airRate):'-')+'</td><td>'+
+      (isFinite(d.value)?fmtNum(d.value):'-')+'</td><td>'+esc(perfOtherParticleText(p))+'</td></tr>';
+  }).join('');
+}
+function perfMiniMetricValue(p,metric){
+  if(metric==='liquidPressure')return p.liquidPressure;
+  if(metric==='airRate')return p.airRate;
+  return perfDroplet(p).value;
+}
+function perfMiniMetricLabel(metric,curve){
+  if(metric==='liquidPressure')return 'barg';
+  if(metric==='airRate')return 'Nm³/hr';
+  var d=perfDroplet(curve&&curve.data&&curve.data[0]);return (d.label||'Droplet')+' μm';
+}
+function perfDrawMini(canvasId,metric){
+  var canvas=$(canvasId),n=activeNozzle(),curve=perfCurrentCurve();if(!canvas)return;
+  var ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  if(!curve||!curve.data||!curve.data.length){
+    ctx.fillStyle='#667085';ctx.font='14px Arial';ctx.textAlign='center';ctx.fillText('Digital data not yet digitized.',W/2,H/2);return
+  }
+  var data=curve.data.filter(function(p){return isFinite(perfMiniMetricValue(p,metric))});
+  if(!data.length)return;
+  var xs=data.map(function(p){return num(p.flow)}),ys=data.map(function(p){return num(perfMiniMetricValue(p,metric))});
+  var xmin=Math.min.apply(null,xs),xmax=Math.max.apply(null,xs),ymin=Math.min.apply(null,ys),ymax=Math.max.apply(null,ys);
+  if(xmin===xmax)xmax=xmin+1;if(ymin===ymax)ymax=ymin+1;
+  var yr=(ymax-ymin)||1;ymin-=yr*.08;ymax+=yr*.08;
+  var L=54,R=15,T=14,B=40;
+  function X(x){return L+(x-xmin)/(xmax-xmin)*(W-L-R)}
+  function Y(y){return H-B-(y-ymin)/(ymax-ymin)*(H-T-B)}
+  ctx.strokeStyle='#e4e7ec';ctx.lineWidth=1;ctx.fillStyle='#667085';ctx.font='11px Arial';ctx.textAlign='right';
+  for(var i=0;i<=4;i++){var y=ymin+(ymax-ymin)*i/4,py=Y(y);ctx.beginPath();ctx.moveTo(L,py);ctx.lineTo(W-R,py);ctx.stroke();ctx.fillText(fmtNum(y),L-6,py+4)}
+  ctx.textAlign='center';
+  for(var j=0;j<=4;j++){var x=xmin+(xmax-xmin)*j/4,px=X(x);ctx.beginPath();ctx.moveTo(px,T);ctx.lineTo(px,H-B);ctx.stroke();ctx.fillText(fmtPerfGraphFlow(x),px,H-B+17)}
+  ctx.fillStyle='#667085';ctx.font='10px Arial';ctx.fillText('Flow '+perfGraphFlowLabel(),(L+W-R)/2,H-6);
+  ctx.save();ctx.translate(12,(T+H-B)/2);ctx.rotate(-Math.PI/2);ctx.fillText(perfMiniMetricLabel(metric,curve),0,0);ctx.restore();
+  ctx.strokeStyle='#2457d6';ctx.lineWidth=2.2;ctx.beginPath();
+  data.forEach(function(p,k){var px=X(p.flow),py=Y(perfMiniMetricValue(p,metric));if(k===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
+  data.forEach(function(p){ctx.fillStyle='#2457d6';ctx.beginPath();ctx.arc(X(p.flow),Y(perfMiniMetricValue(p,metric)),3.5,0,Math.PI*2);ctx.fill()});
+  var normal=num(n.normalFlow);
+  if(normal>=xmin&&normal<=xmax){
+    var dp=perfInterp(curve,normal),dv=perfMiniMetricValue(dp,metric);
+    if(isFinite(dv)){var dx=X(normal),dy=Y(dv);ctx.strokeStyle='#b42318';ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(dx,T);ctx.lineTo(dx,H-B);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#b42318';ctx.beginPath();ctx.arc(dx,dy,5,0,Math.PI*2);ctx.fill()}
+  }
+  canvas._perfMap={curve:curve,metric:metric,X:X,Y:Y,data:data,L:L,R:R,T:T,B:B};
+}
+function perfMiniHover(canvas,e){
+  var map=canvas._perfMap;if(!map)return;
+  var rect=canvas.getBoundingClientRect(),sx=canvas.width/rect.width,sy=canvas.height/rect.height;
+  var x=(e.clientX-rect.left)*sx,y=(e.clientY-rect.top)*sy,best=null,dist=999;
+  map.data.forEach(function(p){var px=map.X(p.flow),py=map.Y(perfMiniMetricValue(p,map.metric)),d=Math.hypot(px-x,py-y);if(d<dist){dist=d;best=p}});
+  var card=canvas.closest('.perf-mini-card'),tip=card.querySelector('.perf-hover-box');
+  if(!tip){tip=document.createElement('div');tip.className='perf-hover-box';card.appendChild(tip)}
+  if(best&&dist<22){
+    var d=perfDroplet(best);
+    tip.style.display='block';tip.style.left=Math.min(rect.width-165,(map.X(best.flow)/sx)+12)+'px';tip.style.top=Math.max(34,(map.Y(perfMiniMetricValue(best,map.metric))/sy)-8)+'px';
+    tip.innerHTML='<b>'+fmtPerfGraphFlow(best.flow)+' '+perfGraphFlowLabel()+'</b><br>Liquid P: '+(isFinite(best.liquidPressure)?fmtNum(best.liquidPressure)+' barg':'-')+
+      '<br>Air: '+(isFinite(best.airRate)?fmtNum(best.airRate)+' Nm³/hr':'-')+
+      '<br>Droplet: '+(isFinite(d.value)?d.label+' '+fmtNum(d.value)+' μm':'-')+
+      (perfOtherParticleText(best)?'<br>'+esc(perfOtherParticleText(best)):'');
+  }else tip.style.display='none';
+}
+function perfDrawAllDigital(){
+  perfRenderDesignSummary();perfRenderDataTable();
+  perfDrawMini('perfCanvasPressure','liquidPressure');
+  perfDrawMini('perfCanvasAir','airRate');
+  perfDrawMini('perfCanvasDroplet','droplet');
+}
+function perfRenderDigitalLayout(){
+  var metric=$('perfMetric').value||'all';
+  $('perfAllDashboard').style.display=metric==='all'?'block':'none';
+  $('perfSingleChart').style.display=metric==='all'?'none':'block';
+  if(metric==='all')perfDrawAllDigital();else perfDrawDigital();
+}
+
+
+var perfCombinedState={hoverFlow:null,plot:null};
+
+function perfSeriesForCurve(curve){
+  if(!curve||!curve.data||!curve.data.length)return [];
+  var p=curve.data[0],series=[];
+  if(isFinite(p.liquidPressure))series.push({key:'liquidPressure',label:'Liquid Pressure',unit:'barg',axis:'pressure'});
+  if(isFinite(p.airRate))series.push({key:'airRate',label:'Air Flow',unit:'Nm³/hr',axis:'air'});
+  if(isFinite(p.smd))series.push({key:'smd',label:'SMD',unit:'μm',axis:'drop'});
+  if(isFinite(p.d32))series.push({key:'d32',label:'D32',unit:'μm',axis:'drop'});
+  if(isFinite(p.x90))series.push({key:'x90',label:'X90',unit:'μm',axis:'drop'});
+  if(isFinite(p.x99))series.push({key:'x99',label:'X99',unit:'μm',axis:'drop'});
+  if(isFinite(p.dv05))series.push({key:'dv05',label:'Dv0.5',unit:'μm',axis:'drop'});
+  if(isFinite(p.dv09))series.push({key:'dv09',label:'Dv0.9',unit:'μm',axis:'drop'});
+  if(isFinite(p.dmax))series.push({key:'dmax',label:'Dmax',unit:'μm',axis:'drop'});
+  return series;
+}
+function perfAxisRange(curve,series,axis){
+  var vals=[];
+  series.filter(function(s){return s.axis===axis}).forEach(function(sr){
+    curve.data.forEach(function(p){if(isFinite(p[sr.key]))vals.push(num(p[sr.key]))});
+  });
+  if(!vals.length)return [0,1];
+  var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);
+  if(lo===hi){lo-=1;hi+=1}
+  var pad=(hi-lo)*.10;
+  return [Math.max(0,lo-pad),hi+pad];
+}
+function perfCombinedColors(){
+  return {
+    liquidPressure:'#2457d6',
+    airRate:'#067647',
+    smd:'#b42318',
+    d32:'#b42318',
+    x90:'#9333ea',
+    x99:'#c2410c',
+    dv05:'#0e7490',
+    dv09:'#7c3aed',
+    dmax:'#475467'
+  };
+}
+function perfDrawAxis(ctx,x,y1,y2,range,side,label,color){
+  ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,y2);ctx.stroke();
+  ctx.font='10px Arial';
+  for(var i=0;i<=5;i++){
+    var v=range[0]+(range[1]-range[0])*i/5;
+    var py=y2-(y2-y1)*i/5;
+    ctx.beginPath();
+    if(side==='left'){ctx.moveTo(x-4,py);ctx.lineTo(x,py);ctx.textAlign='right';ctx.fillText(fmtNum(v),x-7,py+3)}
+    else{ctx.moveTo(x,py);ctx.lineTo(x+4,py);ctx.textAlign='left';ctx.fillText(fmtNum(v),x+7,py+3)}
+    ctx.stroke();
+  }
+  ctx.save();ctx.translate(side==='left'?x-43:x+43,(y1+y2)/2);ctx.rotate(side==='left'?-Math.PI/2:Math.PI/2);ctx.textAlign='center';ctx.font='bold 10px Arial';ctx.fillText(label,0,0);ctx.restore();
+}
+function perfValueAtFlow(curve,flow){
+  return perfInterp(curve,flow);
+}
+function perfUpdateLiveReadout(flow,p){
+  var d=perfDroplet(p);
+  $('perfLiveFlow').textContent=isFinite(flow)?fmtPerfGraphFlow(flow)+' '+perfGraphFlowLabel():'-';
+  $('perfLiveLP').textContent=p&&isFinite(p.liquidPressure)?fmtNum(p.liquidPressure)+' barg':'-';
+  $('perfLiveAir').textContent=p&&isFinite(p.airRate)?fmtNum(p.airRate)+' Nm³/hr':'-';
+  $('perfLiveDropLabel').textContent=d.label||'DROPLET';
+  $('perfLiveDrop').textContent=isFinite(d.value)?fmtNum(d.value)+' μm':'-';
+  $('perfLiveOther').textContent=perfOtherParticleText(p)||'-';
+}
+
+function perfPointKey(model,air){
+  return String(model||'')+'|'+String(Number(air||0).toFixed(3));
+}
+function perfCurrentStoredPoints(){
+  var n=activeNozzle();if(!n)return [];
+  if(!Array.isArray(n.designPoints))n.designPoints=[];
+  var model=n.selectedModel||'',air=$('perfAirSelect').value||perfSelectedAir(n,perfFindModel(model));
+  var key=perfPointKey(model,air);
+  return n.designPoints.filter(function(pt){return perfPointKey(pt.model,pt.air)===key});
+}
+function perfAddStoredPoint(flow){
+  var n=activeNozzle(),curve=perfCurrentCurve();if(!n||!curve||!isFinite(flow))return;
+  if(!Array.isArray(n.designPoints))n.designPoints=[];
+  var model=n.selectedModel||'',air=$('perfAirSelect').value||perfSelectedAir(n,perfFindModel(model));
+  var key=perfPointKey(model,air),range=Math.max(1,curve.data[curve.data.length-1].flow-curve.data[0].flow);
+  var tol=range*0.002;
+  var existing=n.designPoints.find(function(pt){return perfPointKey(pt.model,pt.air)===key&&Math.abs(num(pt.flow)-flow)<=tol});
+  if(existing){existing.flow=flow;existing.updatedAt=now()}
+  else n.designPoints.push({model:model,air:num(air),flow:flow,createdAt:now()});
+  saveStore();perfRenderPointList();
+}
+function perfRemoveStoredPoint(indexInCurrent){
+  var n=activeNozzle();if(!n||!Array.isArray(n.designPoints))return;
+  var current=perfCurrentStoredPoints(),target=current[indexInCurrent];if(!target)return;
+  var idx=n.designPoints.indexOf(target);if(idx>=0)n.designPoints.splice(idx,1);
+  saveStore();perfRenderPointList();perfDrawCombined();
+}
+function perfClearStoredPoints(){
+  var n=activeNozzle();if(!n)return;
+  if(!Array.isArray(n.designPoints))n.designPoints=[];
+  var model=n.selectedModel||'',air=$('perfAirSelect').value||perfSelectedAir(n,perfFindModel(model));
+  var key=perfPointKey(model,air);
+  n.designPoints=n.designPoints.filter(function(pt){return perfPointKey(pt.model,pt.air)!==key});
+  saveStore();perfRenderPointList();perfDrawCombined();
+}
+function perfRenderPointList(){
+  var box=$('perfPointList');if(!box)return;
+  var curve=perfCurrentCurve(),pts=perfCurrentStoredPoints();
+  if(!curve||!pts.length){box.innerHTML='<div class="perf-point-empty">그래프를 클릭하면 Design Point가 여기에 추가됩니다.</div>';return}
+  box.innerHTML=pts.map(function(pt,i){
+    var p=perfValueAtFlow(curve,num(pt.flow)),d=perfDroplet(p),other=perfOtherParticleText(p);
+    return '<div class="perf-point-item">'+
+      '<div class="perf-point-tag">Point '+(i+1)+'</div>'+
+      '<div class="perf-point-values"><b>'+fmtPerfGraphFlow(pt.flow)+' '+perfGraphFlowLabel()+'</b> · '+
+      (p&&isFinite(p.liquidPressure)?'Liquid P. '+fmtNum(p.liquidPressure)+' barg':'Liquid P. -')+' · '+
+      (p&&isFinite(p.airRate)?'Air '+fmtNum(p.airRate)+' Nm³/hr':'Air -')+' · '+
+      (isFinite(d.value)?esc(d.label)+' '+fmtNum(d.value)+' μm':'Droplet -')+
+      (other?'<br>'+esc(other):'')+'</div>'+
+      '<button class="danger perf-point-remove" data-point-index="'+i+'">×</button></div>';
+  }).join('');
+  box.querySelectorAll('.perf-point-remove').forEach(function(btn){
+    btn.onclick=function(){perfRemoveStoredPoint(parseInt(btn.getAttribute('data-point-index'),10)||0)};
+  });
+}
+
+function perfDrawCombined(){
+  var canvas=$('perfCombinedCanvas'),n=activeNozzle(),curve=perfCurrentCurve();
+  if(!canvas||!n)return;
+  var ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  $('perfCombinedLegend').innerHTML='';
+
+  if(!curve||!curve.data||!curve.data.length){
+    ctx.fillStyle='#667085';ctx.font='16px Arial';ctx.textAlign='center';
+    ctx.fillText('Digital data not available for this model.',W/2,H/2);
+    perfUpdateLiveReadout(NaN,null);perfCombinedState.plot=null;return;
+  }
+
+  var colors=perfCombinedColors(),data=curve.data.slice().sort(function(a,b){return a.flow-b.flow});
+  var xmin=Math.min.apply(null,data.map(function(p){return num(p.flow)}));
+  var xmax=Math.max.apply(null,data.map(function(p){return num(p.flow)}));
+  if(xmin===xmax)xmax=xmin+1;
+
+  // Convert the stored metric data back to the same plotting units used in the supplied source graph.
+  function flowDisplay(v){return perfGraphFlowValue(v);}  // internal L/hr -> selected graph unit
+  function pressUS(v){return num(v)*14.5037738;} // barg -> psi
+  function airUS(v){return num(v)/1.6990108;}    // Nm3/hr -> scfm
+
+  var leftVals=[],rightVals=[];
+  data.forEach(function(p){
+    if(isFinite(p.liquidPressure))leftVals.push(pressUS(p.liquidPressure));
+    if(isFinite(p.airRate))leftVals.push(airUS(p.airRate));
+    ['smd','d32','x90','x99','dv05','dv09','dmax'].forEach(function(k){if(isFinite(p[k]))rightVals.push(num(p[k]))});
+  });
+
+  var leftMax=Math.max(10,Math.max.apply(null,leftVals.length?leftVals:[10]));
+  var rightMax=Math.max(20,Math.max.apply(null,rightVals.length?rightVals:[20]));
+  // Source-style rounded scales.
+  function niceMax(v,step){return Math.ceil(v/step)*step}
+  leftMax=niceMax(leftMax,leftMax>160?20:10);
+  rightMax=niceMax(rightMax,rightMax>300?50:20);
+
+  var L=92,R=92,T=52,B=82,plotR=W-R,plotB=H-B;
+  function X(flow){return L+(num(flow)-xmin)/(xmax-xmin)*(plotR-L)}
+  function YL(v){return plotB-(v/leftMax)*(plotB-T)}
+  function YR(v){return plotB-(v/rightMax)*(plotB-T)}
+
+  // Header/title similar to supplied performance sheet graph.
+  ctx.fillStyle='#101828';ctx.font='bold 18px Arial';ctx.textAlign='center';
+  ctx.fillText((n.selectedModel||'')+' Air Atomizing Nozzle',W/2,18);
+  ctx.font='14px Arial';ctx.fillText('@ '+Number(curve.air).toFixed(2)+' barg Air Pressure',W/2,36);
+
+  // Grid.
+  ctx.strokeStyle='#d0d5dd';ctx.lineWidth=1;
+  var yTicks=10;
+  for(var gy=0;gy<=yTicks;gy++){
+    var py=T+(plotB-T)*gy/yTicks;
+    ctx.beginPath();ctx.moveTo(L,py);ctx.lineTo(plotR,py);ctx.stroke();
+  }
+  var xTicks=8;
+  for(var gx=0;gx<=xTicks;gx++){
+    var px=L+(plotR-L)*gx/xTicks;
+    ctx.beginPath();ctx.moveTo(px,T);ctx.lineTo(px,plotB);ctx.stroke();
+  }
+
+  // Axes / source-style labels.
+  ctx.strokeStyle='#344054';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L,plotB);ctx.lineTo(plotR,plotB);ctx.lineTo(plotR,T);ctx.stroke();
+
+  ctx.font='12px Arial';ctx.fillStyle='#344054';
+  for(var i=0;i<=5;i++){
+    var frac=i/5,py=plotB-(plotB-T)*frac;
+    ctx.textAlign='right';ctx.fillText(fmtNum(leftMax*frac),L-7,py+3);
+    ctx.textAlign='left';ctx.fillText(fmtNum(rightMax*frac),plotR+7,py+3);
+  }
+
+  for(var j=0;j<=xTicks;j++){
+    var f=xmin+(xmax-xmin)*j/xTicks,px2=X(f);
+    ctx.textAlign='center';ctx.fillText(fmtNum(flowDisplay(f)),px2,plotB+22);
+  }
+
+  ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('Flow Rate ('+perfGraphFlowLabel()+')', (L+plotR)/2, H-22);
+
+  ctx.save();ctx.translate(24,(T+plotB)/2);ctx.rotate(-Math.PI/2);ctx.font='bold 13px Arial';
+  ctx.fillText('Liquid Pressure (psi), Air Capacity (scfm)',0,0);ctx.restore();
+
+  ctx.save();ctx.translate(W-24,(T+plotB)/2);ctx.rotate(Math.PI/2);ctx.font='bold 13px Arial';
+  ctx.fillText('Particle Size (micrometres)',0,0);ctx.restore();
+
+  // Source-style series:
+  var series=[];
+  if(data.some(function(p){return isFinite(p.liquidPressure)}))series.push({key:'liquidPressure',label:'Liquid Pressure',color:colors.liquidPressure,axis:'left',conv:pressUS,dash:[]});
+  if(data.some(function(p){return isFinite(p.airRate)}))series.push({key:'airRate',label:'Air Capacity',color:colors.airRate,axis:'left',conv:airUS,dash:[7,4]});
+  if(data.some(function(p){return isFinite(p.d32)}))series.push({key:'d32',label:'D32',color:colors.d32,axis:'right',conv:num,dash:[]});
+  if(data.some(function(p){return isFinite(p.smd)}))series.push({key:'smd',label:'SMD',color:colors.smd,axis:'right',conv:num,dash:[]});
+  if(data.some(function(p){return isFinite(p.dv09)}))series.push({key:'dv09',label:'Dv0.9',color:colors.dv09,axis:'right',conv:num,dash:[4,3]});
+  if(data.some(function(p){return isFinite(p.x90)}))series.push({key:'x90',label:'X90',color:colors.x90,axis:'right',conv:num,dash:[4,3]});
+  if(data.some(function(p){return isFinite(p.x99)}))series.push({key:'x99',label:'X99',color:colors.x99,axis:'right',conv:num,dash:[8,4]});
+  if(data.some(function(p){return isFinite(p.dmax)}))series.push({key:'dmax',label:'Dmax',color:colors.dmax,axis:'right',conv:num,dash:[8,4]});
+
+  series.forEach(function(sr){
+    var pts=data.filter(function(p){return isFinite(p[sr.key])});
+    if(!pts.length)return;
+    ctx.strokeStyle=sr.color||'#475467';ctx.lineWidth=(sr.key==='liquidPressure'||sr.key==='airRate'||sr.key==='d32'||sr.key==='smd')?2.4:1.7;
+    ctx.setLineDash(sr.dash||[]);
+    ctx.beginPath();
+    pts.forEach(function(p,k){
+      var px=X(p.flow),val=sr.conv(p[sr.key]),py=sr.axis==='left'?YL(val):YR(val);
+      if(k===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+    });
+    ctx.stroke();ctx.setLineDash([]);
+    pts.forEach(function(p){
+      var px=X(p.flow),val=sr.conv(p[sr.key]),py=sr.axis==='left'?YL(val):YR(val);
+      ctx.fillStyle=sr.color||'#475467';ctx.beginPath();ctx.arc(px,py,3.2,0,Math.PI*2);ctx.fill();
+    });
+  });
+
+  // Saved design points.
+  var savedPoints=perfPdfRenderOptions.hideDesignPoints?[]:perfCurrentStoredPoints();
+  savedPoints.forEach(function(pt,idx){
+    var f=Math.max(xmin,Math.min(xmax,num(pt.flow))),px=X(f);
+    ctx.strokeStyle='#7a271a';ctx.lineWidth=1.2;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(px,T);ctx.lineTo(px,plotB);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#7a271a';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText('P'+(idx+1),px,T-10);
+  });
+
+  // Hover / live cursor.
+  var latest=savedPoints.length?savedPoints[savedPoints.length-1]:null;
+  var activeFlow=isFinite(perfCombinedState.hoverFlow)?perfCombinedState.hoverFlow:(latest?num(latest.flow):num(n.normalFlow));
+  activeFlow=Math.max(xmin,Math.min(xmax,activeFlow));
+  var ip=perfValueAtFlow(curve,activeFlow),cx=X(activeFlow);
+
+  if(isFinite(perfCombinedState.hoverFlow)){
+    ctx.strokeStyle='#101828';ctx.lineWidth=1.15;ctx.setLineDash([5,4]);
+    ctx.beginPath();ctx.moveTo(cx,T);ctx.lineTo(cx,plotB);ctx.stroke();ctx.setLineDash([]);
+  }
+
+  // Normal flow marker.
+  var normal=num(n.normalFlow);
+  if(normal>=xmin&&normal<=xmax){
+    var nx=X(normal);ctx.strokeStyle='#b42318';ctx.lineWidth=1.3;ctx.setLineDash([2,4]);
+    ctx.beginPath();ctx.moveTo(nx,T);ctx.lineTo(nx,plotB);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle='#b42318';ctx.textAlign='center';ctx.font='bold 12px Arial';ctx.fillText('NORMAL',nx,plotB+42);
+  }
+
+  perfUpdateLiveReadout(activeFlow,ip);
+  perfRenderPointList();
+
+  $('perfCombinedLegend').innerHTML=series.map(function(sr){
+    return '<span><i style="background:'+sr.color+'"></i>'+esc(sr.label)+'</span>';
+  }).join('')+
+  '<span style="margin-left:auto;color:#667085">Source-style axes · hover values are metric</span>';
+
+  perfCombinedState.plot={xmin:xmin,xmax:xmax,L:L,R:plotR,T:T,B:plotB,X:X,curve:curve};
+}
+function perfCombinedPointer(e,pin){
+  var canvas=$('perfCombinedCanvas'),plot=perfCombinedState.plot;if(!canvas||!plot)return;
+  var rect=canvas.getBoundingClientRect(),scaleX=canvas.width/rect.width;
+  var px=(e.clientX-rect.left)*scaleX;
+  px=Math.max(plot.L,Math.min(plot.R,px));
+  var flow=plot.xmin+(px-plot.L)/(plot.R-plot.L)*(plot.xmax-plot.xmin);
+  if(pin){perfCombinedState.hoverFlow=null;perfAddStoredPoint(flow)}
+  else perfCombinedState.hoverFlow=flow;
+  perfDrawCombined();
+  var p=perfValueAtFlow(plot.curve,flow),d=perfDroplet(p),tip=$('perfCombinedTooltip');
+  if(!tip)return;
+  tip.style.display='block';
+  tip.style.left=Math.min(rect.width-230,Math.max(8,(px/scaleX)+12))+'px';
+  tip.style.top='52px';
+  tip.innerHTML='<b>Flow '+fmtPerfGraphFlow(flow)+' '+perfGraphFlowLabel()+'</b>'+
+    '<br>Liquid Pressure: '+(p&&isFinite(p.liquidPressure)?fmtNum(p.liquidPressure)+' barg':'-')+
+    '<br>Air Flow: '+(p&&isFinite(p.airRate)?fmtNum(p.airRate)+' Nm³/hr':'-')+
+    '<br>'+(d.label||'Droplet')+': '+(isFinite(d.value)?fmtNum(d.value)+' μm':'-')+
+    (perfOtherParticleText(p)?'<br>'+esc(perfOtherParticleText(p)):'');
+}
+function perfRenderDigitalLayout(){
+  perfDrawCombined();
+}
+function perfDrawDigital(){
+  var canvas=$('perfCanvas'),n=activeNozzle();if(!canvas||!n)return;
+  var m=perfFindNumeric(n.selectedModel),ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);perfHoverPoints=[];
+  if(!m){ctx.fillStyle='#667085';ctx.font='16px Arial';ctx.textAlign='center';ctx.fillText('Digital data not yet digitized for this model.',W/2,H/2);return}
+  var air=num($('perfAirSelect').value||perfSelectedAir(n,perfFindModel(n.selectedModel))),curve=perfCurveFor(m.model,air);
+  if(!curve||!curve.data||!curve.data.length)return;
+  var metric=$('perfMetric').value;if(metric==='all')metric='liquidPressure';var data=curve.data.filter(function(p){return isFinite(perfMetricValue(p,metric))});
+  if(!data.length)return;
+  var xs=data.map(function(p){return num(p.flow)}),ys=data.map(function(p){return num(perfMetricValue(p,metric))});
+  var xmin=Math.min.apply(null,xs),xmax=Math.max.apply(null,xs),ymin=Math.min.apply(null,ys),ymax=Math.max.apply(null,ys);
+  if(xmin===xmax)xmax=xmin+1;if(ymin===ymax)ymax=ymin+1;
+  var padL=72,padR=28,padT=38,padB=58;
+  function X(x){return padL+(x-xmin)/(xmax-xmin)*(W-padL-padR)}
+  function Y(y){return H-padB-(y-ymin)/(ymax-ymin)*(H-padT-padB)}
+  ctx.strokeStyle='#d0d5dd';ctx.lineWidth=1;ctx.fillStyle='#667085';ctx.font='12px Arial';ctx.textAlign='right';
+  for(var i=0;i<=5;i++){var y=ymin+(ymax-ymin)*i/5,py=Y(y);ctx.beginPath();ctx.moveTo(padL,py);ctx.lineTo(W-padR,py);ctx.stroke();ctx.fillText((Math.round(y*100)/100).toString(),padL-8,py+4)}
+  ctx.textAlign='center';
+  for(var j=0;j<=5;j++){var x=xmin+(xmax-xmin)*j/5,px=X(x);ctx.beginPath();ctx.moveTo(px,padT);ctx.lineTo(px,H-padB);ctx.stroke();ctx.fillText(fmtPerfGraphFlow(x),px,H-padB+20)}
+  ctx.fillStyle='#344054';ctx.font='bold 13px Arial';ctx.fillText('Flow / Nozzle ('+perfGraphFlowLabel()+')',(padL+W-padR)/2,H-14);
+  ctx.save();ctx.translate(18,(padT+H-padB)/2);ctx.rotate(-Math.PI/2);ctx.fillText(perfMetricLabel(metric,curve),0,0);ctx.restore();
+  ctx.strokeStyle='#2457d6';ctx.lineWidth=2.5;ctx.beginPath();
+  data.forEach(function(p,k){var px=X(p.flow),py=Y(perfMetricValue(p,metric));if(k===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
+  data.forEach(function(p){var px=X(p.flow),py=Y(perfMetricValue(p,metric));ctx.fillStyle='#2457d6';ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fill();perfHoverPoints.push({x:px,y:py,p:p,curve:curve})});
+  var normal=num(n.normalFlow);
+  if(normal>=xmin&&normal<=xmax){
+    var dp=perfInterp(curve,normal),dy=perfMetricValue(dp,metric);
+    if(isFinite(dy)){var dx=X(normal),dpy=Y(dy);ctx.strokeStyle='#b42318';ctx.lineWidth=1.5;ctx.setLineDash([6,4]);ctx.beginPath();ctx.moveTo(dx,padT);ctx.lineTo(dx,H-padB);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#b42318';ctx.beginPath();ctx.arc(dx,dpy,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#b42318';ctx.textAlign='left';ctx.font='bold 12px Arial';ctx.fillText('Design '+fmtPerfGraphFlow(normal)+' '+perfGraphFlowLabel(),Math.min(dx+8,W-150),Math.max(padT+14,dpy-10))}
+  }
+}
+function perfRenderOriginal(){
+  var n=activeNozzle(),box=$('perfOriginalPanel');if(!box||!n)return;
+  var m=perfFindModel(n.selectedModel);
+  if(!m){box.innerHTML='모델을 선택하세요.';return}
+  box.innerHTML='<div><b style="font-size:16px">'+esc(m.model)+' Original Curve</b><br><br>'+
+    '원본 성능곡선 이미지 슬롯은 유지했습니다.<br>'+
+    '이번 Stable v2.0에는 대용량 원본 이미지 49장을 다시 내장하지 않았습니다.<br>'+
+    '<b>이유:</b> 이전 단일 HTML 빈 페이지 문제를 피하기 위해서입니다.<br><br>'+
+    '확인 가능한 범위 메타데이터: <b>'+fmtNum(m.range[0])+' ~ '+fmtNum(m.range[1])+' L/min</b><br>'+
+    'Air Pressure: '+m.air.map(function(a){return Number(a).toFixed(2)}).join(' / ')+' barg<br><br>'+
+    '<span class="note">다음 단계에서 원본 Curve 이미지는 별도 파일/압축 자원으로 연결하면 프로그램 안정성을 유지할 수 있습니다.</span></div>';
+}
+function perfUpdateStatus(){
+  var n=activeNozzle(),m=n?perfFindModel(n.selectedModel):null;
+  if(!m){$('perfSelectedBadge').textContent='Selected -';$('perfDataBadge').textContent='Data -';$('perfStatus').textContent='추천 모델에서 하나를 선택하세요.';return}
+  $('perfSelectedBadge').textContent='✓ SELECTED '+m.model;
+  $('perfDataBadge').textContent=m.digital?'Digital data available':'Digital data not yet digitized';
+  $('perfDataBadge').className='badge '+(m.digital?'green':'amber');
+  $('perfStatus').innerHTML=m.digital?'실제 수치 데이터가 있는 모델입니다. Digital Curve를 표시할 수 있습니다.':'Digital data not yet digitized. 추천 범위 정보만 표시하며 현재는 선택할 수 없습니다.';
+  $('perfCurveTitle').textContent=m.model+' · '+Number(perfSelectedAir(n,m)||0).toFixed(2)+' barg';
+  if($('perfSelectionFlashModel'))$('perfSelectionFlashModel').textContent=m.model;if($('perfSelectionFlashAir'))$('perfSelectionFlashAir').textContent=Number(perfSelectedAir(n,m)||0).toFixed(2)+' barg';
+}
+function perfApplyToNozzle(){
+  var n=activeNozzle();if(!n)return;
+  var m=perfFindModel(n.selectedModel);if(!m)return;
+  var air=$('perfAirSelect').value||perfSelectedAir(n,m);n.selectedAir=air;
+  n.airPressure=air?Number(air).toFixed(2)+' barg':n.airPressure;
+  var c=perfCurveFor(n.selectedModel,air),p=perfInterp(c,num(n.normalFlow));
+  if(p){
+    if(isFinite(p.airRate))n.airFlow=(Math.round(p.airRate*10)/10)+' Nm³/hr';
+    var d=perfDroplet(p);if(isFinite(d.value))n.dropletSize=d.label+' '+Math.round(d.value)+' μm';
+    if(isFinite(p.liquidPressure))n.liquidPressure=(Math.round(p.liquidPressure*100)/100).toFixed(2)+' barg';
+  }
+  saveStore();loadNozzleFields();renderPerformance();alert('선택 모델/압력 및 계산 가능한 Performance 값을 현재 Nozzle에 적용했습니다.');
+}
+
+function perfRevisionValue(){
+  var n=activeNozzle();
+  if(!n)return 'A';
+  var v=String(n.performanceRevision||'A').trim().toUpperCase().replace(/^REV[.\s-]*/,'');
+  return v||'A';
+}
+function perfSaveRevisionValue(){
+  var n=activeNozzle();if(!n)return;
+  n.performanceRevision=String($('perfRevision').value||'A').trim().toUpperCase().replace(/^REV[.\s-]*/,'')||'A';
+  $('perfRevision').value=n.performanceRevision;
+  saveStore();
+}
+function pdfAsciiBytes(str){return new TextEncoder().encode(str)}
+function pdfConcat(parts){
+  var total=parts.reduce(function(a,p){return a+p.length},0),out=new Uint8Array(total),off=0;
+  parts.forEach(function(p){out.set(p,off);off+=p.length});return out;
+}
+function perfMakeSingleImagePdf(jpegBytes,imgW,imgH){
+  var pageW=841.89,pageH=595.28;
+  var objs=[];
+  objs[1]=pdfAsciiBytes('<< /Type /Catalog /Pages 2 0 R >>');
+  objs[2]=pdfAsciiBytes('<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  objs[3]=pdfAsciiBytes('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+pageW+' '+pageH+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+  var imgHead=pdfAsciiBytes('<< /Type /XObject /Subtype /Image /Width '+imgW+' /Height '+imgH+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpegBytes.length+' >>\nstream\n');
+  var imgTail=pdfAsciiBytes('\nendstream');
+  objs[4]=pdfConcat([imgHead,jpegBytes,imgTail]);
+  var content='q\n'+pageW+' 0 0 '+pageH+' 0 0 cm\n/Im0 Do\nQ\n';
+  var contentBytes=pdfAsciiBytes(content);
+  objs[5]=pdfConcat([pdfAsciiBytes('<< /Length '+contentBytes.length+' >>\nstream\n'),contentBytes,pdfAsciiBytes('endstream')]);
+
+  var header=pdfAsciiBytes('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n'),parts=[header],offset=header.length,offsets=[0];
+  for(var i=1;i<=5;i++){
+    offsets[i]=offset;
+    var pre=pdfAsciiBytes(i+' 0 obj\n'),post=pdfAsciiBytes('\nendobj\n');
+    parts.push(pre,objs[i],post);offset+=pre.length+objs[i].length+post.length;
+  }
+  var xrefOffset=offset,xref='xref\n0 6\n0000000000 65535 f \n';
+  for(var j=1;j<=5;j++)xref+=String(offsets[j]).padStart(10,'0')+' 00000 n \n';
+  var trailer='trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xrefOffset+'\n%%EOF';
+  parts.push(pdfAsciiBytes(xref),pdfAsciiBytes(trailer));
+  return new Blob(parts,{type:'application/pdf'});
+}
+function perfDrawPdfText(ctx,text,x,y,size,weight,align,color){
+  ctx.save();ctx.font=(weight||'400')+' '+size+'px Arial, sans-serif';ctx.fillStyle=color||'#101828';ctx.textAlign=align||'left';ctx.textBaseline='alphabetic';ctx.fillText(String(text==null?'':text),x,y);ctx.restore();
+}
+function perfDrawPdfLine(ctx,x1,y1,x2,y2,color,width){ctx.save();ctx.strokeStyle=color||'#d0d5dd';ctx.lineWidth=width||1;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore()}
+function perfPdfPointRows(curve,pts){
+  return pts.map(function(pt,i){
+    var p=perfValueAtFlow(curve,num(pt.flow))||{},d=perfDroplet(p);
+    return {
+      point:'P'+(i+1),flow:fmtPerfGraphFlow(pt.flow),liquid:isFinite(p.liquidPressure)?fmtNum(p.liquidPressure):'-',air:isFinite(p.airRate)?fmtNum(p.airRate):'-',
+      drop:isFinite(d.value)?fmtNum(d.value):'-',dropLabel:d.label||'Drop',dv09:isFinite(p.dv09)?fmtNum(p.dv09):'-',dmax:isFinite(p.dmax)?fmtNum(p.dmax):'-',x90:isFinite(p.x90)?fmtNum(p.x90):'-',x99:isFinite(p.x99)?fmtNum(p.x99):'-'
+    };
+  });
+}
+
+
+var PERF_METRIC_DESCRIPTIONS={
+  flow:{label:'Flow Rate',text:'Liquid flow rate through one nozzle at the selected operating condition.'},
+  liquidPressure:{label:'Liquid Pressure',text:'Liquid-side pressure corresponding to the selected liquid flow and atomizing-air condition.'},
+  airRate:{label:'Air Capacity / Air Flow',text:'Atomizing-air consumption required at the selected operating condition.'},
+  d32:{label:'D32 / SMD',text:'Sauter Mean Diameter: droplet diameter representing the same volume-to-surface-area ratio as the spray.'},
+  dv05:{label:'Dv0.5',text:'Volume median diameter: 50% of the sprayed liquid volume is contained in droplets smaller than this size.'},
+  dv09:{label:'Dv0.9',text:'90% volume diameter: 90% of the sprayed liquid volume is contained in droplets smaller than this size.'},
+  dmax:{label:'Dmax',text:'Maximum droplet diameter represented or reported in the source performance data.'},
+  x90:{label:'X90',text:'90th-percentile droplet-size value reported in the source dataset; interpretation follows the source data definition.'},
+  x99:{label:'X99',text:'99th-percentile droplet-size value reported in the source dataset; interpretation follows the source data definition.'}
+};
+function perfMetricDescSelection(){
+  return {
+    flow:!$('perfDescFlow')||$('perfDescFlow').checked,
+    liquidPressure:!$('perfDescLiquidPressure')||$('perfDescLiquidPressure').checked,
+    airRate:!$('perfDescAirFlow')||$('perfDescAirFlow').checked,
+    d32:!$('perfDescD32')||$('perfDescD32').checked,
+    dv05:!$('perfDescDv05')||$('perfDescDv05').checked,
+    dv09:!$('perfDescDv09')||$('perfDescDv09').checked,
+    dmax:!$('perfDescDmax')||$('perfDescDmax').checked,
+    x90:!$('perfDescX90')||$('perfDescX90').checked,
+    x99:!$('perfDescX99')||$('perfDescX99').checked
+  };
+}
+function perfCurveMetricAvailability(curve){
+  var a={flow:true,liquidPressure:false,airRate:false,d32:false,dv05:false,dv09:false,dmax:false,x90:false,x99:false};
+  if(!curve||!curve.data)return a;
+  curve.data.forEach(function(p){
+    if(isFinite(p.liquidPressure))a.liquidPressure=true;
+    if(isFinite(p.airRate))a.airRate=true;
+    if(isFinite(p.d32)||isFinite(p.smd))a.d32=true;
+    if(isFinite(p.dv05))a.dv05=true;
+    if(isFinite(p.dv09))a.dv09=true;
+    if(isFinite(p.dmax))a.dmax=true;
+    if(isFinite(p.x90))a.x90=true;
+    if(isFinite(p.x99))a.x99=true;
+  });
+  return a;
+}
+function perfSelectedMetricDescriptions(curve){
+  var opt=perfPdfOptions(),sel=perfMetricDescSelection(),available=perfCurveMetricAvailability(curve);
+  if(!opt.metricDescriptions)return [];
+  var order=['flow','liquidPressure','airRate','d32','dv05','dv09','dmax','x90','x99'],out=[];
+  order.forEach(function(k){
+    if(sel[k]&&available[k]&&PERF_METRIC_DESCRIPTIONS[k])out.push({
+      key:k,label:PERF_METRIC_DESCRIPTIONS[k].label,text:PERF_METRIC_DESCRIPTIONS[k].text
+    });
+  });
+  return out;
+}
+function perfUpdateMetricDescAvailability(){
+  var curve=perfCurrentCurve(),a=perfCurveMetricAvailability(curve);
+  var map={
+    perfDescFlow:'flow',perfDescLiquidPressure:'liquidPressure',perfDescAirFlow:'airRate',
+    perfDescD32:'d32',perfDescDv05:'dv05',perfDescDv09:'dv09',perfDescDmax:'dmax',
+    perfDescX90:'x90',perfDescX99:'x99'
+  };
+  Object.keys(map).forEach(function(id){
+    var el=$(id);if(!el)return;
+    var available=!!a[map[id]];
+    el.disabled=!available;
+    if(el.parentElement)el.parentElement.style.display=available?'flex':'none';
+  });
+  var master=$('perfPdfMetricDescriptions'),box=$('perfMetricDescOptions');
+  if(box)box.classList.toggle('disabled',master&&!master.checked);
+}
+
+var perfPdfRenderOptions={hideDesignPoints:false};
+
+function perfPdfOptions(){
+  return {
+    orientation:($('perfPdfOrientation')&&$('perfPdfOrientation').value==='portrait')?'portrait':'landscape',
+    projectInfo:!$('perfPdfProjectInfo')||$('perfPdfProjectInfo').checked,
+    designPoints:!$('perfPdfDesignPoints')||$('perfPdfDesignPoints').checked,
+    pointTable:!$('perfPdfPointTable')||$('perfPdfPointTable').checked,
+    metricDescriptions:!$('perfPdfMetricDescriptions')||$('perfPdfMetricDescriptions').checked
+  };
+}
+function perfSavePdfOptions(){
+  var n=activeNozzle();if(!n)return;
+  var o=perfPdfOptions();
+  n.pdfOrientation=o.orientation;
+  n.pdfProjectInfo=o.projectInfo;
+  n.pdfDesignPoints=o.designPoints;
+  n.pdfPointTable=o.pointTable;
+  n.pdfMetricDescriptions=o.metricDescriptions;
+  n.pdfMetricDescSelection=perfMetricDescSelection();
+  saveStore();
+  perfUpdatePdfOptionSummary();
+  perfUpdateMetricDescAvailability();
+}
+function perfLoadPdfOptions(){
+  var n=activeNozzle();if(!n)return;
+  if(!n.pdfOrientation)n.pdfOrientation='landscape';
+  if(typeof n.pdfProjectInfo!=='boolean')n.pdfProjectInfo=true;
+  if(typeof n.pdfDesignPoints!=='boolean')n.pdfDesignPoints=true;
+  if(typeof n.pdfPointTable!=='boolean')n.pdfPointTable=true;
+  if(typeof n.pdfMetricDescriptions!=='boolean')n.pdfMetricDescriptions=true;
+  if(!n.pdfMetricDescSelection)n.pdfMetricDescSelection={flow:true,liquidPressure:true,airRate:true,d32:true,dv05:true,dv09:true,dmax:true,x90:true,x99:true};
+  if($('perfPdfOrientation'))$('perfPdfOrientation').value=n.pdfOrientation;
+  if($('perfPdfProjectInfo'))$('perfPdfProjectInfo').checked=n.pdfProjectInfo;
+  if($('perfPdfDesignPoints'))$('perfPdfDesignPoints').checked=n.pdfDesignPoints;
+  if($('perfPdfPointTable'))$('perfPdfPointTable').checked=n.pdfPointTable;
+  if($('perfPdfMetricDescriptions'))$('perfPdfMetricDescriptions').checked=n.pdfMetricDescriptions;
+  var ds=n.pdfMetricDescSelection||{};
+  if($('perfDescFlow'))$('perfDescFlow').checked=ds.flow!==false;
+  if($('perfDescLiquidPressure'))$('perfDescLiquidPressure').checked=ds.liquidPressure!==false;
+  if($('perfDescAirFlow'))$('perfDescAirFlow').checked=ds.airRate!==false;
+  if($('perfDescD32'))$('perfDescD32').checked=ds.d32!==false;
+  if($('perfDescDv05'))$('perfDescDv05').checked=ds.dv05!==false;
+  if($('perfDescDv09'))$('perfDescDv09').checked=ds.dv09!==false;
+  if($('perfDescDmax'))$('perfDescDmax').checked=ds.dmax!==false;
+  if($('perfDescX90'))$('perfDescX90').checked=ds.x90!==false;
+  if($('perfDescX99'))$('perfDescX99').checked=ds.x99!==false;
+  perfUpdatePdfOptionSummary();
+  perfUpdateMetricDescAvailability();
+}
+function perfUpdatePdfOptionSummary(){
+  var b=$('perfPdfOptionSummary');if(!b)return;
+  var o=perfPdfOptions();
+  b.textContent='A4 '+(o.orientation==='portrait'?'Portrait / 세로':'Landscape / 가로')+
+    ' · Project Info '+(o.projectInfo?'포함':'제외')+
+    ' · Design Points '+(o.designPoints?'포함':'제외')+
+    ' · Point Table '+(o.pointTable?'포함':'제외')+
+    ' · Metric 설명 '+(o.metricDescriptions?'포함':'제외');
+}
+
+
+function perfPdfWrapText(ctx,text,maxWidth,font){
+  if(font)ctx.font=font;
+  var words=String(text||'').split(/\s+/),lines=[],line='';
+  words.forEach(function(word){
+    var test=line?line+' '+word:word;
+    if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}
+    else line=test;
+  });
+  if(line)lines.push(line);
+  return lines;
+}
+function perfDrawMetricDescriptions(ctx,items,x,y,w,fontSize,lineH,maxH){
+  if(!items||!items.length)return 0;
+  perfDrawPdfText(ctx,'GRAPH METRIC DESCRIPTIONS',x,y,fontSize+4,'700','left','#101828');
+  var yy=y+30,used=30;
+  items.forEach(function(it){
+    if(used>=maxH)return;
+    var labelW=Math.min(210,w*.18);
+    perfDrawPdfText(ctx,it.label,x,yy,fontSize,'700','left','#344054');
+    ctx.font='500 '+fontSize+'px Arial';
+    var lines=perfPdfWrapText(ctx,it.text,w-labelW-12,'500 '+fontSize+'px Arial');
+    lines.slice(0,2).forEach(function(line,li){
+      perfDrawPdfText(ctx,line,x+labelW,yy+li*lineH,fontSize,'500','left','#475467');
+    });
+    var h=Math.max(lineH,lines.slice(0,2).length*lineH)+6;
+    yy+=h;used+=h;
+  });
+  return used;
+}
+
+function perfBuildPdfCanvas(){
+  var p=current(),n=activeNozzle(),curve=perfCurrentCurve(),graph=$('perfCombinedCanvas');
+  if(!p||!n||!curve||!graph)return null;
+
+  var opt=perfPdfOptions(),portrait=opt.orientation==='portrait',metricDescItems=perfSelectedMetricDescriptions(curve);
+  // A4 ratio at high resolution.
+  var W=portrait?1697:2400,H=portrait?2400:1697;
+  var c=document.createElement('canvas');c.width=W;c.height=H;var ctx=c.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+
+  var oldHover=perfCombinedState.hoverFlow;
+  perfCombinedState.hoverFlow=null;
+  perfPdfRenderOptions.hideDesignPoints=!opt.designPoints;
+  perfDrawCombined();
+
+  var M=portrait?72:82;
+
+  // Header
+  perfDrawPdfText(ctx,'ATOMIZING NOZZLE PERFORMANCE CURVE',W/2,portrait?78:78,portrait?38:44,'700','center','#101828');
+  perfDrawPdfText(ctx,'Rev.'+perfRevisionValue(),W-M,76,portrait?24:27,'700','right','#344054');
+  perfDrawPdfLine(ctx,M,102,W-M,102,'#101828',2);
+
+  var contentTop=132;
+
+  // Project / nozzle metadata (optional)
+  if(opt.projectInfo){
+    var label='#667085',value='#101828';
+    if(portrait){
+      var rowGap=39,left=M,right=Math.floor(W/2)+20;
+      function metaP(labelText,val,x,y){perfDrawPdfText(ctx,labelText,x,y,16,'700','left',label);perfDrawPdfText(ctx,val||'-',x+155,y,18,'600','left',value)}
+      metaP('Project No.',p.projectNo,left,150);metaP('Project',p.projectName,right,150);
+      metaP('Customer',p.customer,left,150+rowGap);metaP('Nozzle',n.typeTag||('Nozzle '+(state.activeNozzle+1)),right,150+rowGap);
+      metaP('Model',n.selectedModel,left,150+rowGap*2);metaP('Air Pressure',Number(curve.air).toFixed(2)+' barg',right,150+rowGap*2);
+      contentTop=285;
+    }else{
+      var metaY=145,rowGapL=42,col1=M,col2=820,col3=1570;
+      function metaL(labelText,val,x,y){perfDrawPdfText(ctx,labelText,x,y,18,'700','left',label);perfDrawPdfText(ctx,val||'-',x+185,y,21,'600','left',value)}
+      metaL('Project No.',p.projectNo,col1,metaY);metaL('Project',p.projectName,col2,metaY);metaL('Customer',p.customer,col3,metaY);
+      metaL('Nozzle',n.typeTag||('Nozzle '+(state.activeNozzle+1)),col1,metaY+rowGapL);metaL('Model',n.selectedModel,col2,metaY+rowGapL);metaL('Air Pressure',Number(curve.air).toFixed(2)+' barg',col3,metaY+rowGapL);
+      contentTop=242;
+    }
+  }
+
+  // Graph area. Portrait gets a taller graph; landscape keeps the familiar wide graph.
+  var gx=M,gy=contentTop;
+  var tableReserve=opt.pointTable?(portrait?700:500):0;
+  var descReserve=(opt.metricDescriptions&&metricDescItems.length)?(portrait?430:300):0;
+  var footReserve=75;
+  var gh=Math.max(portrait?690:560,H-gy-tableReserve-descReserve-footReserve);
+  var gw=W-M*2;
+  ctx.fillStyle='#fff';ctx.fillRect(gx,gy,gw,gh);
+  ctx.strokeStyle='#d0d5dd';ctx.lineWidth=2;ctx.strokeRect(gx,gy,gw,gh);
+  ctx.drawImage(graph,gx+8,gy+8,gw-16,gh-16);
+  var lowerY=gy+gh+44;
+
+  // Design point table (optional)
+  if(opt.pointTable){
+    var pts=perfCurrentStoredPoints(),rows=perfPdfPointRows(curve,pts);
+    var tableY=lowerY;
+    perfDrawPdfText(ctx,'SELECTED DESIGN POINTS',M,tableY,portrait?22:24,'700','left','#101828');
+
+    var cols=portrait?[
+      {k:'point',t:'Point',w:105},{k:'flow',t:'Flow\n('+perfGraphFlowLabel()+')',w:185},{k:'liquid',t:'Liquid P.\n(barg)',w:180},
+      {k:'air',t:'Air Flow\n(Nm³/hr)',w:205},{k:'drop',t:'Drop\n(μm)',w:170},{k:'dv09',t:'Dv0.9\n(μm)',w:165},
+      {k:'dmax',t:'Dmax\n(μm)',w:165},{k:'x90',t:'X90\n(μm)',w:165},{k:'x99',t:'X99\n(μm)',w:165}
+    ]:[
+      {k:'point',t:'Point',w:120},{k:'flow',t:'Flow\n('+perfGraphFlowLabel()+')',w:230},{k:'liquid',t:'Liquid P.\n(barg)',w:230},{k:'air',t:'Air Flow\n(Nm³/hr)',w:250},
+      {k:'drop',t:'Drop Size\n(μm)',w:230},{k:'dv09',t:'Dv0.9\n(μm)',w:220},{k:'dmax',t:'Dmax\n(μm)',w:220},{k:'x90',t:'X90\n(μm)',w:220},{k:'x99',t:'X99\n(μm)',w:220}
+    ];
+
+    var totalW=cols.reduce(function(a,x){return a+x.w},0),scale=(W-M*2)/totalW;
+    cols.forEach(function(x){x.w*=scale});
+    var headY=tableY+22,headH=portrait?54:58;
+    var available=H-105-(headY+headH);
+    var rowH=rows.length?Math.min(portrait?42:44,Math.max(22,available/Math.max(1,rows.length))):(portrait?38:40);
+    var fontSize=rowH<28?14:(portrait?16:18);
+
+    ctx.fillStyle='#f2f4f7';ctx.fillRect(M,headY,W-M*2,headH);
+    var x=M;
+    cols.forEach(function(col){
+      perfDrawPdfLine(ctx,x,headY,x,headY+headH+(rows.length?rowH*rows.length:rowH),'#d0d5dd',1);
+      var lines=col.t.split('\n');
+      perfDrawPdfText(ctx,lines[0],x+col.w/2,headY+(portrait?22:24),portrait?15:17,'700','center','#344054');
+      if(lines[1])perfDrawPdfText(ctx,lines[1],x+col.w/2,headY+(portrait?42:45),portrait?13:15,'600','center','#667085');
+      x+=col.w;
+    });
+    perfDrawPdfLine(ctx,W-M,headY,W-M,headY+headH+(rows.length?rowH*rows.length:rowH),'#d0d5dd',1);
+    perfDrawPdfLine(ctx,M,headY,W-M,headY,'#d0d5dd',1);
+    perfDrawPdfLine(ctx,M,headY+headH,W-M,headY+headH,'#d0d5dd',1);
+
+    if(!rows.length){
+      perfDrawPdfText(ctx,'No saved Design Points - NORMAL flow is shown on the graph.',W/2,headY+headH+30,portrait?16:19,'500','center','#667085');
+      perfDrawPdfLine(ctx,M,headY+headH+rowH,W-M,headY+headH+rowH,'#d0d5dd',1);
+    }else{
+      rows.forEach(function(r,ri){
+        var yy=headY+headH+ri*rowH,xx=M;
+        ctx.fillStyle=ri%2?'#fafafa':'#fff';ctx.fillRect(M,yy,W-M*2,rowH);
+        cols.forEach(function(col){
+          perfDrawPdfText(ctx,r[col.k],xx+col.w/2,yy+rowH*.68,fontSize,col.k==='point'?'700':'500','center','#101828');
+          xx+=col.w;
+        });
+        perfDrawPdfLine(ctx,M,yy+rowH,W-M,yy+rowH,'#e4e7ec',1);
+      });
+    }
+    lowerY=headY+headH+(rows.length?rowH*rows.length:rowH)+34;
+  }
+
+  // Metric descriptions (optional)
+  if(opt.metricDescriptions&&metricDescItems.length){
+    var descFont=portrait?14:15,descLine=portrait?20:22;
+    var maxDescH=Math.max(120,H-lowerY-100);
+    perfDrawMetricDescriptions(ctx,metricDescItems,M,lowerY,W-M*2,descFont,descLine,maxDescH);
+  }
+
+  // Footer
+  var foot='Digital curve based on stored performance data. Values between source points are linearly interpolated.';
+  perfDrawPdfText(ctx,foot,M,H-48,portrait?13:15,'400','left','#667085');
+  perfDrawPdfText(ctx,'Liquid flow unit: '+perfGraphFlowLabel(),W-M,H-48,portrait?13:15,'600','right','#475467');
+
+  // Restore live graph state
+  perfPdfRenderOptions.hideDesignPoints=false;
+  perfCombinedState.hoverFlow=oldHover;
+  perfDrawCombined();
+  return c;
+}
+function perfValidatePdfContext(){
+  var p=current(),n=activeNozzle(),curve=perfCurrentCurve();
+  if(!p||!n){alert('프로젝트와 Nozzle을 먼저 선택해주세요.');return false}
+  if(!n.selectedModel||!curve){alert('Digital Curve 모델과 Air Pressure를 먼저 선택해주세요.');return false}
+  return true;
+}
+function perfOpenPdfPreview(){
+  if(!perfValidatePdfContext())return;
+  perfSaveRevisionValue();
+  var page=perfBuildPdfCanvas();
+  if(!page){alert('PDF 미리보기 데이터를 만들 수 없습니다.');return}
+  var opt=perfPdfOptions();
+  page.setAttribute('aria-label','Performance Curve PDF preview');
+  if($('perfPdfPreviewNote'))$('perfPdfPreviewNote').textContent='실제 PDF 저장과 동일한 A4 '+(opt.orientation==='portrait'?'Portrait / 세로':'Landscape / 가로')+' 페이지입니다. Metric 설명: '+(opt.metricDescriptions?'포함':'제외');
+  var body=$('perfPdfPreviewBody');body.innerHTML='';body.appendChild(page);
+  var overlay=$('perfPdfPreviewOverlay');overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');
+}
+function perfClosePdfPreview(){
+  var overlay=$('perfPdfPreviewOverlay');if(!overlay)return;
+  overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');
+  var body=$('perfPdfPreviewBody');if(body)body.innerHTML='';
+}
+
+function perfExportPdf(){
+  if(!perfValidatePdfContext())return;
+  var p=current(),n=activeNozzle(),curve=perfCurrentCurve();
+  perfSaveRevisionValue();
+  var page=perfBuildPdfCanvas();if(!page){alert('PDF 출력 데이터를 만들 수 없습니다.');return}
+  page.toBlob(function(blob){
+    if(!blob){alert('PDF 이미지 생성에 실패했습니다.');return}
+    var fr=new FileReader();fr.onload=function(){
+      var b64=String(fr.result).split(',')[1]||'',bin=atob(b64),img=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)img[i]=bin.charCodeAt(i);
+      var pdf=perfMakeSingleImagePdf(img,page.width,page.height),url=URL.createObjectURL(pdf),a=document.createElement('a');
+      var safe=function(v){return String(v||'').replace(/[\\/:*?"<>|]+/g,'_').replace(/\s+/g,'_').slice(0,80)};
+      a.href=url;a.download=(safe(p.projectNo||p.projectName||'Project')+'_'+safe(n.selectedModel)+'_PerformanceCurve_Rev'+safe(perfRevisionValue())+'.pdf');
+      document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1500);
+    };fr.readAsDataURL(blob);
+  },'image/jpeg',0.93);
+}
+
+function renderPerformance(){
+  perfPopulateNozzles();
+  var n=activeNozzle();
+  if(!n){return}
+  if(!n.performanceRevision)n.performanceRevision='A';if($('perfRevision'))$('perfRevision').value=perfRevisionValue();if(!n.graphFlowUnit)n.graphFlowUnit='Lmin';if($('perfFlowUnit'))$('perfFlowUnit').value=n.graphFlowUnit;perfLoadPdfOptions();
+  var selected=perfFindModel(n.selectedModel);
+  if(!selected||!selected.digital){
+    var first=perfAllModels().filter(function(m){return m.digital}).sort(function(a,b){return perfScore(a,n)-perfScore(b,n)})[0];
+    if(first){n.selectedModel=first.model;n.selectedAir=String(perfSelectedAir(n,first));saveStore()}
+  }
+  perfRenderBasis();
+  perfPopulateAir();
+  perfRenderRecommendations();
+  perfUpdateStatus();
+  $('perfDigitalPanel').style.display='block';
+  perfDrawCombined();
+}
+
+
+function teamOverrideHandlers(){
+  if(!TEAM_MODE)return;
+  $('newProjectBtn').onclick=function(){teamEmit('new_project',{})};
+  $('saveWorkBtn').onclick=function(){
+    captureProject();var p=current();if(!p)return;saveStore();renderRevision();teamEmit('save_working',{project:clone(p),filename:teamArgs.current_filename||null,sha:teamArgs.current_sha||null});
+  };
+  $('saveRevisionBtn').onclick=function(){
+    captureProject();var p=current();if(!p)return;var c=prompt('Revision Comment를 입력하세요.','');if(c===null)return;if(!String(c).trim()){alert('Revision Comment를 입력해주세요.');return}
+    p.revisionCount=(p.revisionCount||0)+1;p.revisions.push({revNo:p.revisionCount,comment:String(c).trim(),createdAt:now(),snapshot:clone(p.nozzles)});p.updatedAt=now();saveStore();renderRevision();teamEmit('save_revision',{project:clone(p),filename:teamArgs.current_filename||null,sha:teamArgs.current_sha||null,comment:String(c).trim()});
+  };
+  $('completeBtn').onclick=function(){captureProject();var p=current();if(p&&confirm('프로젝트를 Completed 처리하고 잠글까요?')){p.status='Completed';p.locked=true;p.updatedAt=now();saveStore();renderProject();teamEmit('save_working',{project:clone(p),filename:teamArgs.current_filename||null,sha:teamArgs.current_sha||null})}};
+  $('newWorkingRevBtn').onclick=function(){var p=current();if(p&&confirm('새 Revision Working Copy를 시작할까요?')){p.locked=false;p.status='Customer Revision';p.updatedAt=now();saveStore();renderProject();teamEmit('save_working',{project:clone(p),filename:teamArgs.current_filename||null,sha:teamArgs.current_sha||null})}};
+  $('teamOpenBtn').onclick=function(){var f=$('teamProjectSelect').value;if(!f){alert('GitHub Project를 선택해주세요.');return}teamEmit('open_project',{filename:f})};
+  $('teamRefreshBtn').onclick=function(){teamEmit('refresh',{})};
+  $('teamDeleteBtn').onclick=function(){var f=teamArgs.current_filename;if(!f)return;if(confirm('GitHub에서 현재 프로젝트를 삭제할까요?'))teamEmit('delete_project',{filename:f,sha:teamArgs.current_sha||null})};
+  $('teamLogoutBtn').onclick=function(){teamEmit('logout',{})};
+}
+
+function bind(){rfqImportBind();document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){switchView(b.getAttribute('data-view'))})});$('newProjectBtn').onclick=function(){var p=defaultProject();state.projects.push(p);state.currentId=p.id;state.activeNozzle=0;saveStore();switchView('rfq')};$('saveWorkBtn').onclick=function(){captureProject();saveStore();renderRevision();alert('Working Copy가 저장되었습니다.')};$('saveRevisionBtn').onclick=function(){captureProject();var p=current();var c=prompt('Revision Comment를 입력하세요.','');if(c===null)return;if(!String(c).trim()){alert('Revision Comment를 입력해주세요.');return}p.revisionCount=(p.revisionCount||0)+1;p.revisions.push({revNo:p.revisionCount,comment:String(c).trim(),createdAt:now(),snapshot:clone(p.nozzles)});p.updatedAt=now();saveStore();renderRevision();alert('R'+String(p.revisionCount).padStart(2,'0')+' Revision이 저장되었습니다.')};$('completeBtn').onclick=function(){captureProject();var p=current();if(confirm('프로젝트를 Completed 처리하고 잠글까요?')){p.status='Completed';p.locked=true;p.updatedAt=now();saveStore();renderProject()}};$('newWorkingRevBtn').onclick=function(){var p=current();if(confirm('새 Revision Working Copy를 시작할까요?')){p.locked=false;p.status='Customer Revision';p.updatedAt=now();saveStore();renderProject()}};$('addNozzleBtn').onclick=function(){captureProject();var p=current();if(p.nozzles.length>=5)return;p.nozzles.push(defaultNozzle(p.nozzles.length));state.activeNozzle=p.nozzles.length-1;saveStore();renderProject()};$('deleteNozzleBtn').onclick=function(){var p=current();if(p.nozzles.length<=1)return;if(confirm('현재 Nozzle을 삭제할까요?')){p.nozzles.splice(state.activeNozzle,1);state.activeNozzle=Math.max(0,state.activeNozzle-1);saveStore();renderProject()}};$('addSpecBtn').onclick=function(){var a=readSpecs();a.push({label:'',value:'',unit:''});renderSpecs(a)};$('fluid').onchange=updateFluid;['qty','minFlow','normalFlow','maxFlow'].forEach(function(id){$(id).addEventListener('input',updateTotals)});$('dataSheetRevision').addEventListener('input',renderRevision);$('sheetNozzleSelect').onchange=function(){captureProject();state.activeNozzle=parseInt(this.value,10)||0;renderDataSheet()};$('excelBtn').onclick=downloadXlsx;['projectNo','projectName','customer','owner','status','participants','typeTag','injectionType','selectedModel','dataSheetRevision','fluid','concentration','qty','sprayAngle','minFlow','normalFlow','maxFlow','airPressure','airFlow','dropletSize','liquidPressure','manualNozzleType','manualRunType','manualSprayingType','manualDimension','manualTipMaterial','manualPipeMaterial','manualEmptyWeight','manualOperatingWeight','manualAirConnection','manualLiquidConnection','manualUnitNumber','manualDesignTemp','manualOperatingTemp','manualRemark'].forEach(function(id){var el=$(id);el.addEventListener('change',function(){if(current()&&!current().locked){captureProject();saveStore();renderNozzleTabs();renderRevision()}})})
+  // v2.4: independent single-graph performance bindings only.
+  $('perfNozzleSelect').onchange=function(){if(current()&&!current().locked)captureProject();state.activeNozzle=parseInt(this.value,10)||0;saveStore();renderPerformance()};
+  $('perfRefreshBtn').onclick=renderPerformance;
+  $('perfAirSelect').onchange=function(){var n=activeNozzle();if(n){n.selectedAir=this.value;saveStore()}perfUpdateStatus();perfCombinedState.hoverFlow=null;perfDrawCombined();perfUpdateMetricDescAvailability()};
+  $('perfApplyBtn').onclick=perfApplyToNozzle;
+  $('perfRevision').addEventListener('change',perfSaveRevisionValue);
+  $('perfFlowUnit').onchange=function(){var n=activeNozzle();if(n){n.graphFlowUnit=this.value;saveStore()}perfCombinedState.hoverFlow=null;perfDrawCombined()};
+  ['perfPdfOrientation','perfPdfProjectInfo','perfPdfDesignPoints','perfPdfPointTable','perfPdfMetricDescriptions',
+    'perfDescFlow','perfDescLiquidPressure','perfDescAirFlow','perfDescD32','perfDescDv05','perfDescDv09','perfDescDmax','perfDescX90','perfDescX99'
+  ].forEach(function(id){
+    $(id).addEventListener('change',function(){perfSavePdfOptions()});
+  });
+  $('perfPdfPreviewBtn').onclick=perfOpenPdfPreview;
+  $('perfPdfPreviewCloseBtn').onclick=perfClosePdfPreview;
+  $('perfPdfPreviewSaveBtn').onclick=function(){perfExportPdf()};
+  $('perfPdfPreviewOverlay').addEventListener('click',function(e){if(e.target===this)perfClosePdfPreview()});
+  $('perfPdfBtn').onclick=perfExportPdf;
+  $('perfClearPointsBtn').onclick=function(){if(perfCurrentStoredPoints().length&&confirm('현재 모델/압력의 Design Point를 모두 삭제할까요?'))perfClearStoredPoints()};
+  $('perfCombinedCanvas').addEventListener('mousemove',function(e){perfCombinedPointer(e,false)});
+  $('perfCombinedCanvas').addEventListener('click',function(e){perfCombinedPointer(e,true)});
+  $('perfCombinedCanvas').addEventListener('mouseleave',function(){perfCombinedState.hoverFlow=null;var tip=$('perfCombinedTooltip');if(tip)tip.style.display='none';perfDrawCombined()});
+
+}
+document.addEventListener('DOMContentLoaded',function(){try{bind();teamOverrideHandlers();load()}catch(e){showError(e)}})
+})();
+</script>
+</body>
+</html>
