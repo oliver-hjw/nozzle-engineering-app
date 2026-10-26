@@ -1,0 +1,3485 @@
+[
+  {
+    "model": "KAFMX015-20",
+    "family": "FloMax",
+    "angle": 20,
+    "source": "Measured table values",
+    "material": "SS316L",
+    "curves": [
+      {
+        "air": 4.14,
+        "status": "source-data",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 5,
+            "smd": 41.19,
+            "airRate": 12.9,
+            "x90": 70.59,
+            "x99": 112.49,
+            "liquidPressure": 2.04
+          },
+          {
+            "flow": 7,
+            "smd": 42.02,
+            "airRate": 12.7,
+            "x90": 78.1,
+            "x99": 122.8,
+            "liquidPressure": 2.07
+          },
+          {
+            "flow": 13,
+            "smd": 43.53,
+            "airRate": 12.3,
+            "x90": 90.37,
+            "x99": 143,
+            "liquidPressure": 2.2
+          },
+          {
+            "flow": 19,
+            "smd": 46.71,
+            "airRate": 11.7,
+            "x90": 100.88,
+            "x99": 158.44,
+            "liquidPressure": 2.36
+          },
+          {
+            "flow": 25,
+            "smd": 49.21,
+            "airRate": 11.2,
+            "x90": 106.4,
+            "x99": 162.26,
+            "liquidPressure": 2.49
+          },
+          {
+            "flow": 31,
+            "smd": 51.47,
+            "airRate": 10.8,
+            "x90": 105.98,
+            "x99": 162.02,
+            "liquidPressure": 2.6
+          },
+          {
+            "flow": 37,
+            "smd": 54.67,
+            "airRate": 10.2,
+            "x90": 113.05,
+            "x99": 172.58,
+            "liquidPressure": 2.73
+          },
+          {
+            "flow": 43,
+            "smd": 58.19,
+            "airRate": 9.8,
+            "x90": 116.41,
+            "x99": 174.08,
+            "liquidPressure": 2.85
+          },
+          {
+            "flow": 49,
+            "smd": 59.19,
+            "airRate": 9.4,
+            "x90": 115.02,
+            "x99": 172.31,
+            "liquidPressure": 2.92
+          },
+          {
+            "flow": 55,
+            "smd": 61.24,
+            "airRate": 8.8,
+            "x90": 111.7,
+            "x99": 165.34,
+            "liquidPressure": 3.06
+          },
+          {
+            "flow": 60,
+            "smd": 63.95,
+            "airRate": 8.4,
+            "x90": 115.06,
+            "x99": 166.46,
+            "liquidPressure": 3.15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "KAFMX015-55",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Measured table values",
+    "material": "SS316L",
+    "curves": [
+      {
+        "air": 4.14,
+        "status": "source-data",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 5,
+            "smd": 37.96,
+            "airRate": 12.3,
+            "x90": 59.26,
+            "x99": 86.13,
+            "liquidPressure": 2.21
+          },
+          {
+            "flow": 7,
+            "smd": 38.3,
+            "airRate": 12,
+            "x90": 61.01,
+            "x99": 89.27,
+            "liquidPressure": 2.24
+          },
+          {
+            "flow": 13,
+            "smd": 35.6,
+            "airRate": 11.5,
+            "x90": 58.11,
+            "x99": 90.17,
+            "liquidPressure": 2.37
+          },
+          {
+            "flow": 19,
+            "smd": 36.11,
+            "airRate": 11,
+            "x90": 57.94,
+            "x99": 90.1,
+            "liquidPressure": 2.48
+          },
+          {
+            "flow": 25,
+            "smd": 37.57,
+            "airRate": 10.6,
+            "x90": 59.74,
+            "x99": 90.41,
+            "liquidPressure": 2.6
+          },
+          {
+            "flow": 31,
+            "smd": 38.51,
+            "airRate": 10.2,
+            "x90": 65.04,
+            "x99": 101.73,
+            "liquidPressure": 2.68
+          },
+          {
+            "flow": 37,
+            "smd": 39.58,
+            "airRate": 9.7,
+            "x90": 71.21,
+            "x99": 113.96,
+            "liquidPressure": 2.8
+          },
+          {
+            "flow": 43,
+            "smd": 41.81,
+            "airRate": 9.3,
+            "x90": 72.74,
+            "x99": 115.87,
+            "liquidPressure": 2.9
+          },
+          {
+            "flow": 49,
+            "smd": 43.78,
+            "airRate": 8.9,
+            "x90": 76.04,
+            "x99": 117.96,
+            "liquidPressure": 2.99
+          },
+          {
+            "flow": 55,
+            "smd": 44.21,
+            "airRate": 8.7,
+            "x90": 78.62,
+            "x99": 121.03,
+            "liquidPressure": 3.07
+          },
+          {
+            "flow": 60,
+            "smd": 46.16,
+            "airRate": 8.4,
+            "x90": 80.13,
+            "x99": 120.47,
+            "liquidPressure": 3.15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FMX015-20",
+    "family": "FloMax",
+    "angle": 20,
+    "source": "Reference curve / digitized",
+    "material": "SS316L",
+    "curves": [
+      {
+        "air": 1.38,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 6,
+            "liquidPressure": 0.68,
+            "airRate": 7.3,
+            "d32": 39,
+            "dv05": 40,
+            "dmax": 108
+          },
+          {
+            "flow": 18,
+            "liquidPressure": 0.86,
+            "airRate": 7,
+            "d32": 41,
+            "dv05": 42,
+            "dmax": 114
+          },
+          {
+            "flow": 30,
+            "liquidPressure": 1.05,
+            "airRate": 6.6,
+            "d32": 44,
+            "dv05": 46,
+            "dmax": 123
+          },
+          {
+            "flow": 42,
+            "liquidPressure": 1.22,
+            "airRate": 6.1,
+            "d32": 49,
+            "dv05": 52,
+            "dmax": 135
+          },
+          {
+            "flow": 54,
+            "liquidPressure": 1.4,
+            "airRate": 5.6,
+            "d32": 58,
+            "dv05": 64,
+            "dmax": 160
+          }
+        ]
+      },
+      {
+        "air": 2,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 6,
+            "liquidPressure": 1.18,
+            "airRate": 9.4,
+            "d32": 36,
+            "dv05": 37,
+            "dmax": 95
+          },
+          {
+            "flow": 18,
+            "liquidPressure": 1.38,
+            "airRate": 8.8,
+            "d32": 39,
+            "dv05": 41,
+            "dmax": 103
+          },
+          {
+            "flow": 30,
+            "liquidPressure": 1.57,
+            "airRate": 8,
+            "d32": 43,
+            "dv05": 46,
+            "dmax": 112
+          },
+          {
+            "flow": 42,
+            "liquidPressure": 1.78,
+            "airRate": 7.1,
+            "d32": 49,
+            "dv05": 52,
+            "dmax": 123
+          },
+          {
+            "flow": 54,
+            "liquidPressure": 1.98,
+            "airRate": 5.5,
+            "d32": 56,
+            "dv05": 60,
+            "dmax": 136
+          }
+        ]
+      },
+      {
+        "air": 2.76,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 6,
+            "liquidPressure": 1.65,
+            "airRate": 11.5,
+            "d32": 33,
+            "dv05": 35,
+            "dmax": 84
+          },
+          {
+            "flow": 18,
+            "liquidPressure": 1.88,
+            "airRate": 10.7,
+            "d32": 35,
+            "dv05": 37,
+            "dmax": 91
+          },
+          {
+            "flow": 30,
+            "liquidPressure": 2.08,
+            "airRate": 9.7,
+            "d32": 38,
+            "dv05": 40,
+            "dmax": 98
+          },
+          {
+            "flow": 42,
+            "liquidPressure": 2.3,
+            "airRate": 8.6,
+            "d32": 41,
+            "dv05": 44,
+            "dmax": 105
+          },
+          {
+            "flow": 54,
+            "liquidPressure": 2.58,
+            "airRate": 7.2,
+            "d32": 45,
+            "dv05": 49,
+            "dmax": 114
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FMX090-55",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Reference curve / digitized",
+    "material": "SS316L",
+    "curves": [
+      {
+        "air": 2.76,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 1.9,
+            "airRate": 45,
+            "d32": 58,
+            "dv05": 61,
+            "dmax": 112
+          },
+          {
+            "flow": 180,
+            "liquidPressure": 2.25,
+            "airRate": 43,
+            "d32": 61,
+            "dv05": 64,
+            "dmax": 119
+          },
+          {
+            "flow": 240,
+            "liquidPressure": 2.65,
+            "airRate": 40,
+            "d32": 66,
+            "dv05": 69,
+            "dmax": 129
+          },
+          {
+            "flow": 300,
+            "liquidPressure": 3.05,
+            "airRate": 38,
+            "d32": 72,
+            "dv05": 75,
+            "dmax": 143
+          },
+          {
+            "flow": 342,
+            "liquidPressure": 3.35,
+            "airRate": 36,
+            "d32": 78,
+            "dv05": 81,
+            "dmax": 163
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 2.35,
+            "airRate": 61,
+            "d32": 50,
+            "dv05": 52,
+            "dmax": 94
+          },
+          {
+            "flow": 180,
+            "liquidPressure": 2.78,
+            "airRate": 59,
+            "d32": 57,
+            "dv05": 59,
+            "dmax": 103
+          },
+          {
+            "flow": 240,
+            "liquidPressure": 3.18,
+            "airRate": 56,
+            "d32": 64,
+            "dv05": 66,
+            "dmax": 113
+          },
+          {
+            "flow": 300,
+            "liquidPressure": 3.6,
+            "airRate": 53,
+            "d32": 72,
+            "dv05": 74,
+            "dmax": 128
+          },
+          {
+            "flow": 342,
+            "liquidPressure": 3.95,
+            "airRate": 50,
+            "d32": 78,
+            "dv05": 80,
+            "dmax": 140
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FMX015SB-40",
+    "family": "FloMax",
+    "angle": 40,
+    "source": "Reference curve / digitized",
+    "material": "SS316L",
+    "curves": [
+      {
+        "air": 3.45,
+        "status": "digitized-reference",
+        "flowUnit": "L/hr-internal",
+        "data": [
+          {
+            "flow": 1,
+            "liquidPressure": 2.55,
+            "airRate": 13.5,
+            "d32": 42,
+            "dv09": 62,
+            "dmax": 82
+          },
+          {
+            "flow": 10,
+            "liquidPressure": 2.65,
+            "airRate": 12.8,
+            "d32": 32,
+            "dv09": 50,
+            "dmax": 59
+          },
+          {
+            "flow": 20,
+            "liquidPressure": 2.8,
+            "airRate": 11.8,
+            "d32": 33,
+            "dv09": 49,
+            "dmax": 58
+          },
+          {
+            "flow": 40,
+            "liquidPressure": 3.15,
+            "airRate": 9.5,
+            "d32": 36,
+            "dv09": 57,
+            "dmax": 79
+          },
+          {
+            "flow": 60,
+            "liquidPressure": 3.45,
+            "airRate": 7.5,
+            "d32": 40,
+            "dv09": 77,
+            "dmax": 127
+          },
+          {
+            "flow": 100,
+            "liquidPressure": 4.1,
+            "airRate": 5.5,
+            "d32": 48,
+            "dv09": 108,
+            "dmax": 175
+          },
+          {
+            "flow": 140,
+            "liquidPressure": 4.65,
+            "airRate": 4.3,
+            "d32": 51,
+            "dv09": 120,
+            "dmax": 198
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM1",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 1.38,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 0.97,
+            "airRate": 30.3,
+            "dmax": 147,
+            "d32": 31.96
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 1.07,
+            "airRate": 27.9,
+            "dmax": 147.5,
+            "d32": 33.9
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 1.17,
+            "airRate": 25.5,
+            "dmax": 148,
+            "d32": 35.7
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 1.28,
+            "airRate": 23.1,
+            "dmax": 148.6,
+            "d32": 37.5
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 1.39,
+            "airRate": 20.9,
+            "dmax": 149.1,
+            "d32": 39.2
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 1.49,
+            "airRate": 18.9,
+            "dmax": 149.6,
+            "d32": 40.9
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 1.6,
+            "airRate": 17,
+            "dmax": 150.1,
+            "d32": 42.4
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 1.7,
+            "airRate": 15.4,
+            "dmax": 150.5,
+            "d32": 43.9
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 1.79,
+            "airRate": 13.86,
+            "dmax": 151,
+            "d32": 45.27
+          }
+        ]
+      },
+      {
+        "air": 2,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 1.49,
+            "airRate": 33.63,
+            "dmax": 133.58,
+            "d32": 26.79
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 1.6,
+            "airRate": 31,
+            "dmax": 135,
+            "d32": 28.2
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 1.72,
+            "airRate": 28.6,
+            "dmax": 136.3,
+            "d32": 29.6
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 1.83,
+            "airRate": 26.3,
+            "dmax": 137.5,
+            "d32": 31
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 1.95,
+            "airRate": 24.1,
+            "dmax": 138.6,
+            "d32": 32.4
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 2.06,
+            "airRate": 21.9,
+            "dmax": 139.7,
+            "d32": 33.8
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 2.16,
+            "airRate": 19.8,
+            "dmax": 140.8,
+            "d32": 35.2
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 2.24,
+            "airRate": 17.7,
+            "dmax": 141.8,
+            "d32": 36.6
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 2.31,
+            "airRate": 15.7,
+            "dmax": 142.82,
+            "d32": 37.88
+          }
+        ]
+      },
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 1.99,
+            "airRate": 43.79,
+            "dmax": 117.32,
+            "d32": 20.88
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 2.13,
+            "airRate": 41.3,
+            "dmax": 120.3,
+            "d32": 22.7
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 2.27,
+            "airRate": 38.9,
+            "dmax": 123.2,
+            "d32": 24.5
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 2.41,
+            "airRate": 36.5,
+            "dmax": 126,
+            "d32": 26.3
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 2.55,
+            "airRate": 34.1,
+            "dmax": 128.8,
+            "d32": 28
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 2.69,
+            "airRate": 31.8,
+            "dmax": 131.6,
+            "d32": 29.7
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 2.83,
+            "airRate": 29.4,
+            "dmax": 134.6,
+            "d32": 31.4
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 2.96,
+            "airRate": 27,
+            "dmax": 137.7,
+            "d32": 33
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 3.08,
+            "airRate": 24.57,
+            "dmax": 140.97,
+            "d32": 34.55
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 2.52,
+            "airRate": 63.19,
+            "dmax": 115.84,
+            "d32": 23.65
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 2.67,
+            "airRate": 59.8,
+            "dmax": 118.1,
+            "d32": 25.3
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 2.82,
+            "airRate": 56.5,
+            "dmax": 120.4,
+            "d32": 27
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 2.97,
+            "airRate": 53.2,
+            "dmax": 122.6,
+            "d32": 28.6
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 3.12,
+            "airRate": 50,
+            "dmax": 124.7,
+            "d32": 30.2
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 3.27,
+            "airRate": 46.8,
+            "dmax": 126.8,
+            "d32": 31.8
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 3.42,
+            "airRate": 43.5,
+            "dmax": 128.9,
+            "d32": 33.4
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 3.56,
+            "airRate": 40.1,
+            "dmax": 131,
+            "d32": 35
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 3.69,
+            "airRate": 36.58,
+            "dmax": 133.21,
+            "d32": 36.58
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 3.07,
+            "airRate": 75.98,
+            "dmax": 110.58,
+            "d32": 21.99
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 3.22,
+            "airRate": 72.4,
+            "dmax": 113,
+            "d32": 24
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 3.38,
+            "airRate": 68.9,
+            "dmax": 115.4,
+            "d32": 26
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 3.53,
+            "airRate": 65.4,
+            "dmax": 117.7,
+            "d32": 28
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 3.69,
+            "airRate": 62,
+            "dmax": 120,
+            "d32": 30
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 3.84,
+            "airRate": 58.6,
+            "dmax": 122.3,
+            "d32": 31.9
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 4,
+            "airRate": 55.2,
+            "dmax": 124.6,
+            "d32": 33.8
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 4.15,
+            "airRate": 51.8,
+            "dmax": 127,
+            "d32": 35.6
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 4.29,
+            "airRate": 48.34,
+            "dmax": 129.49,
+            "d32": 37.34
+          }
+        ]
+      },
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 3.63,
+            "airRate": 87.94,
+            "dmax": 103.3,
+            "d32": 22.63
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 3.8,
+            "airRate": 84.1,
+            "dmax": 104.7,
+            "d32": 24.3
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 3.98,
+            "airRate": 80.3,
+            "dmax": 106.1,
+            "d32": 26
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 4.15,
+            "airRate": 76.5,
+            "dmax": 107.4,
+            "d32": 27.7
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 4.33,
+            "airRate": 72.7,
+            "dmax": 108.8,
+            "d32": 29.4
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 4.5,
+            "airRate": 68.9,
+            "dmax": 110.1,
+            "d32": 31
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 4.67,
+            "airRate": 65,
+            "dmax": 111.4,
+            "d32": 32.7
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 4.84,
+            "airRate": 61.1,
+            "dmax": 112.7,
+            "d32": 34.4
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 5,
+            "airRate": 57.07,
+            "dmax": 113.97,
+            "d32": 36.05
+          }
+        ]
+      },
+      {
+        "air": 5.5,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 3.97,
+            "airRate": 99.21,
+            "dmax": 85.22,
+            "d32": 17.46
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 4.15,
+            "airRate": 95,
+            "dmax": 88,
+            "d32": 19.3
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 4.34,
+            "airRate": 90.8,
+            "dmax": 90.8,
+            "d32": 21.1
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 4.52,
+            "airRate": 86.6,
+            "dmax": 93.6,
+            "d32": 22.9
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 4.71,
+            "airRate": 82.4,
+            "dmax": 96.4,
+            "d32": 24.7
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 4.89,
+            "airRate": 78.2,
+            "dmax": 99.2,
+            "d32": 26.5
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 5.08,
+            "airRate": 74,
+            "dmax": 102,
+            "d32": 28.3
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 5.26,
+            "airRate": 69.9,
+            "dmax": 104.7,
+            "d32": 30.2
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 5.44,
+            "airRate": 65.96,
+            "dmax": 107.39,
+            "d32": 32.01
+          }
+        ]
+      },
+      {
+        "air": 6.2,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 4.58,
+            "airRate": 113.49,
+            "dmax": 91.66,
+            "d32": 19.08
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 4.77,
+            "airRate": 109.2,
+            "dmax": 95.4,
+            "d32": 20.6
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 4.96,
+            "airRate": 104.8,
+            "dmax": 99.1,
+            "d32": 22.1
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 5.15,
+            "airRate": 100.5,
+            "dmax": 102.9,
+            "d32": 23.6
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 5.34,
+            "airRate": 96.1,
+            "dmax": 106.7,
+            "d32": 25.1
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 5.53,
+            "airRate": 91.8,
+            "dmax": 110.5,
+            "d32": 26.5
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 5.72,
+            "airRate": 87.4,
+            "dmax": 114.3,
+            "d32": 28
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 5.91,
+            "airRate": 83,
+            "dmax": 118.1,
+            "d32": 29.4
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 6.09,
+            "airRate": 78.73,
+            "dmax": 121.89,
+            "d32": 30.88
+          }
+        ]
+      },
+      {
+        "air": 6.9,
+        "data": [
+          {
+            "flow": 120,
+            "liquidPressure": 5.25,
+            "airRate": 130.62,
+            "dmax": 104.94,
+            "d32": 17.92
+          },
+          {
+            "flow": 176.2,
+            "liquidPressure": 5.46,
+            "airRate": 126,
+            "dmax": 109,
+            "d32": 19.3
+          },
+          {
+            "flow": 232.5,
+            "liquidPressure": 5.67,
+            "airRate": 121.5,
+            "dmax": 113.1,
+            "d32": 20.7
+          },
+          {
+            "flow": 288.8,
+            "liquidPressure": 5.88,
+            "airRate": 116.9,
+            "dmax": 117.2,
+            "d32": 22
+          },
+          {
+            "flow": 345,
+            "liquidPressure": 6.08,
+            "airRate": 112.3,
+            "dmax": 121.3,
+            "d32": 23.4
+          },
+          {
+            "flow": 401.2,
+            "liquidPressure": 6.29,
+            "airRate": 107.7,
+            "dmax": 125.4,
+            "d32": 24.7
+          },
+          {
+            "flow": 457.5,
+            "liquidPressure": 6.49,
+            "airRate": 103.1,
+            "dmax": 129.5,
+            "d32": 26
+          },
+          {
+            "flow": 513.8,
+            "liquidPressure": 6.69,
+            "airRate": 98.5,
+            "dmax": 133.7,
+            "d32": 27.3
+          },
+          {
+            "flow": 570,
+            "liquidPressure": 6.89,
+            "airRate": 93.86,
+            "dmax": 137.83,
+            "d32": 28.64
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM5",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 2.4,
+            "airRate": 132.09,
+            "dmax": 94.7,
+            "d32": 25.12
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 2.66,
+            "airRate": 126.9,
+            "dmax": 97,
+            "d32": 27.6
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 2.92,
+            "airRate": 121.7,
+            "dmax": 99.3,
+            "d32": 30.1
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 3.18,
+            "airRate": 116.5,
+            "dmax": 101.5,
+            "d32": 32.7
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 3.44,
+            "airRate": 111.3,
+            "dmax": 103.8,
+            "d32": 35.2
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 3.7,
+            "airRate": 106.1,
+            "dmax": 106,
+            "d32": 37.7
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 3.96,
+            "airRate": 100.9,
+            "dmax": 108.2,
+            "d32": 40.2
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 4.21,
+            "airRate": 95.7,
+            "dmax": 110.4,
+            "d32": 42.7
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 4.44,
+            "airRate": 90.6,
+            "dmax": 112.56,
+            "d32": 45.21
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 2.78,
+            "airRate": 162.84,
+            "dmax": 88.74,
+            "d32": 24.49
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 3.06,
+            "airRate": 156.8,
+            "dmax": 92,
+            "d32": 27
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 3.35,
+            "airRate": 150.7,
+            "dmax": 95.2,
+            "d32": 29.5
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 3.64,
+            "airRate": 144.6,
+            "dmax": 98.4,
+            "d32": 32
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 3.93,
+            "airRate": 138.6,
+            "dmax": 101.6,
+            "d32": 34.5
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 4.22,
+            "airRate": 132.5,
+            "dmax": 104.8,
+            "d32": 36.9
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 4.5,
+            "airRate": 126.4,
+            "dmax": 108,
+            "d32": 39.3
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 4.78,
+            "airRate": 120.3,
+            "dmax": 111.2,
+            "d32": 41.8
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 5.04,
+            "airRate": 114.28,
+            "dmax": 114.28,
+            "d32": 44.16
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 3.44,
+            "airRate": 192.44,
+            "dmax": 79.07,
+            "d32": 22.97
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 3.7,
+            "airRate": 186.2,
+            "dmax": 82.6,
+            "d32": 25.3
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 3.96,
+            "airRate": 180,
+            "dmax": 86.1,
+            "d32": 27.6
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 4.22,
+            "airRate": 173.7,
+            "dmax": 89.6,
+            "d32": 29.9
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 4.48,
+            "airRate": 167.4,
+            "dmax": 93.1,
+            "d32": 32.2
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 4.74,
+            "airRate": 161.1,
+            "dmax": 96.6,
+            "d32": 34.5
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 5,
+            "airRate": 154.8,
+            "dmax": 100.1,
+            "d32": 36.7
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 5.27,
+            "airRate": 148.6,
+            "dmax": 103.7,
+            "d32": 38.9
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 5.55,
+            "airRate": 142.44,
+            "dmax": 107.27,
+            "d32": 40.99
+          }
+        ]
+      },
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 4,
+            "airRate": 225.58,
+            "dmax": 80.23,
+            "d32": 24.13
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 4.26,
+            "airRate": 218.9,
+            "dmax": 83.8,
+            "d32": 26.5
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 4.52,
+            "airRate": 212.2,
+            "dmax": 87.3,
+            "d32": 28.9
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 4.78,
+            "airRate": 205.5,
+            "dmax": 90.8,
+            "d32": 31.2
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 5.04,
+            "airRate": 198.8,
+            "dmax": 94.3,
+            "d32": 33.5
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 5.3,
+            "airRate": 192.1,
+            "dmax": 97.8,
+            "d32": 35.8
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 5.56,
+            "airRate": 185.4,
+            "dmax": 101.4,
+            "d32": 38.1
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 5.82,
+            "airRate": 179,
+            "dmax": 104.9,
+            "d32": 40.4
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 6.08,
+            "airRate": 172.97,
+            "dmax": 108.43,
+            "d32": 42.73
+          }
+        ]
+      },
+      {
+        "air": 5.5,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 4.69,
+            "airRate": 265.81,
+            "dmax": 83.72,
+            "d32": 28.6
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 4.94,
+            "airRate": 258.1,
+            "dmax": 87.2,
+            "d32": 30.9
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 5.19,
+            "airRate": 250.4,
+            "dmax": 90.8,
+            "d32": 33.2
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 5.44,
+            "airRate": 242.7,
+            "dmax": 94.3,
+            "d32": 35.5
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 5.69,
+            "airRate": 235,
+            "dmax": 97.8,
+            "d32": 37.8
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 5.94,
+            "airRate": 227.3,
+            "dmax": 101.3,
+            "d32": 40.1
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 6.19,
+            "airRate": 219.6,
+            "dmax": 104.9,
+            "d32": 42.4
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 6.45,
+            "airRate": 212,
+            "dmax": 108.4,
+            "d32": 44.7
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 6.71,
+            "airRate": 204.42,
+            "dmax": 111.98,
+            "d32": 47.09
+          }
+        ]
+      },
+      {
+        "air": 6.2,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 5.34,
+            "airRate": 307.67,
+            "dmax": 72.03,
+            "d32": 20.35
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 5.57,
+            "airRate": 298.8,
+            "dmax": 75.3,
+            "d32": 22.7
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 5.81,
+            "airRate": 289.9,
+            "dmax": 78.5,
+            "d32": 25
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 6.04,
+            "airRate": 281,
+            "dmax": 81.8,
+            "d32": 27.4
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 6.27,
+            "airRate": 272.1,
+            "dmax": 85.1,
+            "d32": 29.7
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 6.51,
+            "airRate": 263.2,
+            "dmax": 88.3,
+            "d32": 32
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 6.74,
+            "airRate": 254.3,
+            "dmax": 91.6,
+            "d32": 34.3
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 6.97,
+            "airRate": 245.4,
+            "dmax": 94.8,
+            "d32": 36.5
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 7.2,
+            "airRate": 236.45,
+            "dmax": 98.08,
+            "d32": 38.66
+          }
+        ]
+      },
+      {
+        "air": 6.9,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 6.22,
+            "airRate": 363.72,
+            "dmax": 62.33,
+            "d32": 19.07
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 6.43,
+            "airRate": 353.1,
+            "dmax": 65.1,
+            "d32": 21.2
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 6.64,
+            "airRate": 342.5,
+            "dmax": 67.8,
+            "d32": 23.3
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 6.85,
+            "airRate": 331.9,
+            "dmax": 70.6,
+            "d32": 25.4
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 7.06,
+            "airRate": 321.3,
+            "dmax": 73.3,
+            "d32": 27.5
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 7.27,
+            "airRate": 310.7,
+            "dmax": 76,
+            "d32": 29.6
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 7.48,
+            "airRate": 300.1,
+            "dmax": 78.8,
+            "d32": 31.7
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 7.7,
+            "airRate": 289.6,
+            "dmax": 81.5,
+            "d32": 33.8
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 7.91,
+            "airRate": 279.07,
+            "dmax": 84.19,
+            "d32": 35.81
+          }
+        ]
+      },
+      {
+        "air": 8.2,
+        "data": [
+          {
+            "flow": 480,
+            "liquidPressure": 7.16,
+            "airRate": 429.07,
+            "dmax": 55.23,
+            "d32": 16.86
+          },
+          {
+            "flow": 615,
+            "liquidPressure": 7.34,
+            "airRate": 416.3,
+            "dmax": 57.7,
+            "d32": 18.8
+          },
+          {
+            "flow": 750,
+            "liquidPressure": 7.52,
+            "airRate": 403.6,
+            "dmax": 60.2,
+            "d32": 20.7
+          },
+          {
+            "flow": 885,
+            "liquidPressure": 7.7,
+            "airRate": 390.9,
+            "dmax": 62.6,
+            "d32": 22.6
+          },
+          {
+            "flow": 1020,
+            "liquidPressure": 7.88,
+            "airRate": 378.2,
+            "dmax": 65.1,
+            "d32": 24.5
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 8.06,
+            "airRate": 365.5,
+            "dmax": 67.6,
+            "d32": 26.4
+          },
+          {
+            "flow": 1290,
+            "liquidPressure": 8.25,
+            "airRate": 352.8,
+            "dmax": 70,
+            "d32": 28.3
+          },
+          {
+            "flow": 1425,
+            "liquidPressure": 8.44,
+            "airRate": 340.1,
+            "dmax": 72.5,
+            "d32": 30.2
+          },
+          {
+            "flow": 1560,
+            "liquidPressure": 8.62,
+            "airRate": 327.33,
+            "dmax": 75,
+            "d32": 31.98
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM10",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 1.38,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 1.28,
+            "airRate": 68.9,
+            "dmax": 179.36,
+            "d32": 45.64
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 1.43,
+            "airRate": 63.5,
+            "dmax": 182.8,
+            "d32": 48.6
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 1.58,
+            "airRate": 58.1,
+            "dmax": 186.2,
+            "d32": 51.5
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 1.73,
+            "airRate": 52.7,
+            "dmax": 189.6,
+            "d32": 54.4
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 1.88,
+            "airRate": 47.3,
+            "dmax": 193,
+            "d32": 57.3
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 2.03,
+            "airRate": 41.9,
+            "dmax": 196.4,
+            "d32": 60.2
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 2.18,
+            "airRate": 36.5,
+            "dmax": 199.8,
+            "d32": 63.1
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 2.33,
+            "airRate": 31.1,
+            "dmax": 203.2,
+            "d32": 66
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 2.48,
+            "airRate": 25.87,
+            "dmax": 206.69,
+            "d32": 68.9
+          }
+        ]
+      },
+      {
+        "air": 2,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 1.86,
+            "airRate": 99.42,
+            "dmax": 116.28,
+            "d32": 47.38
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 2.03,
+            "airRate": 92.6,
+            "dmax": 126.7,
+            "d32": 50.2
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 2.2,
+            "airRate": 85.8,
+            "dmax": 137.2,
+            "d32": 53
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 2.37,
+            "airRate": 79,
+            "dmax": 147.7,
+            "d32": 55.8
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 2.54,
+            "airRate": 72.2,
+            "dmax": 158.1,
+            "d32": 58.7
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 2.71,
+            "airRate": 65.4,
+            "dmax": 168.6,
+            "d32": 61.5
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 2.88,
+            "airRate": 58.6,
+            "dmax": 179,
+            "d32": 64.4
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 3.04,
+            "airRate": 51.7,
+            "dmax": 189.5,
+            "d32": 67.2
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 3.2,
+            "airRate": 44.77,
+            "dmax": 200,
+            "d32": 70.06
+          }
+        ]
+      },
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 2.39,
+            "airRate": 129.07,
+            "dmax": 143.6,
+            "d32": 45.64
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 2.59,
+            "airRate": 120.7,
+            "dmax": 150.1,
+            "d32": 47.7
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 2.79,
+            "airRate": 112.3,
+            "dmax": 156.6,
+            "d32": 49.8
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 2.99,
+            "airRate": 103.9,
+            "dmax": 163.1,
+            "d32": 51.9
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 3.19,
+            "airRate": 95.5,
+            "dmax": 169.6,
+            "d32": 54
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 3.39,
+            "airRate": 87.1,
+            "dmax": 176.1,
+            "d32": 56.1
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 3.59,
+            "airRate": 78.7,
+            "dmax": 182.6,
+            "d32": 58.1
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 3.79,
+            "airRate": 70.4,
+            "dmax": 189.1,
+            "d32": 60.2
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 3.98,
+            "airRate": 62.21,
+            "dmax": 195.64,
+            "d32": 62.21
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 3.17,
+            "airRate": 169.3,
+            "dmax": 126.98,
+            "d32": 44.65
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 3.36,
+            "airRate": 158.7,
+            "dmax": 134.5,
+            "d32": 46.5
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 3.55,
+            "airRate": 148.1,
+            "dmax": 142.1,
+            "d32": 48.4
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 3.74,
+            "airRate": 137.4,
+            "dmax": 149.7,
+            "d32": 50.3
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 3.93,
+            "airRate": 126.7,
+            "dmax": 157.2,
+            "d32": 52.2
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 4.12,
+            "airRate": 116.1,
+            "dmax": 164.8,
+            "d32": 54.1
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 4.31,
+            "airRate": 105.5,
+            "dmax": 172.4,
+            "d32": 56
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 4.5,
+            "airRate": 94.8,
+            "dmax": 179.9,
+            "d32": 57.9
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 4.69,
+            "airRate": 84.19,
+            "dmax": 187.44,
+            "d32": 59.77
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 3.43,
+            "airRate": 196.51,
+            "dmax": 114.24,
+            "d32": 42.15
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 3.65,
+            "airRate": 185.5,
+            "dmax": 121,
+            "d32": 43.9
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 3.87,
+            "airRate": 174.4,
+            "dmax": 127.8,
+            "d32": 45.7
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 4.1,
+            "airRate": 163.4,
+            "dmax": 134.6,
+            "d32": 47.5
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 4.32,
+            "airRate": 152.3,
+            "dmax": 141.4,
+            "d32": 49.3
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 4.55,
+            "airRate": 141.3,
+            "dmax": 148.2,
+            "d32": 51.1
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 4.77,
+            "airRate": 130.2,
+            "dmax": 155,
+            "d32": 52.9
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 5,
+            "airRate": 119.1,
+            "dmax": 161.8,
+            "d32": 54.7
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 5.22,
+            "airRate": 108.14,
+            "dmax": 168.6,
+            "d32": 56.4
+          }
+        ]
+      },
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 3.9,
+            "airRate": 227.03,
+            "dmax": 100.87,
+            "d32": 40
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 4.15,
+            "airRate": 215.2,
+            "dmax": 107,
+            "d32": 41.3
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 4.39,
+            "airRate": 203.4,
+            "dmax": 113.1,
+            "d32": 42.6
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 4.64,
+            "airRate": 191.6,
+            "dmax": 119.2,
+            "d32": 43.9
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 4.89,
+            "airRate": 179.8,
+            "dmax": 125.3,
+            "d32": 45.2
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 5.14,
+            "airRate": 168,
+            "dmax": 131.4,
+            "d32": 46.5
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 5.38,
+            "airRate": 156.2,
+            "dmax": 137.5,
+            "d32": 47.8
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 5.63,
+            "airRate": 144.3,
+            "dmax": 143.6,
+            "d32": 49.1
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 5.87,
+            "airRate": 132.56,
+            "dmax": 149.71,
+            "d32": 50.4
+          }
+        ]
+      },
+      {
+        "air": 5.5,
+        "data": [
+          {
+            "flow": 900,
+            "liquidPressure": 4.53,
+            "airRate": 237.56,
+            "dmax": 91.05,
+            "d32": 35.93
+          },
+          {
+            "flow": 1155,
+            "liquidPressure": 4.75,
+            "airRate": 224.2,
+            "dmax": 96.8,
+            "d32": 37.5
+          },
+          {
+            "flow": 1410,
+            "liquidPressure": 4.97,
+            "airRate": 210.8,
+            "dmax": 102.5,
+            "d32": 39.1
+          },
+          {
+            "flow": 1665,
+            "liquidPressure": 5.19,
+            "airRate": 197.4,
+            "dmax": 108.2,
+            "d32": 40.7
+          },
+          {
+            "flow": 1920,
+            "liquidPressure": 5.41,
+            "airRate": 184,
+            "dmax": 113.9,
+            "d32": 42.3
+          },
+          {
+            "flow": 2175,
+            "liquidPressure": 5.63,
+            "airRate": 170.6,
+            "dmax": 119.6,
+            "d32": 43.9
+          },
+          {
+            "flow": 2430,
+            "liquidPressure": 5.85,
+            "airRate": 157.2,
+            "dmax": 125.3,
+            "d32": 45.5
+          },
+          {
+            "flow": 2685,
+            "liquidPressure": 6.07,
+            "airRate": 143.8,
+            "dmax": 131,
+            "d32": 47
+          },
+          {
+            "flow": 2940,
+            "liquidPressure": 6.28,
+            "airRate": 130.81,
+            "dmax": 136.74,
+            "d32": 48.49
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM25",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 2,
+        "data": [
+          {
+            "flow": 3420,
+            "liquidPressure": 2.62,
+            "airRate": 50,
+            "dmax": 199,
+            "d32": 66
+          },
+          {
+            "flow": 3592.5,
+            "liquidPressure": 2.7,
+            "airRate": 48.5,
+            "dmax": 199.4,
+            "d32": 66.5
+          },
+          {
+            "flow": 3765,
+            "liquidPressure": 2.78,
+            "airRate": 47,
+            "dmax": 199.8,
+            "d32": 67
+          },
+          {
+            "flow": 3937.5,
+            "liquidPressure": 2.86,
+            "airRate": 45.5,
+            "dmax": 200.2,
+            "d32": 67.5
+          },
+          {
+            "flow": 4110,
+            "liquidPressure": 2.94,
+            "airRate": 44,
+            "dmax": 200.6,
+            "d32": 68
+          },
+          {
+            "flow": 4282.5,
+            "liquidPressure": 3.02,
+            "airRate": 42.5,
+            "dmax": 201,
+            "d32": 68.5
+          },
+          {
+            "flow": 4455,
+            "liquidPressure": 3.1,
+            "airRate": 41,
+            "dmax": 201.4,
+            "d32": 69
+          },
+          {
+            "flow": 4627.5,
+            "liquidPressure": 3.19,
+            "airRate": 39.5,
+            "dmax": 201.8,
+            "d32": 69.5
+          },
+          {
+            "flow": 4800,
+            "liquidPressure": 3.28,
+            "airRate": 38,
+            "dmax": 202.2,
+            "d32": 70
+          }
+        ]
+      },
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 3420,
+            "liquidPressure": 3.25,
+            "airRate": 59.74,
+            "dmax": 189.39,
+            "d32": 69.9
+          },
+          {
+            "flow": 3690,
+            "liquidPressure": 3.39,
+            "airRate": 55.6,
+            "dmax": 190.2,
+            "d32": 70.6
+          },
+          {
+            "flow": 3960,
+            "liquidPressure": 3.53,
+            "airRate": 51.5,
+            "dmax": 191,
+            "d32": 71.3
+          },
+          {
+            "flow": 4230,
+            "liquidPressure": 3.67,
+            "airRate": 47.3,
+            "dmax": 191.8,
+            "d32": 72
+          },
+          {
+            "flow": 4500,
+            "liquidPressure": 3.81,
+            "airRate": 43.1,
+            "dmax": 192.6,
+            "d32": 72.7
+          },
+          {
+            "flow": 4770,
+            "liquidPressure": 3.95,
+            "airRate": 38.9,
+            "dmax": 193.4,
+            "d32": 73.4
+          },
+          {
+            "flow": 5040,
+            "liquidPressure": 4.09,
+            "airRate": 34.7,
+            "dmax": 194.2,
+            "d32": 74.1
+          },
+          {
+            "flow": 5310,
+            "liquidPressure": 4.22,
+            "airRate": 30.5,
+            "dmax": 195,
+            "d32": 74.9
+          },
+          {
+            "flow": 5580,
+            "liquidPressure": 4.35,
+            "airRate": 26.39,
+            "dmax": 195.77,
+            "d32": 75.7
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 3420,
+            "liquidPressure": 3.85,
+            "airRate": 83.99,
+            "dmax": 175.64,
+            "d32": 67.05
+          },
+          {
+            "flow": 3690,
+            "liquidPressure": 4,
+            "airRate": 78.8,
+            "dmax": 176.4,
+            "d32": 67.7
+          },
+          {
+            "flow": 3960,
+            "liquidPressure": 4.15,
+            "airRate": 73.6,
+            "dmax": 177.2,
+            "d32": 68.4
+          },
+          {
+            "flow": 4230,
+            "liquidPressure": 4.3,
+            "airRate": 68.5,
+            "dmax": 177.9,
+            "d32": 69.1
+          },
+          {
+            "flow": 4500,
+            "liquidPressure": 4.45,
+            "airRate": 63.3,
+            "dmax": 178.7,
+            "d32": 69.8
+          },
+          {
+            "flow": 4770,
+            "liquidPressure": 4.6,
+            "airRate": 58.2,
+            "dmax": 179.5,
+            "d32": 70.5
+          },
+          {
+            "flow": 5040,
+            "liquidPressure": 4.74,
+            "airRate": 53.1,
+            "dmax": 180.2,
+            "d32": 71.2
+          },
+          {
+            "flow": 5310,
+            "liquidPressure": 4.87,
+            "airRate": 48,
+            "dmax": 181,
+            "d32": 71.9
+          },
+          {
+            "flow": 5580,
+            "liquidPressure": 5,
+            "airRate": 42.92,
+            "dmax": 181.67,
+            "d32": 72.62
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 3420,
+            "liquidPressure": 4.45,
+            "airRate": 106.29,
+            "dmax": 155.57,
+            "d32": 62.02
+          },
+          {
+            "flow": 3690,
+            "liquidPressure": 4.61,
+            "airRate": 100.1,
+            "dmax": 156.3,
+            "d32": 62.7
+          },
+          {
+            "flow": 3960,
+            "liquidPressure": 4.77,
+            "airRate": 93.9,
+            "dmax": 157,
+            "d32": 63.3
+          },
+          {
+            "flow": 4230,
+            "liquidPressure": 4.93,
+            "airRate": 87.8,
+            "dmax": 157.7,
+            "d32": 64
+          },
+          {
+            "flow": 4500,
+            "liquidPressure": 5.09,
+            "airRate": 81.6,
+            "dmax": 158.4,
+            "d32": 64.6
+          },
+          {
+            "flow": 4770,
+            "liquidPressure": 5.25,
+            "airRate": 75.5,
+            "dmax": 159.1,
+            "d32": 65.3
+          },
+          {
+            "flow": 5040,
+            "liquidPressure": 5.41,
+            "airRate": 69.3,
+            "dmax": 159.8,
+            "d32": 66
+          },
+          {
+            "flow": 5310,
+            "liquidPressure": 5.56,
+            "airRate": 63.2,
+            "dmax": 160.4,
+            "d32": 66.6
+          },
+          {
+            "flow": 5580,
+            "liquidPressure": 5.7,
+            "airRate": 57.01,
+            "dmax": 161,
+            "d32": 67.24
+          }
+        ]
+      },
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 3420,
+            "liquidPressure": 5.15,
+            "airRate": 131.79,
+            "dmax": 142.37,
+            "d32": 61.62
+          },
+          {
+            "flow": 3690,
+            "liquidPressure": 5.3,
+            "airRate": 124.7,
+            "dmax": 143,
+            "d32": 62.2
+          },
+          {
+            "flow": 3960,
+            "liquidPressure": 5.45,
+            "airRate": 117.6,
+            "dmax": 143.6,
+            "d32": 62.8
+          },
+          {
+            "flow": 4230,
+            "liquidPressure": 5.6,
+            "airRate": 110.5,
+            "dmax": 144.2,
+            "d32": 63.4
+          },
+          {
+            "flow": 4500,
+            "liquidPressure": 5.75,
+            "airRate": 103.4,
+            "dmax": 144.8,
+            "d32": 64
+          },
+          {
+            "flow": 4770,
+            "liquidPressure": 5.9,
+            "airRate": 96.3,
+            "dmax": 145.4,
+            "d32": 64.6
+          },
+          {
+            "flow": 5040,
+            "liquidPressure": 6.05,
+            "airRate": 89.2,
+            "dmax": 146,
+            "d32": 65.2
+          },
+          {
+            "flow": 5310,
+            "liquidPressure": 6.19,
+            "airRate": 82.1,
+            "dmax": 146.5,
+            "d32": 65.9
+          },
+          {
+            "flow": 5580,
+            "liquidPressure": 6.32,
+            "airRate": 75.36,
+            "dmax": 147.01,
+            "d32": 66.64
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM40",
+    "family": "FloMax",
+    "angle": 55,
+    "source": "Original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 3300,
+            "liquidPressure": 3.75,
+            "airRate": 553.12,
+            "dmax": 376.56,
+            "d32": 141.41
+          },
+          {
+            "flow": 4275,
+            "liquidPressure": 4.45,
+            "airRate": 534.4,
+            "dmax": 386.3,
+            "d32": 147.8
+          },
+          {
+            "flow": 5250,
+            "liquidPressure": 5.16,
+            "airRate": 515.6,
+            "dmax": 396.1,
+            "d32": 154.2
+          },
+          {
+            "flow": 6225,
+            "liquidPressure": 5.87,
+            "airRate": 496.9,
+            "dmax": 405.9,
+            "d32": 160.6
+          },
+          {
+            "flow": 7200,
+            "liquidPressure": 6.58,
+            "airRate": 478.1,
+            "dmax": 415.7,
+            "d32": 167
+          },
+          {
+            "flow": 8175,
+            "liquidPressure": 7.28,
+            "airRate": 459.4,
+            "dmax": 425.4,
+            "d32": 173.4
+          },
+          {
+            "flow": 9150,
+            "liquidPressure": 7.98,
+            "airRate": 440.6,
+            "dmax": 435.2,
+            "d32": 179.8
+          },
+          {
+            "flow": 10125,
+            "liquidPressure": 8.68,
+            "airRate": 421.9,
+            "dmax": 444.9,
+            "d32": 186
+          },
+          {
+            "flow": 11100,
+            "liquidPressure": 9.38,
+            "airRate": 403.12,
+            "dmax": 454.69,
+            "d32": 192.19
+          }
+        ]
+      },
+      {
+        "air": 5.5,
+        "data": [
+          {
+            "flow": 3300,
+            "liquidPressure": 3.5,
+            "airRate": 610.94,
+            "dmax": 203.91,
+            "d32": 71.09
+          },
+          {
+            "flow": 4275,
+            "liquidPressure": 4.34,
+            "airRate": 591,
+            "dmax": 224.4,
+            "d32": 78.3
+          },
+          {
+            "flow": 5250,
+            "liquidPressure": 5.18,
+            "airRate": 571,
+            "dmax": 244.9,
+            "d32": 85.5
+          },
+          {
+            "flow": 6225,
+            "liquidPressure": 6.02,
+            "airRate": 551,
+            "dmax": 265.4,
+            "d32": 92.7
+          },
+          {
+            "flow": 7200,
+            "liquidPressure": 6.86,
+            "airRate": 531,
+            "dmax": 285.9,
+            "d32": 99.9
+          },
+          {
+            "flow": 8175,
+            "liquidPressure": 7.7,
+            "airRate": 511,
+            "dmax": 306.4,
+            "d32": 107.1
+          },
+          {
+            "flow": 9150,
+            "liquidPressure": 8.54,
+            "airRate": 491,
+            "dmax": 326.9,
+            "d32": 114.3
+          },
+          {
+            "flow": 10125,
+            "liquidPressure": 9.39,
+            "airRate": 471,
+            "dmax": 347.4,
+            "d32": 121.6
+          },
+          {
+            "flow": 11100,
+            "liquidPressure": 10.23,
+            "airRate": 451.56,
+            "dmax": 367.97,
+            "d32": 128.91
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM5A",
+    "family": "FloMax A Series",
+    "angle": 55,
+    "source": "A-Series original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 2,
+        "data": [
+          {
+            "flow": 452.3,
+            "liquidPressure": 1.14,
+            "airRate": 94.75,
+            "dmax": 135.21,
+            "d32": 74.31,
+            "dv09": 101.49
+          },
+          {
+            "flow": 593.2,
+            "liquidPressure": 1.5,
+            "airRate": 91.8,
+            "dmax": 146.48,
+            "d32": 79.64,
+            "dv09": 111.68
+          },
+          {
+            "flow": 734.2,
+            "liquidPressure": 1.86,
+            "airRate": 88.85,
+            "dmax": 157.75,
+            "d32": 84.97,
+            "dv09": 121.87
+          },
+          {
+            "flow": 875.1,
+            "liquidPressure": 2.23,
+            "airRate": 85.89,
+            "dmax": 169.01,
+            "d32": 90.3,
+            "dv09": 132.06
+          },
+          {
+            "flow": 1016,
+            "liquidPressure": 2.59,
+            "airRate": 82.94,
+            "dmax": 180.28,
+            "d32": 95.64,
+            "dv09": 142.26
+          },
+          {
+            "flow": 1156.9,
+            "liquidPressure": 2.95,
+            "airRate": 79.99,
+            "dmax": 191.55,
+            "d32": 100.97,
+            "dv09": 152.45
+          },
+          {
+            "flow": 1297.8,
+            "liquidPressure": 3.32,
+            "airRate": 77.04,
+            "dmax": 202.82,
+            "d32": 106.3,
+            "dv09": 162.64
+          },
+          {
+            "flow": 1438.8,
+            "liquidPressure": 3.68,
+            "airRate": 74.09,
+            "dmax": 214.08,
+            "d32": 111.64,
+            "dv09": 172.83
+          },
+          {
+            "flow": 1579.7,
+            "liquidPressure": 4.05,
+            "airRate": 71.14,
+            "dmax": 225.34,
+            "d32": 116.97,
+            "dv09": 183.03
+          }
+        ]
+      },
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 474.9,
+            "liquidPressure": 1.62,
+            "airRate": 122.96,
+            "dmax": 119.04,
+            "d32": 76.38,
+            "dv09": 95.64
+          },
+          {
+            "flow": 614.6,
+            "liquidPressure": 1.99,
+            "airRate": 119.37,
+            "dmax": 128.07,
+            "d32": 81.2,
+            "dv09": 103.42
+          },
+          {
+            "flow": 754.4,
+            "liquidPressure": 2.37,
+            "airRate": 115.79,
+            "dmax": 137.1,
+            "d32": 86.01,
+            "dv09": 111.21
+          },
+          {
+            "flow": 894.1,
+            "liquidPressure": 2.75,
+            "airRate": 112.2,
+            "dmax": 146.13,
+            "d32": 90.83,
+            "dv09": 119
+          },
+          {
+            "flow": 1033.8,
+            "liquidPressure": 3.14,
+            "airRate": 108.61,
+            "dmax": 155.16,
+            "d32": 95.64,
+            "dv09": 126.78
+          },
+          {
+            "flow": 1173.5,
+            "liquidPressure": 3.54,
+            "airRate": 105.03,
+            "dmax": 164.19,
+            "d32": 100.46,
+            "dv09": 134.57
+          },
+          {
+            "flow": 1313.3,
+            "liquidPressure": 3.94,
+            "airRate": 101.44,
+            "dmax": 173.22,
+            "d32": 105.28,
+            "dv09": 142.35
+          },
+          {
+            "flow": 1453,
+            "liquidPressure": 4.35,
+            "airRate": 97.85,
+            "dmax": 182.25,
+            "d32": 110.09,
+            "dv09": 150.13
+          },
+          {
+            "flow": 1592.7,
+            "liquidPressure": 4.77,
+            "airRate": 94.27,
+            "dmax": 191.28,
+            "d32": 114.91,
+            "dv09": 157.91
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 474.9,
+            "liquidPressure": 1.94,
+            "airRate": 146.9,
+            "dmax": 101.15,
+            "d32": 75,
+            "dv09": 82.91
+          },
+          {
+            "flow": 611.4,
+            "liquidPressure": 2.35,
+            "airRate": 143.92,
+            "dmax": 109.02,
+            "d32": 80.16,
+            "dv09": 90.35
+          },
+          {
+            "flow": 747.9,
+            "liquidPressure": 2.76,
+            "airRate": 140.94,
+            "dmax": 116.89,
+            "d32": 85.32,
+            "dv09": 97.79
+          },
+          {
+            "flow": 884.4,
+            "liquidPressure": 3.17,
+            "airRate": 137.96,
+            "dmax": 124.76,
+            "d32": 90.48,
+            "dv09": 105.23
+          },
+          {
+            "flow": 1020.8,
+            "liquidPressure": 3.58,
+            "airRate": 134.99,
+            "dmax": 132.63,
+            "d32": 95.64,
+            "dv09": 112.67
+          },
+          {
+            "flow": 1157.3,
+            "liquidPressure": 3.98,
+            "airRate": 132.01,
+            "dmax": 140.5,
+            "d32": 100.8,
+            "dv09": 120.11
+          },
+          {
+            "flow": 1293.8,
+            "liquidPressure": 4.39,
+            "airRate": 129.03,
+            "dmax": 148.37,
+            "d32": 105.96,
+            "dv09": 127.55
+          },
+          {
+            "flow": 1430.2,
+            "liquidPressure": 4.79,
+            "airRate": 126.05,
+            "dmax": 156.24,
+            "d32": 111.12,
+            "dv09": 134.99
+          },
+          {
+            "flow": 1566.7,
+            "liquidPressure": 5.19,
+            "airRate": 123.07,
+            "dmax": 164.11,
+            "d32": 116.28,
+            "dv09": 142.43
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM10A",
+    "family": "FloMax A Series",
+    "angle": 55,
+    "source": "A-Series original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 2.76,
+        "data": [
+          {
+            "flow": 316.7,
+            "liquidPressure": 1.29,
+            "airRate": 83.56,
+            "dmax": 143.06,
+            "d32": 51.7,
+            "dv09": 108.5
+          },
+          {
+            "flow": 646.9,
+            "liquidPressure": 1.61,
+            "airRate": 74.86,
+            "dmax": 162.08,
+            "d32": 61.92,
+            "dv09": 123.54
+          },
+          {
+            "flow": 977.1,
+            "liquidPressure": 1.93,
+            "airRate": 66.17,
+            "dmax": 181.09,
+            "d32": 72.14,
+            "dv09": 138.58
+          },
+          {
+            "flow": 1307.3,
+            "liquidPressure": 2.26,
+            "airRate": 57.47,
+            "dmax": 200.11,
+            "d32": 82.35,
+            "dv09": 153.62
+          },
+          {
+            "flow": 1637.5,
+            "liquidPressure": 2.58,
+            "airRate": 48.78,
+            "dmax": 219.13,
+            "d32": 92.57,
+            "dv09": 168.65
+          },
+          {
+            "flow": 1967.7,
+            "liquidPressure": 2.9,
+            "airRate": 40.08,
+            "dmax": 238.14,
+            "d32": 102.79,
+            "dv09": 183.69
+          },
+          {
+            "flow": 2297.9,
+            "liquidPressure": 3.22,
+            "airRate": 31.39,
+            "dmax": 257.16,
+            "d32": 113,
+            "dv09": 198.73
+          },
+          {
+            "flow": 2628.1,
+            "liquidPressure": 3.55,
+            "airRate": 22.69,
+            "dmax": 276.18,
+            "d32": 123.22,
+            "dv09": 213.77
+          },
+          {
+            "flow": 2958.3,
+            "liquidPressure": 3.87,
+            "airRate": 14,
+            "dmax": 302.75,
+            "d32": 133.44,
+            "dv09": 228.81
+          }
+        ]
+      },
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 258.3,
+            "liquidPressure": 1.02,
+            "airRate": 98.62,
+            "dmax": 125.25,
+            "d32": 33.75,
+            "dv09": 89.25
+          },
+          {
+            "flow": 610.4,
+            "liquidPressure": 1.42,
+            "airRate": 88,
+            "dmax": 138.98,
+            "d32": 38.67,
+            "dv09": 98.95
+          },
+          {
+            "flow": 962.5,
+            "liquidPressure": 1.83,
+            "airRate": 77.36,
+            "dmax": 152.72,
+            "d32": 43.59,
+            "dv09": 108.66
+          },
+          {
+            "flow": 1314.6,
+            "liquidPressure": 2.23,
+            "airRate": 66.74,
+            "dmax": 166.45,
+            "d32": 48.52,
+            "dv09": 118.36
+          },
+          {
+            "flow": 1666.7,
+            "liquidPressure": 2.64,
+            "airRate": 56.12,
+            "dmax": 180.19,
+            "d32": 53.44,
+            "dv09": 128.06
+          },
+          {
+            "flow": 2018.8,
+            "liquidPressure": 3.04,
+            "airRate": 45.49,
+            "dmax": 193.92,
+            "d32": 58.36,
+            "dv09": 137.77
+          },
+          {
+            "flow": 2370.8,
+            "liquidPressure": 3.44,
+            "airRate": 34.87,
+            "dmax": 207.66,
+            "d32": 63.28,
+            "dv09": 147.47
+          },
+          {
+            "flow": 2722.9,
+            "liquidPressure": 3.85,
+            "airRate": 24.23,
+            "dmax": 221.39,
+            "d32": 68.2,
+            "dv09": 157.17
+          },
+          {
+            "flow": 3075,
+            "liquidPressure": 4.25,
+            "airRate": 13.59,
+            "dmax": 235.12,
+            "d32": 73.12,
+            "dv09": 166.88
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 250,
+            "liquidPressure": 1.38,
+            "airRate": 160.12,
+            "dmax": 148.88,
+            "d32": 79.52,
+            "dv09": 121.13
+          },
+          {
+            "flow": 605.2,
+            "liquidPressure": 1.82,
+            "airRate": 150.1,
+            "dmax": 156.71,
+            "d32": 81.06,
+            "dv09": 126.42
+          },
+          {
+            "flow": 960.4,
+            "liquidPressure": 2.25,
+            "airRate": 140.08,
+            "dmax": 164.53,
+            "d32": 82.61,
+            "dv09": 131.72
+          },
+          {
+            "flow": 1315.6,
+            "liquidPressure": 2.69,
+            "airRate": 130.06,
+            "dmax": 172.36,
+            "d32": 84.15,
+            "dv09": 137.01
+          },
+          {
+            "flow": 1670.8,
+            "liquidPressure": 3.12,
+            "airRate": 120.04,
+            "dmax": 180.19,
+            "d32": 85.7,
+            "dv09": 142.31
+          },
+          {
+            "flow": 2026,
+            "liquidPressure": 3.56,
+            "airRate": 110.02,
+            "dmax": 188.02,
+            "d32": 87.24,
+            "dv09": 147.61
+          },
+          {
+            "flow": 2381.2,
+            "liquidPressure": 4,
+            "airRate": 100,
+            "dmax": 195.85,
+            "d32": 88.79,
+            "dv09": 152.9
+          },
+          {
+            "flow": 2736.5,
+            "liquidPressure": 4.43,
+            "airRate": 89.98,
+            "dmax": 203.67,
+            "d32": 90.33,
+            "dv09": 158.2
+          },
+          {
+            "flow": 3091.7,
+            "liquidPressure": 4.87,
+            "airRate": 79.95,
+            "dmax": 211.5,
+            "d32": 91.88,
+            "dv09": 163.5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "model": "FM25A",
+    "family": "FloMax A Series",
+    "angle": 55,
+    "source": "A-Series original performance curve / digitized reference",
+    "material": "316SS",
+    "curves": [
+      {
+        "air": 3.45,
+        "data": [
+          {
+            "flow": 2310.6,
+            "liquidPressure": 1.74,
+            "airRate": 97.66,
+            "dmax": 180.95,
+            "d32": 52.98,
+            "dv09": 123.21
+          },
+          {
+            "flow": 2942.5,
+            "liquidPressure": 2.14,
+            "airRate": 91.4,
+            "dmax": 213.17,
+            "d32": 65.92,
+            "dv09": 148.21
+          },
+          {
+            "flow": 3574.5,
+            "liquidPressure": 2.54,
+            "airRate": 85.15,
+            "dmax": 245.27,
+            "d32": 78.87,
+            "dv09": 173.21
+          },
+          {
+            "flow": 4206.4,
+            "liquidPressure": 2.94,
+            "airRate": 78.89,
+            "dmax": 277.48,
+            "d32": 91.81,
+            "dv09": 198.21
+          },
+          {
+            "flow": 4838.3,
+            "liquidPressure": 3.35,
+            "airRate": 72.64,
+            "dmax": 309.69,
+            "d32": 104.76,
+            "dv09": 223.21
+          },
+          {
+            "flow": 5470.2,
+            "liquidPressure": 3.75,
+            "airRate": 66.38,
+            "dmax": 341.91,
+            "d32": 117.7,
+            "dv09": 248.21
+          },
+          {
+            "flow": 6102.1,
+            "liquidPressure": 4.15,
+            "airRate": 60.13,
+            "dmax": 374.12,
+            "d32": 130.65,
+            "dv09": 273.21
+          },
+          {
+            "flow": 6734,
+            "liquidPressure": 4.55,
+            "airRate": 53.87,
+            "dmax": 406.34,
+            "d32": 143.6,
+            "dv09": 298.21
+          },
+          {
+            "flow": 7366,
+            "liquidPressure": 4.95,
+            "airRate": 47.62,
+            "dmax": 438.69,
+            "d32": 156.55,
+            "dv09": 323.21
+          }
+        ]
+      },
+      {
+        "air": 4.14,
+        "data": [
+          {
+            "flow": 1851.1,
+            "liquidPressure": 1.9,
+            "airRate": 168.1,
+            "dmax": 180.95,
+            "d32": 87.26,
+            "dv09": 134.29
+          },
+          {
+            "flow": 2462.3,
+            "liquidPressure": 2.35,
+            "airRate": 162.06,
+            "dmax": 198.75,
+            "d32": 97.72,
+            "dv09": 150.3
+          },
+          {
+            "flow": 3073.4,
+            "liquidPressure": 2.8,
+            "airRate": 156.02,
+            "dmax": 216.55,
+            "d32": 108.18,
+            "dv09": 166.3
+          },
+          {
+            "flow": 3684.6,
+            "liquidPressure": 3.24,
+            "airRate": 149.98,
+            "dmax": 234.35,
+            "d32": 118.64,
+            "dv09": 182.31
+          },
+          {
+            "flow": 4295.7,
+            "liquidPressure": 3.69,
+            "airRate": 143.94,
+            "dmax": 252.14,
+            "d32": 129.1,
+            "dv09": 198.31
+          },
+          {
+            "flow": 4906.9,
+            "liquidPressure": 4.14,
+            "airRate": 137.9,
+            "dmax": 269.94,
+            "d32": 139.56,
+            "dv09": 214.32
+          },
+          {
+            "flow": 5518.1,
+            "liquidPressure": 4.59,
+            "airRate": 131.86,
+            "dmax": 287.74,
+            "d32": 150.02,
+            "dv09": 230.32
+          },
+          {
+            "flow": 6129.2,
+            "liquidPressure": 5.03,
+            "airRate": 125.81,
+            "dmax": 305.53,
+            "d32": 160.48,
+            "dv09": 246.33
+          },
+          {
+            "flow": 6740.4,
+            "liquidPressure": 5.48,
+            "airRate": 119.76,
+            "dmax": 323.33,
+            "d32": 170.95,
+            "dv09": 262.38
+          }
+        ]
+      },
+      {
+        "air": 4.83,
+        "data": [
+          {
+            "flow": 1991.5,
+            "liquidPressure": 1.79,
+            "airRate": 184.64,
+            "dmax": 172.14,
+            "d32": 77.5,
+            "dv09": 127.91
+          },
+          {
+            "flow": 2596.3,
+            "liquidPressure": 2.31,
+            "airRate": 178.67,
+            "dmax": 183.75,
+            "d32": 86.16,
+            "dv09": 139.11
+          },
+          {
+            "flow": 3201.1,
+            "liquidPressure": 2.83,
+            "airRate": 172.7,
+            "dmax": 195.36,
+            "d32": 94.82,
+            "dv09": 150.31
+          },
+          {
+            "flow": 3805.9,
+            "liquidPressure": 3.35,
+            "airRate": 166.73,
+            "dmax": 206.96,
+            "d32": 103.48,
+            "dv09": 161.51
+          },
+          {
+            "flow": 4410.6,
+            "liquidPressure": 3.87,
+            "airRate": 160.76,
+            "dmax": 218.57,
+            "d32": 112.14,
+            "dv09": 172.71
+          },
+          {
+            "flow": 5015.4,
+            "liquidPressure": 4.39,
+            "airRate": 154.79,
+            "dmax": 230.18,
+            "d32": 120.8,
+            "dv09": 183.91
+          },
+          {
+            "flow": 5620.2,
+            "liquidPressure": 4.91,
+            "airRate": 148.82,
+            "dmax": 241.79,
+            "d32": 129.46,
+            "dv09": 195.11
+          },
+          {
+            "flow": 6225,
+            "liquidPressure": 5.43,
+            "airRate": 142.85,
+            "dmax": 253.39,
+            "d32": 138.12,
+            "dv09": 206.31
+          },
+          {
+            "flow": 6829.8,
+            "liquidPressure": 5.94,
+            "airRate": 136.88,
+            "dmax": 265,
+            "d32": 146.79,
+            "dv09": 217.5
+          }
+        ]
+      },
+      {
+        "air": 5.5,
+        "data": [
+          {
+            "flow": 1914.9,
+            "liquidPressure": 1.41,
+            "airRate": 189.32,
+            "dmax": 162,
+            "d32": 66.86,
+            "dv09": 116.36
+          },
+          {
+            "flow": 2524.5,
+            "liquidPressure": 2,
+            "airRate": 184.01,
+            "dmax": 172.45,
+            "d32": 74.74,
+            "dv09": 126.24
+          },
+          {
+            "flow": 3134,
+            "liquidPressure": 2.59,
+            "airRate": 178.7,
+            "dmax": 182.89,
+            "d32": 82.61,
+            "dv09": 136.13
+          },
+          {
+            "flow": 3743.6,
+            "liquidPressure": 3.18,
+            "airRate": 173.39,
+            "dmax": 193.34,
+            "d32": 90.49,
+            "dv09": 146.01
+          },
+          {
+            "flow": 4353.2,
+            "liquidPressure": 3.77,
+            "airRate": 168.08,
+            "dmax": 203.79,
+            "d32": 98.36,
+            "dv09": 155.9
+          },
+          {
+            "flow": 4962.8,
+            "liquidPressure": 4.36,
+            "airRate": 162.77,
+            "dmax": 214.23,
+            "d32": 106.24,
+            "dv09": 165.78
+          },
+          {
+            "flow": 5572.3,
+            "liquidPressure": 4.95,
+            "airRate": 157.46,
+            "dmax": 224.68,
+            "d32": 114.11,
+            "dv09": 175.67
+          },
+          {
+            "flow": 6181.9,
+            "liquidPressure": 5.54,
+            "airRate": 152.15,
+            "dmax": 235.12,
+            "d32": 121.99,
+            "dv09": 185.55
+          },
+          {
+            "flow": 6791.5,
+            "liquidPressure": 6.13,
+            "airRate": 146.89,
+            "dmax": 245.57,
+            "d32": 129.86,
+            "dv09": 195.43
+          }
+        ]
+      }
+    ]
+  }
+]
