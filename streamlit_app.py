@@ -1,19 +1,22 @@
 from __future__ import annotations
 
 import hashlib
+import hmac
+import secrets
 import json
 import re
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
+import requests
 import streamlit as st
 import streamlit.components.v1 as components
 
 from github_store import ConflictError, GitHubProjectStore, GitHubStoreError, LocalProjectStore
 
 ROOT = Path(__file__).parent
-APP_VERSION = "HTML Team Edition v2.0"
+APP_VERSION = "HTML Team Edition v2.18"
 html_ui = components.declare_component("nozzle_html_ui", path=str(ROOT / "component"))
 
 st.set_page_config(page_title="Nozzle Engineering System", page_icon="⚙️", layout="wide", initial_sidebar_state="collapsed")
@@ -41,37 +44,127 @@ def secret_get(*parts, default=None):
         return default
 
 
-def load_users():
+def load_users(local_mode=False):
     raw = secret_get("team", "users", default=None)
     users = {}
     if raw:
         for key in raw:
             v = raw[key]
             users[key] = {"name": str(v.get("name", key)), "role": str(v.get("role", "Member")), "pin_sha256": str(v.get("pin_sha256", ""))}
-    if not users:
+    if not users and local_mode:
         users = {"demo": {"name": "Demo Admin", "role": "Admin", "pin_sha256": sha256("0000")}}
     return users
 
 
-def login_gate():
-    users = load_users()
+def pin_digest(pin, salt):
+    return hashlib.pbkdf2_hmac("sha256", pin.encode(), bytes.fromhex(salt), 600_000).hex()
+
+
+def team_snapshot(store):
+    try:
+        return store.team_snapshot()
+    except (GitHubStoreError, requests.RequestException, ValueError, KeyError):
+        st.warning("팀 계정 데이터를 읽을 수 없습니다. 저장소 연결을 확인하세요.")
+        return None
+
+
+def save_team(store, snapshot, message):
+    try:
+        store.save_team(snapshot, message)
+    except (GitHubStoreError, requests.RequestException):
+        st.error("저장 결과를 확인할 수 없습니다. 새로고침 후 신청 상태를 확인하세요.")
+        return False
+    return True
+
+
+def register(accounts, configured, username, name, pin, confirmation):
+    if not re.fullmatch(r"[a-z0-9._-]{1,64}", username) or not name or len(name) > 80:
+        raise ValueError("이름과 사용자 ID(영문, 숫자, 점, 밑줄, 하이픈)를 확인하세요.")
+    if username in {key.casefold() for key in (*configured, *accounts["users"], *accounts["pending_users"], "oliver")}:
+        raise ValueError("이미 사용 중이거나 신청된 ID입니다.")
+    if not re.fullmatch(r"[0-9]{4,32}", pin) or pin != confirmation:
+        raise ValueError("숫자 4~32자리 PIN과 PIN 확인을 동일하게 입력하세요.")
+    salt = secrets.token_hex(16)
+    accounts["pending_users"][username] = {"name": name, "salt": salt, "pin_hash": pin_digest(pin, salt)}
+
+
+def login_gate(store, local_mode):
     if "auth_user" in st.session_state:
         return st.session_state.auth_user
-    st.markdown("<div style='max-width:520px;margin:80px auto;padding:28px;border:1px solid #dfe6ee;border-radius:14px;background:white'>", unsafe_allow_html=True)
+    configured = load_users(local_mode)
+    snapshot = None if local_mode else team_snapshot(store)
+    members = snapshot[2]["users"] if snapshot else {}
+    users = {**members, **configured}
     st.title("⚙️ Nozzle Engineering System")
-    st.caption(f"{APP_VERSION} · Original HTML UI + GitHub Team Sync")
-    with st.form("login"):
-        username = st.selectbox("User", list(users.keys()), format_func=lambda k: users[k]["name"])
-        pin = st.text_input("PIN", type="password")
-        ok = st.form_submit_button("Login", type="primary", use_container_width=True)
-    if ok:
-        rec = users[username]
-        if rec["pin_sha256"] and sha256(pin) == rec["pin_sha256"]:
-            st.session_state.auth_user = {"id": username, **rec}
-            st.rerun()
-        st.error("PIN이 맞지 않습니다.")
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.caption(APP_VERSION)
+    login, signup = st.tabs(["로그인", "사용자 등록"])
+    with login:
+        with st.form("login"):
+            username = st.selectbox("User", list(users), format_func=lambda key: users[key]["name"])
+            pin = st.text_input("PIN", type="password")
+            submitted = st.form_submit_button("Login", type="primary", disabled=not users)
+        if submitted and username in users:
+            record = users[username]
+            if username in configured:
+                valid = hmac.compare_digest(sha256(pin), record["pin_sha256"])
+                role = record["role"]
+            else:
+                valid = hmac.compare_digest(pin_digest(pin, record["salt"]), record["pin_hash"])
+                role = "Member"
+            if valid:
+                st.session_state.auth_user = {"id": username, "name": record["name"], "role": role}
+                st.rerun()
+            st.error("PIN이 맞지 않습니다.")
+    with signup:
+        if snapshot is None:
+            st.info("가입 신청에는 비공개 데이터 저장소 연결이 필요합니다.")
+        else:
+            with st.form("signup", clear_on_submit=True):
+                name = st.text_input("이름", max_chars=80).strip()
+                username = st.text_input("사용자 ID", max_chars=64).strip().lower()
+                pin = st.text_input("신규 PIN (숫자 4~32자리)", type="password", max_chars=32)
+                repeat = st.text_input("PIN 확인", type="password", max_chars=32)
+                submitted = st.form_submit_button("가입 신청")
+            if submitted:
+                try:
+                    register(snapshot[2], configured, username, name, pin, repeat)
+                except ValueError as error:
+                    st.error(str(error))
+                else:
+                    if save_team(store, snapshot, "Submit team registration"):
+                        st.success("가입 신청을 저장했습니다. Oliver의 승인 후 로그인할 수 있습니다.")
     st.stop()
+
+
+def review_registrations(store, user):
+    configured = load_users()
+    admin = configured.get(user["id"], {})
+    if admin.get("role", "").casefold() != "admin" or "oliver" not in (
+        user["id"].casefold(), admin.get("name", "").casefold()
+    ):
+        return
+    snapshot = team_snapshot(store)
+    if snapshot is None:
+        return
+    accounts = snapshot[2]
+    pending = accounts["pending_users"]
+    with st.expander(f"Team Admin · 가입 승인 대기 {len(pending)}명", expanded=bool(pending)):
+        for username, record in list(pending.items()):
+            label, accept, decline = st.columns([4, 1, 1])
+            label.text(f"{record['name']} ({username})")
+            key = username + record["salt"]
+            approved = accept.button("승인", key="approve_" + key)
+            rejected = decline.button("거절", key="reject_" + key)
+            if approved or rejected:
+                if approved:
+                    if username.casefold() in {key.casefold() for key in (*configured, *accounts["users"])}:
+                        st.error("이미 등록된 ID입니다.")
+                        return
+                    accounts["users"][username] = {**record, "role": "Member"}
+                del pending[username]
+                if save_team(store, snapshot, "Approve team registration" if approved else "Reject team registration"):
+                    st.rerun()
+                return
 
 
 def make_store():
@@ -155,7 +248,11 @@ def save_submitted(store,user,project,revision=False):
         st.session_state.project=project;st.session_state.sync_status="Error";st.session_state.flash=str(e);st.session_state.load_token+=1
 
 
-user=login_gate(); store,local_mode=make_store(); ensure_state(user)
+store, local_mode = make_store()
+user = login_gate(store, local_mode)
+if not local_mode:
+    review_registrations(store, user)
+ensure_state(user)
 refs=list_refs(store)
 value=html_ui(project=st.session_state.project, project_refs=refs, current_filename=st.session_state.project_filename, current_sha=st.session_state.project_sha, user=user, sync_status=st.session_state.sync_status if not local_mode else "LOCAL DEMO", flash=st.session_state.flash, load_token=st.session_state.load_token, open_view="rfq", key="nozzle_html_team_v2", default=None)
 

@@ -75,6 +75,49 @@ class GitHubProjectStore:
             "default_branch": data.get("default_branch"),
         }
 
+    def _project_path(self, filename):
+        if not filename or "/" in filename or "\\" in filename or not filename.endswith(".json"):
+            raise GitHubStoreError("Invalid project filename")
+        return f"{self.root}/{filename}"
+
+    def _team_api(self, method, endpoint, **kwargs):
+        response = requests.request(method, f"https://api.github.com/repos/{self.repo}/{endpoint}",
+                                    headers=self.headers, timeout=20, **kwargs)
+        if not response.ok:
+            self._raise(response, "Team account operation failed")
+        return response.json()
+
+    def team_snapshot(self):
+        if not self.health()["private"] or self.root.split("/")[0] == "team":
+            raise GitHubStoreError("팀 계정에는 별도의 비공개 데이터 저장소와 프로젝트 폴더가 필요합니다.")
+        head = self._team_api("GET", f"git/ref/heads/{quote(self.branch, safe='/')}")["object"]["sha"]
+        tree = self._team_api("GET", f"git/commits/{head}")["tree"]["sha"]
+        accounts = {}
+        for group in ("users", "pending_users"):
+            response = requests.get(self._url(f"team/{group}.json"), headers=self.headers,
+                                    params={"ref": head}, timeout=20)
+            if response.status_code == 404:
+                accounts[group] = {}
+                continue
+            if not response.ok:
+                self._raise(response, "Team account read failed")
+            records = json.loads(base64.b64decode(response.json()["content"]))
+            if not isinstance(records, dict):
+                raise GitHubStoreError("팀 계정 파일 형식을 확인하세요.")
+            accounts[group] = records
+        return head, tree, accounts
+
+    def save_team(self, snapshot, message):
+        head, tree, accounts = snapshot
+        entries = [{"path": f"team/{group}.json", "mode": "100644", "type": "blob",
+                    "content": json.dumps(records, ensure_ascii=False, indent=2)}
+                   for group, records in accounts.items()]
+        updated = self._team_api("POST", "git/trees", json={"base_tree": tree, "tree": entries})
+        commit = self._team_api("POST", "git/commits",
+                                json={"message": message, "parents": [head], "tree": updated["sha"]})
+        self._team_api("PATCH", f"git/refs/heads/{quote(self.branch, safe='/')}",
+                       json={"sha": commit["sha"], "force": False})
+
     def list_projects(self) -> list[ProjectRef]:
         r = requests.get(
             self._url(self.root),
@@ -94,7 +137,7 @@ class GitHubProjectStore:
         return rows
 
     def read_project(self, filename: str) -> tuple[dict[str, Any], str]:
-        path = f"{self.root}/{filename}"
+        path = self._project_path(filename)
         r = requests.get(
             self._url(path),
             headers=self.headers,
@@ -108,7 +151,7 @@ class GitHubProjectStore:
         return json.loads(raw), data["sha"]
 
     def get_sha(self, filename: str) -> str | None:
-        path = f"{self.root}/{filename}"
+        path = self._project_path(filename)
         r = requests.get(
             self._url(path),
             headers=self.headers,
@@ -129,7 +172,7 @@ class GitHubProjectStore:
         actor: str,
         message: str,
     ) -> str:
-        path = f"{self.root}/{filename}"
+        path = self._project_path(filename)
         current_sha = self.get_sha(filename)
 
         # Optimistic concurrency: a loaded project may only overwrite the exact
@@ -168,7 +211,7 @@ class GitHubProjectStore:
             raise ConflictError(
                 "This project changed after you loaded it. Reload before deleting."
             )
-        path = f"{self.root}/{filename}"
+        path = self._project_path(filename)
         payload = {
             "message": f"Delete project {filename} by {actor}",
             "sha": current_sha,
