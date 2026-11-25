@@ -1279,17 +1279,18 @@ function perfRenderPointList(){
   });
 }
 
-function perfDrawCombined(){
-  var canvas=$('perfCombinedCanvas'),n=activeNozzle(),curve=perfCurrentCurve();
+function perfDrawCombined(pdfCanvas,pdfOptions){
+  var pdfMode=!!pdfCanvas;
+  var canvas=pdfCanvas||$('perfCombinedCanvas'),n=activeNozzle(),curve=perfCurrentCurve();
   if(!canvas||!n)return;
   var ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
-  $('perfCombinedLegend').innerHTML='';
+  if(!pdfMode)$('perfCombinedLegend').innerHTML='';
 
   if(!curve||!curve.data||!curve.data.length){
     ctx.fillStyle='#667085';ctx.font='16px Arial';ctx.textAlign='center';
     ctx.fillText('Digital data not available for this model.',W/2,H/2);
-    perfUpdateLiveReadout(NaN,null);perfCombinedState.plot=null;return;
+    if(!pdfMode){perfUpdateLiveReadout(NaN,null);perfCombinedState.plot=null;}return;
   }
 
   var colors=perfCombinedColors(),data=curve.data.slice().sort(function(a,b){return a.flow-b.flow});
@@ -1316,15 +1317,15 @@ function perfDrawCombined(){
   leftMax=niceMax(leftMax,leftMax>160?20:10);
   rightMax=niceMax(rightMax,rightMax>300?50:20);
 
-  var L=92,R=92,T=52,B=82,plotR=W-R,plotB=H-B;
+  var L=pdfMode?145:92,R=pdfMode?116:92,T=pdfMode?112:52,B=pdfMode?144:82,plotR=W-R,plotB=H-B;
   function X(flow){return L+(num(flow)-xmin)/(xmax-xmin)*(plotR-L)}
   function YL(v){return plotB-(v/leftMax)*(plotB-T)}
   function YR(v){return plotB-(v/rightMax)*(plotB-T)}
 
   // Header/title similar to supplied performance sheet graph.
-  ctx.fillStyle='#101828';ctx.font='bold 18px Arial';ctx.textAlign='center';
-  ctx.fillText((n.selectedModel||'')+' Air Atomizing Nozzle',W/2,18);
-  ctx.font='14px Arial';ctx.fillText('@ '+Number(curve.air).toFixed(2)+' barg Air Pressure',W/2,36);
+  ctx.fillStyle='#101828';ctx.font=pdfMode?'bold 36px Arial':'bold 18px Arial';ctx.textAlign='center';
+  ctx.fillText((n.selectedModel||'')+' Air Atomizing Nozzle',W/2,pdfMode?40:18);
+  ctx.font=pdfMode?'28px Arial':'14px Arial';ctx.fillText('@ '+Number(curve.air).toFixed(2)+' barg Air Pressure',W/2,pdfMode?74:36);
 
   // Grid.
   ctx.strokeStyle='#d0d5dd';ctx.lineWidth=1;
@@ -1340,29 +1341,41 @@ function perfDrawCombined(){
   }
 
   // Axes / source-style labels.
-  ctx.strokeStyle='#344054';ctx.lineWidth=1.2;
+  ctx.strokeStyle='#344054';ctx.lineWidth=pdfMode?3:1.2;
   ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L,plotB);ctx.lineTo(plotR,plotB);ctx.lineTo(plotR,T);ctx.stroke();
 
-  ctx.font='12px Arial';ctx.fillStyle='#344054';
+  ctx.font=pdfMode?'600 28px Arial':'12px Arial';ctx.fillStyle=pdfMode?'#101828':'#344054';
   for(var i=0;i<=5;i++){
     var frac=i/5,py=plotB-(plotB-T)*frac;
-    ctx.textAlign='right';ctx.fillText(fmtNum(leftMax*frac),L-7,py+3);
-    ctx.textAlign='left';ctx.fillText(fmtNum(rightMax*frac),plotR+7,py+3);
+    ctx.textAlign='right';ctx.fillText(fmtNum(leftMax*frac),L-(pdfMode?12:7),py+(pdfMode?9:3));
+    ctx.textAlign='left';ctx.fillText(fmtNum(rightMax*frac),plotR+(pdfMode?12:7),py+(pdfMode?9:3));
   }
 
   for(var j=0;j<=xTicks;j++){
     var f=xmin+(xmax-xmin)*j/xTicks,px2=X(f);
-    ctx.textAlign='center';ctx.fillText(fmtNum(flowDisplay(f)),px2,plotB+22);
+    ctx.textAlign='center';ctx.fillText(fmtNum(flowDisplay(f)),px2,plotB+(pdfMode?34:22));
   }
 
-  ctx.font='bold 14px Arial';ctx.textAlign='center';
-  ctx.fillText('Flow Rate ('+perfGraphFlowLabel()+')', (L+plotR)/2, H-22);
+  ctx.font=pdfMode?'bold 32px Arial':'bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('Flow Rate ('+perfGraphFlowLabel()+')', (L+plotR)/2, pdfMode?plotB+96:H-22);
 
-  ctx.save();ctx.translate(24,(T+plotB)/2);ctx.rotate(-Math.PI/2);ctx.font='bold 13px Arial';
-  ctx.fillText('Liquid Pressure (psi), Air Capacity (scfm)',0,0);ctx.restore();
-
-  ctx.save();ctx.translate(W-24,(T+plotB)/2);ctx.rotate(Math.PI/2);ctx.font='bold 13px Arial';
-  ctx.fillText('Particle Size (micrometres)',0,0);ctx.restore();
+  if(pdfMode){
+    function rotatedTitle(text,x,rotation){
+      ctx.save();ctx.translate(x,(T+plotB)/2);ctx.rotate(rotation);
+      ctx.textAlign='center';ctx.font='bold 28px Arial';
+      var f=Math.min(28,Math.floor(28*(plotB-T-10)/Math.max(1,ctx.measureText(text).width)));
+      ctx.font='bold '+Math.max(18,f)+'px Arial';
+      ctx.fillText(text,0,0,plotB-T-10);ctx.restore();
+    }
+    rotatedTitle('Liquid Pressure (psi)',32,-Math.PI/2);
+    rotatedTitle('Air Capacity (scfm)',65,-Math.PI/2);
+    rotatedTitle('Particle Size (μm)',W-24,Math.PI/2);
+  }else{
+    ctx.save();ctx.translate(24,(T+plotB)/2);ctx.rotate(-Math.PI/2);ctx.font='bold 13px Arial';
+    ctx.fillText('Liquid Pressure (psi), Air Capacity (scfm)',0,0);ctx.restore();
+    ctx.save();ctx.translate(W-24,(T+plotB)/2);ctx.rotate(Math.PI/2);ctx.font='bold 13px Arial';
+    ctx.fillText('Particle Size (micrometres)',0,0);ctx.restore();
+  }
 
   // Source-style series:
   var series=[];
@@ -1379,7 +1392,8 @@ function perfDrawCombined(){
     var pts=data.filter(function(p){return isFinite(p[sr.key])});
     if(!pts.length)return;
     ctx.strokeStyle=sr.color||'#475467';ctx.lineWidth=(sr.key==='liquidPressure'||sr.key==='airRate'||sr.key==='d32'||sr.key==='smd')?2.4:1.7;
-    ctx.setLineDash(sr.dash||[]);
+    if(pdfMode)ctx.lineWidth*=1.8;
+    ctx.setLineDash(pdfMode?(sr.dash||[]).map(function(v){return v*1.5}):(sr.dash||[]));
     ctx.beginPath();
     pts.forEach(function(p,k){
       var px=X(p.flow),val=sr.conv(p[sr.key]),py=sr.axis==='left'?YL(val):YR(val);
@@ -1388,17 +1402,17 @@ function perfDrawCombined(){
     ctx.stroke();ctx.setLineDash([]);
     pts.forEach(function(p){
       var px=X(p.flow),val=sr.conv(p[sr.key]),py=sr.axis==='left'?YL(val):YR(val);
-      ctx.fillStyle=sr.color||'#475467';ctx.beginPath();ctx.arc(px,py,3.2,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle=sr.color||'#475467';ctx.beginPath();ctx.arc(px,py,pdfMode?5:3.2,0,Math.PI*2);ctx.fill();
     });
   });
 
   // Saved design points.
-  var savedPoints=perfPdfRenderOptions.hideDesignPoints?[]:perfCurrentStoredPoints();
+  var savedPoints=(pdfMode?!pdfOptions.designPoints:perfPdfRenderOptions.hideDesignPoints)?[]:perfCurrentStoredPoints();
   savedPoints.forEach(function(pt,idx){
     var f=Math.max(xmin,Math.min(xmax,num(pt.flow))),px=X(f);
     ctx.strokeStyle='#7a271a';ctx.lineWidth=1.2;ctx.setLineDash([4,4]);
     ctx.beginPath();ctx.moveTo(px,T);ctx.lineTo(px,plotB);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='#7a271a';ctx.font='bold 12px Arial';ctx.textAlign='center';ctx.fillText('P'+(idx+1),px,T-10);
+    ctx.fillStyle='#7a271a';ctx.font=pdfMode?'bold 28px Arial':'bold 12px Arial';ctx.textAlign='center';ctx.fillText('P'+(idx+1),px,T-(pdfMode?8:10));
   });
 
   // Hover / live cursor.
@@ -1407,7 +1421,7 @@ function perfDrawCombined(){
   activeFlow=Math.max(xmin,Math.min(xmax,activeFlow));
   var ip=perfValueAtFlow(curve,activeFlow),cx=X(activeFlow);
 
-  if(isFinite(perfCombinedState.hoverFlow)){
+  if(!pdfMode&&isFinite(perfCombinedState.hoverFlow)){
     ctx.strokeStyle='#101828';ctx.lineWidth=1.15;ctx.setLineDash([5,4]);
     ctx.beginPath();ctx.moveTo(cx,T);ctx.lineTo(cx,plotB);ctx.stroke();ctx.setLineDash([]);
   }
@@ -1417,9 +1431,25 @@ function perfDrawCombined(){
   if(normal>=xmin&&normal<=xmax){
     var nx=X(normal);ctx.strokeStyle='#b42318';ctx.lineWidth=1.3;ctx.setLineDash([2,4]);
     ctx.beginPath();ctx.moveTo(nx,T);ctx.lineTo(nx,plotB);ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle='#b42318';ctx.textAlign='center';ctx.font='bold 12px Arial';ctx.fillText('NORMAL',nx,plotB+42);
+    ctx.fillStyle='#b42318';ctx.textAlign='center';ctx.font=pdfMode?'bold 27px Arial':'bold 12px Arial';ctx.fillText('NORMAL',nx,plotB+(pdfMode?65:42));
   }
 
+  if(pdfMode){
+    // PDF-only legend: match the series colours and dash patterns.
+    ctx.save();ctx.font='600 24px Arial';ctx.textAlign='left';
+    var entries=series.map(function(sr){return {sr:sr,w:66+ctx.measureText(sr.label).width+24}});
+    var total=entries.reduce(function(sum,e){return sum+e.w},0);
+    var legendX=Math.max(15,(W-total)/2),legendY=H-14;
+    var legendScale=Math.min(1,(W-30)/Math.max(1,total));
+    ctx.translate(legendX,legendY);ctx.scale(legendScale,legendScale);
+    var lx=0;
+    entries.forEach(function(e){
+      ctx.strokeStyle=e.sr.color||'#475467';ctx.lineWidth=4;
+      ctx.setLineDash((e.sr.dash||[]).map(function(v){return v*1.4}));
+      ctx.beginPath();ctx.moveTo(lx,-8);ctx.lineTo(lx+42,-8);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#101828';ctx.fillText(e.sr.label,lx+52,0);lx+=e.w;
+    });ctx.restore();return;
+  }
   perfUpdateLiveReadout(activeFlow,ip);
   perfRenderPointList();
 
@@ -1537,7 +1567,7 @@ function pdfConcat(parts){
   parts.forEach(function(p){out.set(p,off);off+=p.length});return out;
 }
 function perfMakeSingleImagePdf(jpegBytes,imgW,imgH){
-  var pageW=841.89,pageH=595.28;
+  var pageW=imgW<imgH?595.28:841.89,pageH=imgW<imgH?841.89:595.28;
   var objs=[];
   objs[1]=pdfAsciiBytes('<< /Type /Catalog /Pages 2 0 R >>');
   objs[2]=pdfAsciiBytes('<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
@@ -1744,10 +1774,6 @@ function perfBuildPdfCanvas(){
   var c=document.createElement('canvas');c.width=W;c.height=H;var ctx=c.getContext('2d');
   ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
 
-  var oldHover=perfCombinedState.hoverFlow;
-  perfCombinedState.hoverFlow=null;
-  perfPdfRenderOptions.hideDesignPoints=!opt.designPoints;
-  perfDrawCombined();
 
   var M=portrait?72:82;
 
@@ -1786,7 +1812,9 @@ function perfBuildPdfCanvas(){
   var gw=W-M*2;
   ctx.fillStyle='#fff';ctx.fillRect(gx,gy,gw,gh);
   ctx.strokeStyle='#d0d5dd';ctx.lineWidth=2;ctx.strokeRect(gx,gy,gw,gh);
-  ctx.drawImage(graph,gx+8,gy+8,gw-16,gh-16);
+  var pdfGraph=document.createElement('canvas');pdfGraph.width=gw-16;pdfGraph.height=gh-16;
+  perfDrawCombined(pdfGraph,opt);
+  ctx.drawImage(pdfGraph,gx+8,gy+8);
   var lowerY=gy+gh+44;
 
   // Design point table (optional)
@@ -1853,10 +1881,6 @@ function perfBuildPdfCanvas(){
   perfDrawPdfText(ctx,foot,M,H-48,portrait?13:15,'400','left','#667085');
   perfDrawPdfText(ctx,'Liquid flow unit: '+perfGraphFlowLabel(),W-M,H-48,portrait?13:15,'600','right','#475467');
 
-  // Restore live graph state
-  perfPdfRenderOptions.hideDesignPoints=false;
-  perfCombinedState.hoverFlow=oldHover;
-  perfDrawCombined();
   return c;
 }
 function perfValidatePdfContext(){
@@ -1896,7 +1920,7 @@ function perfExportPdf(){
       a.href=url;a.download=(safe(p.projectNo||p.projectName||'Project')+'_'+safe(n.selectedModel)+'_PerformanceCurve_Rev'+safe(perfRevisionValue())+'.pdf');
       document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1500);
     };fr.readAsDataURL(blob);
-  },'image/jpeg',0.93);
+  },'image/jpeg',0.97);
 }
 
 function renderPerformance(){
